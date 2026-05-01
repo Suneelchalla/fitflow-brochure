@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="theme-color" content="#071510"/>
+<title>FitFlow Pro — Your All-in-One Fitness App</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gd:#071510;--gm:#0d1f14;--gb:#2e7d46;--gl:#43a05a;--gg:#7ed9a0;
+  --ac:#f0c040;--bl:#1e88e5;--tx:#e8f5e9;--t2:#a5d6b0;--t3:#5a8a65;
+  --sf:rgba(255,255,255,.04);--br:rgba(67,160,90,.15);
+  --fd:'Bebas Neue',cursive;--fb:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--gd);color:var(--tx);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* SHARED */
+section{padding:60px 18px}
+.wrap{max-width:660px;margin:0 auto}
+.ey{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gl);margin-bottom:10px;font-weight:600;opacity:.8}
+h2{font-family:var(--fd);font-size:clamp(52px,14vw,80px);line-height:.93;letter-spacing:.02em;color:#fff;margin-bottom:14px}
+h2 em{color:var(--gg);font-style:normal}
+.lead{font-size:15px;color:var(--t2);font-weight:300;line-height:1.7;margin-bottom:36px}
+.div{width:44px;height:3px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:14px 0 26px}
+.rev{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,21,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(67,160,90,.1);padding:11px 18px;display:flex;align-items:center;justify-content:space-between}
+.nlogo{font-family:var(--fd);font-size:22px;color:var(--gg)}
+.nbtn{font-size:11px;font-weight:700;background:rgba(46,125,70,.9);color:#fff;padding:6px 14px;border-radius:20px;text-decoration:none}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 18px 60px;position:relative;overflow:hidden}
+.hbg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 120% 60% at 50% 0%,rgba(46,125,70,.3) 0%,transparent 65%),radial-gradient(ellipse 80% 50% at 10% 90%,rgba(30,136,229,.1) 0%,transparent 60%),var(--gd)}
+.hgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(67,160,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.06) 1px,transparent 1px);background-size:44px 44px;animation:gm 18s linear infinite}
+@keyframes gm{to{background-position:44px 44px}}
+.hcon{position:relative;z-index:2;width:100%;max-width:460px}
+.bolt{width:76px;height:76px;border-radius:20px;background:linear-gradient(135deg,#1a4a28,#0d2a16);border:2px solid rgba(67,160,90,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 0 48px rgba(67,160,90,.3);animation:bp 3s ease-in-out infinite}
+@keyframes bp{0%,100%{box-shadow:0 0 48px rgba(67,160,90,.3)}50%{box-shadow:0 0 72px rgba(67,160,90,.5)}}
+.bolt svg{width:42px;height:42px}
+.hero h1{font-family:var(--fd);font-size:clamp(64px,18vw,96px);line-height:.9;color:#fff;letter-spacing:.02em;margin-bottom:6px}
+.hero h1 span{color:var(--gg)}
+.hsub{font-size:15px;color:var(--t2);margin:14px auto 26px;max-width:340px;font-weight:300;line-height:1.6}
+.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
+.pill{font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid rgba(67,160,90,.3);background:rgba(67,160,90,.08);color:var(--gg);font-weight:600}
+.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(67,160,90,.15);border:1px solid rgba(67,160,90,.2);border-radius:16px;overflow:hidden}
+.hs{background:rgba(7,21,16,.8);padding:15px 8px;text-align:center}
+.hsn{font-family:var(--fd);font-size:34px;color:var(--gg);line-height:1}
+.hsl{font-size:10px;color:var(--t3);margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
+
+/* PROBLEM */
+.ps{background:linear-gradient(180deg,var(--gd),#040d08)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pc{background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.18);border-radius:16px;padding:16px}
+.pc .ic{font-size:26px;margin-bottom:9px}
+.pc h3{font-size:13px;font-weight:700;color:#ef9a9a;margin-bottom:5px}
+.pc p{font-size:11px;color:var(--t3);line-height:1.55}
+
+/* MODULES */
+.ms{background:#040d08}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:24px}
+.mc{border-radius:15px;padding:15px;border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--ca,#43a05a)}
+.mc.ca{background:rgba(67,160,90,.06);--ca:#43a05a}
+.mc.gm{background:rgba(30,136,229,.06);--ca:#1e88e5}
+.mc.yo{background:rgba(156,39,176,.06);--ca:#9c27b0}
+.mc.ci{background:rgba(255,87,34,.06);--ca:#ff5722}
+.mc.ru{background:rgba(240,192,64,.06);--ca:#f0c040}
+.mc.st{background:rgba(0,188,212,.06);--ca:#00bcd4}
+.mc.cu{background:rgba(233,30,99,.06);--ca:#e91e63}
+.mc.dt{background:rgba(76,175,80,.06);--ca:#4caf50}
+.mc.co{background:rgba(229,57,53,.06);--ca:#ef5350}
+.mc.full{grid-column:span 2;background:rgba(240,192,64,.06);--ca:#f0c040}
+.mme{font-size:26px;margin-bottom:9px}
+.mc h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.mc p{font-size:11px;color:var(--t3);line-height:1.5}
+.mtags{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px}
+.mt{font-size:9px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:var(--t2)}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.sb{background:rgba(67,160,90,.07);border:1px solid rgba(67,160,90,.18);border-radius:13px;padding:15px;text-align:center}
+.sbn{font-family:var(--fd);font-size:40px;color:var(--gg);line-height:1}
+.sbl{font-size:11px;color:var(--t2);margin-top:5px;line-height:1.4}
+
+/* GPS RUNNING */
+.rs{background:linear-gradient(135deg,#040d08,#071a0f);position:relative}
+.pw{max-width:240px;margin:0 auto 32px}
+.phone{background:linear-gradient(135deg,#0a1f12,#071510);border:1.5px solid rgba(67,160,90,.3);border-radius:30px;padding:14px;box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 50px rgba(67,160,90,.08)}
+.pscreen{background:#0a1810;border-radius:18px;overflow:hidden;aspect-ratio:9/18;display:flex;flex-direction:column}
+.pmap{flex:1;background:linear-gradient(135deg,#0f2318,#0a1a10);position:relative;display:flex;align-items:center;justify-content:center}
+.mr{position:absolute;width:82%;height:72%}
+.mgl{stroke:rgba(67,160,90,.1);stroke-width:1}
+.rl{stroke:#ff6b35;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.gd{fill:#4285f4}
+.psp{background:rgba(7,21,16,.95);backdrop-filter:blur(10px);padding:10px;border-top:1px solid rgba(67,160,90,.12)}
+.pt{font-family:var(--fd);font-size:33px;color:#fff;text-align:center;line-height:1;margin-bottom:9px}
+.psr{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;text-align:center;margin-bottom:9px}
+.pv{font-family:var(--fd);font-size:16px;color:var(--gl)}
+.pl{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-top:1px}
+.pbs{display:flex;gap:7px}
+.pb1{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px;text-align:center;font-size:9px;font-weight:700;color:#fff}
+.pb2{flex:1;background:rgba(229,57,53,.8);border-radius:14px;padding:6px;text-align:center;font-size:9px;font-weight:700;color:#fff}
+.fl{list-style:none}
+.fl li{display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-bottom:1px solid rgba(67,160,90,.08)}
+.fl li:last-child{border:none}
+.fi{width:34px;height:34px;border-radius:10px;background:rgba(67,160,90,.1);border:1px solid rgba(67,160,90,.18);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ft{font-weight:700;font-size:13px;color:#fff;margin-bottom:2px}
+.fd{font-size:12px;color:var(--t3);line-height:1.5}
+
+/* BEFORE AFTER */
+.bas{background:#040d08}
+.bag{display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:17px;overflow:hidden}
+.bb{background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.15);padding:18px 14px}
+.ba{background:rgba(67,160,90,.05);border:1px solid rgba(67,160,90,.2);padding:18px 14px}
+.bl2{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.bb .bl2{color:#ef9a9a}.ba .bl2{color:var(--gg)}
+.blist{list-style:none}
+.blist li{font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:6px;line-height:1.45}
+.blist li:last-child{border:none}
+.bb .blist li{color:#ef9a9a}.ba .blist li{color:var(--t2)}
+
+/* COMPARE */
+.cs{background:var(--gd)}
+.tw{overflow-x:auto;border-radius:13px;border:1px solid rgba(67,160,90,.15)}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:360px}
+th{padding:13px 10px;font-size:11px;font-weight:700;text-align:center}
+th.ff{background:rgba(46,125,70,.25);color:var(--gg)}
+th.ot{background:rgba(255,255,255,.03);color:var(--t3)}
+th.fe{text-align:left;background:rgba(255,255,255,.02);color:var(--t3);font-size:10px}
+td{padding:10px;font-size:11px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04)}
+td.fn{text-align:left;font-weight:600;color:var(--t2)}
+td.fc{background:rgba(67,160,90,.04);border-left:1px solid rgba(67,160,90,.12);border-right:1px solid rgba(67,160,90,.12);color:var(--gg);font-weight:600}
+td.oc{color:var(--t3)}
+.ck{color:#43a05a}.cx{color:rgba(229,57,53,.7)}
+
+/* STORIES */
+.ss{background:#040d08}
+.sc{background:var(--gm);border:1px solid rgba(67,160,90,.1);border-radius:17px;padding:20px;margin-bottom:12px}
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.av-a{background:linear-gradient(135deg,#1e88e5,#0d47a1)}
+.av-b{background:linear-gradient(135deg,#9c27b0,#4a148c)}
+.av-c{background:linear-gradient(135deg,#ff5722,#bf360c)}
+.av-d{background:linear-gradient(135deg,#43a05a,#1b5e20)}
+.sn{font-size:10px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+.sti{font-size:14px;font-weight:700;color:#fff}
+.stx{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:12px}
+.sus{display:flex;flex-wrap:wrap;gap:6px}
+.stag{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:600}
+
+/* PILLARS */
+.pls{background:linear-gradient(180deg,#040d08,var(--gd))}
+.plg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pi{padding:18px 14px;border-radius:15px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05)}
+.pn{font-family:var(--fd);font-size:36px;color:rgba(67,160,90,.2);line-height:1;margin-bottom:9px}
+.pi h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px}
+.pi p{font-size:11px;color:var(--t3);line-height:1.55}
+
+/* REPORT */
+.rps{background:#040d08}
+.rpc{background:linear-gradient(135deg,rgba(46,125,70,.1),rgba(67,160,90,.05));border:1px solid rgba(67,160,90,.2);border-radius:20px;padding:22px;max-width:340px;margin:0 auto}
+.grade{font-family:var(--fd);font-size:76px;color:#43a05a;line-height:1;text-align:center}
+.gl{font-size:17px;font-weight:700;text-align:center;color:#fff;margin-bottom:3px}
+.gs{font-size:11px;color:var(--t3);text-align:center;margin-bottom:18px}
+.wg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:16px}
+.wh{font-size:9px;color:var(--t3);text-align:center;font-weight:700}
+.wd{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.wd.ac{background:rgba(67,160,90,.6)}
+.wd.mi{background:rgba(229,57,53,.18);font-size:8px;color:#ef9a9a}
+.rsg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+.rst{background:rgba(7,21,16,.7);border-radius:11px;padding:11px;text-align:center}
+.rsn{font-family:var(--fd);font-size:26px;color:var(--gg);line-height:1}
+.rsl{font-size:10px;color:var(--t3);margin-top:2px}
+.rsd{font-size:9px;color:#43a05a;margin-top:2px}
+.rq{background:rgba(67,160,90,.07);border:1px solid rgba(67,160,90,.18);border-radius:11px;padding:12px;font-size:12px;color:var(--t2);font-style:italic;line-height:1.6;text-align:center}
+
+/* CTA */
+.ctas{text-align:center;padding:76px 18px;background:radial-gradient(ellipse 120% 70% at 50% 50%,rgba(46,125,70,.18) 0%,transparent 70%),var(--gd);position:relative;overflow:hidden}
+.ctas::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(67,160,90,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.04) 1px,transparent 1px);background-size:32px 32px}
+.ctai{position:relative;z-index:2}
+.ctas h2{font-size:clamp(52px,16vw,80px);margin-bottom:13px}
+.ctas p{font-size:15px;color:var(--t2);margin-bottom:30px;max-width:300px;margin-left:auto;margin-right:auto;line-height:1.6}
+.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#2e7d46,#43a05a);color:#fff;font-size:15px;font-weight:700;padding:14px 30px;border-radius:50px;text-decoration:none;box-shadow:0 8px 28px rgba(46,125,70,.4)}
+.ctaf{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-size:12px;color:var(--t3)}
+
+/* FOOTER */
+footer{background:#020a05;border-top:1px solid rgba(67,160,90,.08);padding:28px 18px;text-align:center}
+.flogo{font-family:var(--fd);font-size:24px;color:var(--gg);margin-bottom:5px}
+footer p{font-size:12px;color:var(--t3);line-height:1.6}
+
+@media print{nav{display:none}body{background:#fff;color:#111}section{padding:36px 14px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nlogo">FITFLOW PRO</div>
+  <a href="#cta" class="nbtn">⚡ Get for ₹299</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbg"></div><div class="hgrid"></div>
+  <div class="hcon">
+    <div class="bolt">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="46,10 28,42 40,42 32,70 54,36 41,36" fill="#4caf50"/>
+        <polygon points="46,10 28,42 40,42 32,70 54,36 41,36" fill="none" stroke="rgba(126,217,160,.4)" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="ey">FitFlow Pro · Your Fitness Companion</div>
+    <h1>FITNESS<br/><span>REIMAGINED</span></h1>
+    <p class="hsub">One app. 9 modules. GPS tracking, training plans, live maps, Core & Abs, nutrition — all offline-ready.</p>
+    <div class="pills">
+      <span class="pill">⚡ Works Offline</span>
+      <span class="pill">📍 GPS Live Map</span>
+      <span class="pill">🔒 100% Private</span>
+      <span class="pill">📱 Android PWA</span>
+      <span class="pill">☁️ Auto Backup</span>
+    </div>
+    <div class="hstats">
+      <div class="hs"><div class="hsn">9+</div><div class="hsl">Modules</div></div>
+      <div class="hs"><div class="hsn">4</div><div class="hsl">Run Plans</div></div>
+      <div class="hs"><div class="hsn">∞</div><div class="hsl">Custom</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="ps">
+  <div class="wrap rev">
+    <div class="ey">The Problem</div>
+    <h2>TOO MANY<br/><em>APPS</em></h2>
+    <div class="div"></div>
+    <p class="lead">Most people juggle 4–6 apps for fitness. One for running, one for gym, one for diet, another for hydration. They drain money and motivation before the workout even starts.</p>
+    <div class="pgrid">
+      <div class="pc"><div class="ic">😤</div><h3>App Overload</h3><p>Switching between Strava, YouTube, MyFitnessPal daily kills momentum.</p></div>
+      <div class="pc"><div class="ic">💸</div><h3>Insane Subscriptions</h3><p>Strava alone is ₹349/month — that's ₹4,188/year just to see your own route map. Every. Single. Year.</p></div>
+      <div class="pc"><div class="ic">📶</div><h3>Needs Internet</h3><p>At the gym, in the park, on a trek — apps stop when signal drops.</p></div>
+      <div class="pc"><div class="ic">🔐</div><h3>No Privacy</h3><p>Big apps sell your health data. Your body isn't their product.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="ms" id="features">
+  <div class="wrap rev">
+    <div class="ey">Everything You Need</div>
+    <h2>ONE APP<br/><em>ALL FITNESS</em></h2>
+    <div class="div"></div>
+    <p class="lead">9 fully-featured modules — each with guided workouts, nutrition plans, hydration tracking, and progress history.</p>
+
+    <div class="mgrid">
+      <div class="mc ca"><div class="mme">🏠</div><h3>Home Cardio</h3><p>No equipment. Full 6-day programme at home.</p><div class="mtags"><span class="mt">6-day plan</span><span class="mt">No gear</span></div></div>
+      <div class="mc gm"><div class="mme">🏋️</div><h3>Gym Workouts</h3><p>6-day split. Sets, reps, rest. Beginner to advanced.</p><div class="mtags"><span class="mt">6-day split</span><span class="mt">Progressive</span></div></div>
+      <div class="mc yo"><div class="mme">🧘</div><h3>Yoga</h3><p>Daily flows with breathing cues and sequences.</p><div class="mtags"><span class="mt">6 days</span><span class="mt">All levels</span></div></div>
+      <div class="mc co"><div class="mme">🔥</div><h3>Core & Abs ✦NEW</h3><p>6 days of targeted ab work — planks to dragon flags.</p><div class="mtags"><span class="mt">6 days</span><span class="mt">Video demos</span></div></div>
+      <div class="mc ci"><div class="mme">💪</div><h3>Calisthenics</h3><p>3 levels with skill tree. Beginner to advanced.</p><div class="mtags"><span class="mt">3 levels</span><span class="mt">Skill tree</span></div></div>
+      <div class="mc st"><div class="mme">🤸</div><h3>Stretching</h3><p>Daily mobility routines for every module.</p><div class="mtags"><span class="mt">6 days</span><span class="mt">Recovery</span></div></div>
+      <div class="mc cu"><div class="mme">✏️</div><h3>Custom Workouts</h3><p>Build your own routines. Name, sets, reps, rest.</p><div class="mtags"><span class="mt">Unlimited</span><span class="mt">Tracked</span></div></div>
+      <div class="mc dt"><div class="mme">🥗</div><h3>Nutrition</h3><p>Module-specific meals + daily hydration log.</p><div class="mtags"><span class="mt">Meal timing</span><span class="mt">Hydration</span></div></div>
+      <div class="mc full"><div class="mme">🏃</div><h3>Running · Walking · Cycling</h3><p>Live GPS map, real-time pace + speed + calories. Run / Walk / Cycle. 4 training plans from 5K to Full Marathon with daily schedule and one-tap run start.</p><div class="mtags"><span class="mt">GPS live map</span><span class="mt">3 modes</span><span class="mt">4 marathon plans</span><span class="mt">Lock screen</span></div></div>
+    </div>
+
+    <div class="srow">
+      <div class="sb"><div class="sbn">100%</div><div class="sbl">Offline. Train anywhere — gym, park, trek, no signal.</div></div>
+      <div class="sb" style="grid-column:span 2;background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.3)"><div class="sbn" style="color:var(--ac);font-size:36px">₹299</div><div class="sbl" style="color:#fff;font-weight:600">One-time. Own it forever.</div><div style="font-size:10px;color:var(--t3);margin-top:6px;line-height:1.5">Strava costs ₹349/month → ₹4,188/year → ₹12,564 over 3 years.<br/>FitFlow Pro: ₹299. Once. That's it.</div></div>
+      <div class="sb"><div class="sbn">30s</div><div class="sbl">To install on Android. Tap "Add to Home Screen."</div></div>
+      <div class="sb"><div class="sbn">☁️</div><div class="sbl">Auto cloud backup. Runs survive reinstalls.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GPS RUNNING -->
+<section class="rs" id="running">
+  <div class="wrap rev">
+    <div class="ey">GPS Running Module</div>
+    <h2>TRACK<br/><em>EVERY STEP</em></h2>
+    <div class="div"></div>
+
+    <div class="pw">
+      <div class="phone">
+        <div class="pscreen">
+          <div class="pmap">
+            <svg viewBox="0 0 200 270" class="mr" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="67"  x2="200" y2="67"  class="mgl"/>
+              <line x1="0" y1="134" x2="200" y2="134" class="mgl"/>
+              <line x1="0" y1="201" x2="200" y2="201" class="mgl"/>
+              <line x1="50"  y1="0" x2="50"  y2="270" class="mgl"/>
+              <line x1="100" y1="0" x2="100" y2="270" class="mgl"/>
+              <line x1="150" y1="0" x2="150" y2="270" class="mgl"/>
+              <path d="M30,67  L170,67"  stroke="rgba(67,160,90,.07)" stroke-width="6" fill="none"/>
+              <path d="M30,134 L170,134" stroke="rgba(67,160,90,.07)" stroke-width="6" fill="none"/>
+              <path d="M50,10  L50,260"  stroke="rgba(67,160,90,.07)" stroke-width="6" fill="none"/>
+              <path d="M100,10 L100,260" stroke="rgba(67,160,90,.07)" stroke-width="6" fill="none"/>
+              <path d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z"
+                stroke="rgba(255,107,53,.25)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z" class="rl" stroke-width="3"/>
+              <circle cx="40"  cy="230" r="5" fill="#43a05a" stroke="white" stroke-width="1.5"/>
+              <circle cx="60"  cy="230" r="5" fill="#f0c040" stroke="white" stroke-width="1.5"/>
+              <circle cx="150" cy="67"  r="7" fill="rgba(66,133,244,.25)"/>
+              <circle cx="150" cy="67"  r="4.5" fill="rgba(66,133,244,.5)"/>
+              <circle cx="150" cy="67"  r="3" class="gd" stroke="white" stroke-width="1.5"/>
+            </svg>
+            <div style="position:absolute;top:8px;right:8px;background:rgba(67,160,90,.85);color:#fff;font-size:7px;font-weight:700;padding:2px 6px;border-radius:7px">GPS ●</div>
+            <div style="position:absolute;top:8px;left:8px;background:rgba(7,21,16,.8);color:#fff;font-size:8px;font-weight:700;padding:2px 7px;border-radius:7px">🚶 Walk</div>
+          </div>
+          <div class="psp">
+            <div style="font-size:7px;color:rgba(255,255,255,.35);text-align:center;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Elapsed Time</div>
+            <div class="pt">21:34</div>
+            <div class="psr">
+              <div><div class="pv">1.78</div><div class="pl">KM</div></div>
+              <div><div class="pv">12:05</div><div class="pl">PACE</div></div>
+              <div><div class="pv">5.0</div><div class="pl">KM/H</div></div>
+              <div><div class="pv">89</div><div class="pl">KCAL</div></div>
+            </div>
+            <div class="pbs">
+              <div class="pb1">⏸ Pause</div>
+              <div class="pb2">⏹ Stop</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="fl">
+      <li><div class="fi">🗺️</div><div><div class="ft">Live Map While Running</div><div class="fd">Real route on dark street map. Pan and pinch-zoom freely. Blue dot follows you live.</div></div></li>
+      <li><div class="fi">📊</div><div><div class="ft">4 Live Stats</div><div class="fd">Distance · Pace · Speed (km/h) · Calories — updating every second.</div></div></li>
+      <li><div class="fi">🔒</div><div><div class="ft">Lock Screen Stats</div><div class="fd">Screen Wake Lock keeps GPS alive. Stats show on media notification. Lock phone freely.</div></div></li>
+      <li><div class="fi">🏃</div><div><div class="ft">Run · Walk · Cycle</div><div class="fd">3 activity types with correct calorie rates and activity-specific milestone cards.</div></div></li>
+      <li><div class="fi">🏆</div><div><div class="ft">Milestone Celebrations</div><div class="fd">1K, 3K, 5K, 10K, Half Marathon, Full Marathon — every milestone gets a personal celebration.</div></div></li>
+      <li><div class="fi">📅</div><div><div class="ft">4 Training Plans</div><div class="fd">5K, 10K, Half Marathon, Full Marathon — daily schedule with one-tap run start.</div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- BEFORE AFTER -->
+<section class="bas">
+  <div class="wrap rev">
+    <div class="ey">The Transformation</div>
+    <h2>BEFORE<br/><em>VS AFTER</em></h2>
+    <div class="div"></div>
+    <div class="bag">
+      <div class="bb">
+        <div class="bl2">❌ Without</div>
+        <ul class="blist">
+          <li><span>✗</span> 10 min deciding which app</li>
+          <li><span>✗</span> Data in 5 different apps</li>
+          <li><span>✗</span> GPS stops when screen locks</li>
+          <li><span>✗</span> No workout without internet</li>
+          <li><span>✗</span> ₹4,000–12,000/year on subscriptions</li>
+          <li><span>✗</span> Quit by February</li>
+          <li><span>✗</span> Data sold to advertisers</li>
+        </ul>
+      </div>
+      <div class="ba">
+        <div class="bl2">✅ With FitFlow</div>
+        <ul class="blist">
+          <li><span>✓</span> One app, ready instantly</li>
+          <li><span>✓</span> Everything in one history</li>
+          <li><span>✓</span> GPS tracks with locked screen</li>
+          <li><span>✓</span> 100% offline, train anywhere</li>
+          <li><span>✓</span> ₹299 once. Own it for life</li>
+          <li><span>✓</span> Streaks & milestones drive you</li>
+          <li><span>✓</span> Your data, your Google Sheet</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE VS STRAVA -->
+<section style="background:linear-gradient(135deg,#040d08,#071a0f);padding:60px 18px">
+  <div class="wrap rev">
+    <div class="ey">The Honest Price Talk</div>
+    <h2>₹299<br/><em>ONCE</em></h2>
+    <div class="div"></div>
+
+    <!-- Value comparison cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px">
+
+      <div style="background:rgba(229,57,53,.06);border:1px solid rgba(229,57,53,.2);border-radius:16px;padding:18px;text-align:center">
+        <div style="font-size:22px;margin-bottom:8px">🏃</div>
+        <div style="font-size:10px;color:rgba(239,154,154,.7);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:6px">Strava Premium</div>
+        <div style="font-family:var(--fd);font-size:32px;color:#ef9a9a;line-height:1">₹349</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:3px">per month</div>
+        <div style="height:1px;background:rgba(229,57,53,.2);margin:12px 0"></div>
+        <div style="font-size:11px;color:#ef9a9a;line-height:1.6">₹4,188/year<br/>₹12,564 in 3 years<br/>and counting...</div>
+      </div>
+
+      <div style="background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:16px;padding:18px;text-align:center;position:relative">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--ac);color:#000;font-size:9px;font-weight:700;padding:3px 10px;border-radius:10px;white-space:nowrap">SMART CHOICE</div>
+        <div style="font-size:22px;margin-bottom:8px">⚡</div>
+        <div style="font-size:10px;color:rgba(240,192,64,.8);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:6px">FitFlow Pro</div>
+        <div style="font-family:var(--fd);font-size:32px;color:var(--ac);line-height:1">₹299</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:3px">one time. forever.</div>
+        <div style="height:1px;background:rgba(240,192,64,.2);margin:12px 0"></div>
+        <div style="font-size:11px;color:var(--ac);line-height:1.6">₹299 total<br/>₹299 in 3 years<br/>₹299 forever.</div>
+      </div>
+
+    </div>
+
+    <!-- Strava savings callout -->
+    <div style="background:rgba(67,160,90,.08);border:1px solid rgba(67,160,90,.2);border-radius:16px;padding:18px;margin-bottom:20px;text-align:center">
+      <div style="font-size:13px;color:var(--gg);font-weight:700;margin-bottom:6px">💡 What you save vs Strava Premium</div>
+      <div style="font-family:var(--fd);font-size:44px;color:var(--gg);line-height:1">₹3,889</div>
+      <div style="font-size:12px;color:var(--t2);margin-top:4px">in the first year alone</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:6px;line-height:1.5">That's new running shoes + protein powder for a year.<br/>And FitFlow does more than Strava.</div>
+    </div>
+
+    <!-- No peer pressure pitch -->
+    <div style="background:rgba(30,136,229,.07);border:1px solid rgba(30,136,229,.2);border-radius:16px;padding:20px">
+      <div style="font-size:20px;margin-bottom:10px;text-align:center">🧘</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;text-align:center;margin-bottom:10px">No Kudos. No Competition. Just You.</div>
+      <div style="font-size:13px;color:var(--t2);line-height:1.7">
+        On Strava, you start running for fitness. Then you start running for Kudos. Then someone in your group runs 25km and suddenly your 5km feels small. Before long, you're running for their validation — not your health.
+      </div>
+      <div style="height:1px;background:rgba(30,136,229,.15);margin:14px 0"></div>
+      <div style="font-size:13px;color:var(--t2);line-height:1.7">
+        FitFlow Pro has no social feed. No leaderboard. No one can see your runs. Your 1km walk on a bad day is celebrated exactly the same as your 10km PR — because <span style="color:#64b5f6;font-weight:600">this app is built for you, not for an audience</span>.
+      </div>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)">
+          <span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> Your progress is private — only you see it
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)">
+          <span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> No comparing yourself to others — just vs yesterday's you
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)">
+          <span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> 1km walked beats 0km on the couch — always celebrated
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)">
+          <span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> Milestone messages encourage, never shame
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="cs" id="compare">
+  <div class="wrap rev">
+    <div class="ey">How We Compare</div>
+    <h2>FITFLOW<br/><em>VS REST</em></h2>
+    <div class="div"></div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th class="fe">Feature</th>
+            <th class="ff">⚡ FitFlow</th>
+            <th class="ot">Strava + Others</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="fn">All-in-one hub</td><td class="fc"><span class="ck">✓ Yes</span></td><td class="oc"><span class="cx">✗ Split</span></td></tr>
+          <tr><td class="fn">Core & Abs module</td><td class="fc"><span class="ck">✓ Built in</span></td><td class="oc"><span class="cx">✗ None</span></td></tr>
+          <tr><td class="fn">GPS live map</td><td class="fc"><span class="ck">✓ Built in</span></td><td class="oc">Paid plan</td></tr>
+          <tr><td class="fn">Gym + Yoga + Stretch</td><td class="fc"><span class="ck">✓ All in</span></td><td class="oc"><span class="cx">✗ Extra apps</span></td></tr>
+          <tr><td class="fn">Nutrition plans</td><td class="fc"><span class="ck">✓ Per module</span></td><td class="oc">Paid extra</td></tr>
+          <tr><td class="fn">Works offline</td><td class="fc"><span class="ck">✓ 100%</span></td><td class="oc"><span class="cx">✗ No</span></td></tr>
+          <tr><td class="fn">Lock screen GPS</td><td class="fc"><span class="ck">✓ Wake Lock</span></td><td class="oc">Strava only</td></tr>
+          <tr><td class="fn">Weekly report card</td><td class="fc"><span class="ck">✓ Grade+stats</span></td><td class="oc">Limited</td></tr>
+          <tr><td class="fn">History calendar</td><td class="fc"><span class="ck">✓ Tap any day</span></td><td class="oc">Partial</td></tr>
+          <tr><td class="fn">No ads / tracking</td><td class="fc"><span class="ck">✓ Zero ads</span></td><td class="oc"><span class="cx">✗ Ad-supported</span></td></tr>
+          <tr><td class="fn" style="border:none">Total cost</td><td class="fc" style="border:none"><span class="ck">✓ ₹299 one-time</span></td><td class="oc" style="border:none"><span style="color:#ef9a9a">₹4,000+/year</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="ss" id="stories">
+  <div class="wrap rev">
+    <div class="ey">Real People, Real Results</div>
+    <h2>A DAY IN<br/><em>THEIR LIFE</em></h2>
+    <div class="div"></div>
+
+    <div class="sc">
+      <div class="sh"><div class="av av-a">👨‍💼</div><div><div class="sn">Working Professional</div><div class="sti">Rahul, 32 — Software Engineer</div></div></div>
+      <p class="stx">6 AM: FitFlow notification arrives. He logs a 3km walk — GPS tracks the route, lock screen shows pace. Back home: water logged. Lunch: gym nutrition plan checked. Evening: Chest day marked done. Sunday: Weekly Report — B+, "4 active days, up 2 from last week!"</p>
+      <div class="sus">
+        <span class="stag" style="background:rgba(30,136,229,.15);color:#64b5f6;border:1px solid rgba(30,136,229,.25)">🚶 GPS Walk</span>
+        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">🏋️ Gym</span>
+        <span class="stag" style="background:rgba(30,136,229,.12);color:#90caf9;border:1px solid rgba(30,136,229,.2)">💧 Hydration</span>
+        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">📊 Report</span>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh"><div class="av av-b">👩‍🎓</div><div><div class="sn">College Student · No budget</div><div class="sti">Priya, 21 — Student, Chennai</div></div></div>
+      <p class="stx">No gym membership, no money for apps. Home Cardio in her bedroom. Yoga 3×/week. Weekends: cycle GPS. This month she added Core & Abs — Saturday's 100-rep challenge + L-sit attempts are brutal and she loves it. 18-day streak. No internet needed.</p>
+      <div class="sus">
+        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">🏠 Home Cardio</span>
+        <span class="stag" style="background:rgba(156,39,176,.12);color:#ce93d8;border:1px solid rgba(156,39,176,.25)">🧘 Yoga</span>
+        <span class="stag" style="background:rgba(229,57,53,.12);color:#ef9a9a;border:1px solid rgba(229,57,53,.2)">🔥 Core & Abs</span>
+        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">🚴 Cycle GPS</span>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh"><div class="av av-c">👨‍🦳</div><div><div class="sn">Returning to Fitness</div><div class="sti">Venkat, 45 — Manager, Bengaluru</div></div></div>
+      <p class="stx">5 years off exercise. Started FitFlow's 5K plan — Week 1: walk 20 min. Week 3: run 2km non-stop. Week 6: first 5K done. Certificate unlocked. Added Stretching module for runner recovery. 3 months later: registered for an actual 10K race.</p>
+      <div class="sus">
+        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">📋 5K Plan</span>
+        <span class="stag" style="background:rgba(0,188,212,.1);color:#80deea;border:1px solid rgba(0,188,212,.2)">🤸 Stretching</span>
+        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">🥗 Nutrition</span>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh"><div class="av av-d">👩‍⚕️</div><div><div class="sn">Fitness Enthusiast</div><div class="sti">Ananya, 28 — Physio, Pune</div></div></div>
+      <p class="stx">Calisthenics skill tree for handstand progress. Custom Workouts builder for client programmes. Half marathon training plan — 3 runs/week. Core & Abs added for Saturday: 100-rep challenge then L-sit. History calendar shows which weeks she under-trained. Personal bests: 18km longest run, 6:20/km fastest pace.</p>
+      <div class="sus">
+        <span class="stag" style="background:rgba(255,87,34,.12);color:#ffccbc;border:1px solid rgba(255,87,34,.25)">💪 Calisthenics</span>
+        <span class="stag" style="background:rgba(233,30,99,.1);color:#f48fb1;border:1px solid rgba(233,30,99,.2)">✏️ Custom</span>
+        <span class="stag" style="background:rgba(229,57,53,.12);color:#ef9a9a;border:1px solid rgba(229,57,53,.2)">🔥 Core & Abs</span>
+        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">🏅 HM Plan</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pls">
+  <div class="wrap rev">
+    <div class="ey">Built Right</div>
+    <h2>THE TECH<br/><em>BEHIND IT</em></h2>
+    <div class="div"></div>
+    <p class="lead">Engineered to be fast, private, and always available.</p>
+    <div class="plg">
+      <div class="pi"><div class="pn">01</div><h3>PWA — No App Store</h3><p>Install from browser in 30 sec. Works on any Android from last 5 years.</p></div>
+      <div class="pi"><div class="pn">02</div><h3>Offline First</h3><p>All workouts local first. Syncs when online. Gym with no signal — no problem.</p></div>
+      <div class="pi"><div class="pn">03</div><h3>Google Sheets</h3><p>Your data in your own sheet. Every run, workout, log — backed up automatically.</p></div>
+      <div class="pi"><div class="pn">04</div><h3>GPS Wake Lock</h3><p>Screen Wake Lock keeps GPS alive when screen is off. Full marathon, no data loss.</p></div>
+      <div class="pi"><div class="pn">05</div><h3>Live Map Tiles</h3><p>Same mapping stack as Strava. Route draws live as you move. Fully pannable.</p></div>
+      <div class="pi"><div class="pn">06</div><h3>Smart Onboarding</h3><p>Choose your modules. Only selected workouts show on dashboard — personal from day 1.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEKLY REPORT -->
+<section class="rps">
+  <div class="wrap rev">
+    <div class="ey">Know Your Progress</div>
+    <h2>WEEKLY<br/><em>REPORT CARD</em></h2>
+    <div class="div"></div>
+    <p class="lead">Every Monday — your grade, streak, stats vs last week, and a motivational message.</p>
+    <div class="rpc">
+      <div style="font-size:10px;color:var(--t3);text-align:center;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px">Week of 28 Apr — 4 May</div>
+      <div class="grade">A+</div>
+      <div class="gl">Outstanding!</div>
+      <div class="gs">6 active days · 12 day streak 🔥</div>
+      <div class="wg">
+        <div class="wh">M</div><div class="wh">T</div><div class="wh">W</div><div class="wh">T</div><div class="wh">F</div><div class="wh">S</div><div class="wh">S</div>
+        <div class="wd ac">🏋️</div><div class="wd ac">🏃</div><div class="wd ac">🔥</div><div class="wd ac">🏋️</div><div class="wd mi">✕</div><div class="wd ac">🚶</div><div class="wd ac">🤸</div>
+      </div>
+      <div class="rsg">
+        <div class="rst"><div class="rsn">6</div><div class="rsl">Workouts</div><div class="rsd">+2 vs last week</div></div>
+        <div class="rst"><div class="rsn">8.4</div><div class="rsl">km this week</div><div class="rsd">+3.1km vs last week</div></div>
+      </div>
+      <div class="rq">"You crushed it this week! Elite consistency. Keep this energy going!"</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ctas" id="cta">
+  <div class="ctai">
+    <div class="ey">Start Today</div>
+    <h2>START YOUR<br/><em>JOURNEY</em></h2>
+    <p>One-time ₹299. No renewals, no app store, no ads. Open on Android, tap "Add to Home Screen." 30 seconds to install. Your fitness revolution starts now.</p>
+    <a href="#" class="btn">⚡ Get FitFlow Pro — ₹299</a>
+    <div class="ctaf">
+      <span>✓ Any Android</span>
+      <span>✓ No app store</span>
+      <span>✓ 30 sec install</span>
+      <span>✓ ₹299 once, yours forever</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">FITFLOW PRO</div>
+  <p>GPS Running · Gym · Yoga · Core & Abs · Calisthenics<br/>Stretching · Custom Workouts · Nutrition · Hydration</p>
+  <p style="margin-top:8px;font-size:11px;opacity:.5">Built for consistency. Made for everyone.</p>
+</footer>
+
+<script>
+const ob = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('on');ob.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rev').forEach(el => ob.observe(el));
+</script>
+</body>
+</html>

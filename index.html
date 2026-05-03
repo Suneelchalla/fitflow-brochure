@@ -92,7 +92,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,21,16,.92)
 .hgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(67,160,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.06) 1px,transparent 1px);background-size:44px 44px;animation:gm 18s linear infinite}
 @keyframes gm{to{background-position:44px 44px}}
 .hcon{position:relative;z-index:2;width:100%;max-width:460px}
-.bolt{width:130px;height:130px;border-radius:20px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:none;animation:none}
+.bolt{width:200px;height:200px;border-radius:20px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:none;animation:none}
 @keyframes bp{0%,100%{box-shadow:0 0 48px rgba(67,160,90,.3)}50%{box-shadow:0 0 72px rgba(67,160,90,.5)}}
 @keyframes logo-pulse{0%{r:42;opacity:.4;stroke-width:1.5}50%{r:46;opacity:0;stroke-width:1}100%{r:42;opacity:.4;stroke-width:1.5}}
 @keyframes bolt-glow{0%,100%{opacity:.9}50%{opacity:1}}
@@ -298,24 +298,24 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
 <section class="hero">
   <div class="hbg"></div><div class="hgrid"></div>
   <div class="hcon">
-    <div class="bolt" style="background:transparent;border:none;box-shadow:none;width:130px;height:130px;padding:0;animation:none">
-      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg" width="130" height="130" id="hero-logo">
+    <div class="bolt" style="background:transparent;border:none;box-shadow:none;width:200px;height:200px;padding:0;animation:none;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="hero-logo">
         <defs>
           <filter id="logo-glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feGaussianBlur stdDeviation="4" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
-        <!-- Outer dark ring (matches photo) -->
-        <circle cx="44" cy="44" r="42" fill="none" stroke="rgba(46,125,70,.6)" stroke-width="2.5"/>
+        <!-- Outer dark ring -->
+        <circle cx="80" cy="80" r="76" fill="none" stroke="rgba(46,125,70,.6)" stroke-width="3"/>
         <!-- Animated pulse ring -->
-        <circle cx="44" cy="44" r="42" fill="none" stroke="rgba(67,160,90,.3)" stroke-width="1.5" id="logo-pulse-ring"/>
+        <circle cx="80" cy="80" r="76" fill="none" stroke="rgba(67,160,90,.35)" stroke-width="2" id="logo-pulse-ring"/>
         <!-- Green filled circle -->
-        <circle cx="44" cy="44" r="36" fill="#43a05a"/>
+        <circle cx="80" cy="80" r="66" fill="#43a05a"/>
         <!-- Subtle inner highlight -->
-        <circle cx="44" cy="44" r="36" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
-        <!-- White lightning bolt (exact shape from logo) -->
-        <path d="M50 14 L30 46 L42 46 L34 74 L58 40 L46 40 Z" fill="white" filter="url(#logo-glow)"/>
+        <circle cx="80" cy="80" r="66" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+        <!-- White lightning bolt — centered, proportional -->
+        <path d="M92 24 L56 86 L76 86 L62 136 L106 72 L86 72 Z" fill="white" filter="url(#logo-glow)"/>
       </svg>
     </div>
     <div class="ey">FitFlow Pro · Your Fitness Companion</div>
@@ -1294,12 +1294,12 @@ if (phone) {
 (function() {
   const ring = document.getElementById('logo-pulse-ring');
   if (!ring) return;
-  let r = 42, growing = true, opacity = 0.4;
+  let r = 76, growing = true, opacity = 0.4;
   function animRing() {
     if (growing) { r += 0.12; opacity -= 0.004; }
     else         { r -= 0.12; opacity += 0.004; }
-    if (r >= 50) growing = false;
-    if (r <= 42) growing = true;
+    if (r >= 84) growing = false;
+    if (r <= 76) growing = true;
     ring.setAttribute('r', r.toFixed(2));
     ring.setAttribute('opacity', Math.max(0, Math.min(0.5, opacity)).toFixed(3));
     requestAnimationFrame(animRing);

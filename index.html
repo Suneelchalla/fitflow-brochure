@@ -92,7 +92,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,21,16,.92)
 .hgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(67,160,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.06) 1px,transparent 1px);background-size:44px 44px;animation:gm 18s linear infinite}
 @keyframes gm{to{background-position:44px 44px}}
 .hcon{position:relative;z-index:2;width:100%;max-width:460px}
-.bolt{width:280px;height:280px;border-radius:20px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;box-shadow:none;animation:none}
+/* bolt class removed */
 @keyframes bp{0%,100%{box-shadow:0 0 48px rgba(67,160,90,.3)}50%{box-shadow:0 0 72px rgba(67,160,90,.5)}}
 @keyframes logo-pulse{0%{r:42;opacity:.4;stroke-width:1.5}50%{r:46;opacity:0;stroke-width:1}100%{r:42;opacity:.4;stroke-width:1.5}}
 @keyframes bolt-glow{0%,100%{opacity:.9}50%{opacity:1}}
@@ -298,8 +298,8 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
 <section class="hero">
   <div class="hbg"></div><div class="hgrid"></div>
   <div class="hcon">
-    <div class="bolt" style="background:transparent;border:none;box-shadow:none;width:280px;height:280px;padding:0;animation:none;display:flex;align-items:center;justify-content:center">
-      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="280" height="280" id="hero-logo">
+    <div style="width:158px!important;height:158px!important;min-width:158px;min-height:158px;padding:0;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:158px!important;height:158px!important;min-width:158px;min-height:158px;display:block;flex-shrink:0" id="hero-logo">
         <defs>
           <filter id="logo-glow">
             <feGaussianBlur stdDeviation="4" result="blur"/>

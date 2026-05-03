@@ -92,7 +92,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,21,16,.92)
 .hgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(67,160,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.06) 1px,transparent 1px);background-size:44px 44px;animation:gm 18s linear infinite}
 @keyframes gm{to{background-position:44px 44px}}
 .hcon{position:relative;z-index:2;width:100%;max-width:460px}
-.bolt{width:200px;height:200px;border-radius:20px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:none;animation:none}
+.bolt{width:280px;height:280px;border-radius:20px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;box-shadow:none;animation:none}
 @keyframes bp{0%,100%{box-shadow:0 0 48px rgba(67,160,90,.3)}50%{box-shadow:0 0 72px rgba(67,160,90,.5)}}
 @keyframes logo-pulse{0%{r:42;opacity:.4;stroke-width:1.5}50%{r:46;opacity:0;stroke-width:1}100%{r:42;opacity:.4;stroke-width:1.5}}
 @keyframes bolt-glow{0%,100%{opacity:.9}50%{opacity:1}}
@@ -298,8 +298,8 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
 <section class="hero">
   <div class="hbg"></div><div class="hgrid"></div>
   <div class="hcon">
-    <div class="bolt" style="background:transparent;border:none;box-shadow:none;width:200px;height:200px;padding:0;animation:none;display:flex;align-items:center;justify-content:center">
-      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="hero-logo">
+    <div class="bolt" style="background:transparent;border:none;box-shadow:none;width:280px;height:280px;padding:0;animation:none;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="280" height="280" id="hero-logo">
         <defs>
           <filter id="logo-glow">
             <feGaussianBlur stdDeviation="4" result="blur"/>
@@ -318,7 +318,7 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
         <path d="M92 24 L56 86 L76 86 L62 136 L106 72 L86 72 Z" fill="white" filter="url(#logo-glow)"/>
       </svg>
     </div>
-    <div class="ey">FitFlow Pro · Your Fitness Companion</div>
+    <div class="ey" style="margin-bottom:6px">FitFlow Pro · Your Fitness Companion</div>
     <h1>FITNESS<br/><span>REIMAGINED</span></h1>
     <p class="hsub">One app. 9 modules. GPS tracking, training plans, live maps, calisthenics, nutrition — cloud-backed, always with you.</p>
     <div class="pills">
@@ -605,8 +605,7 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
               <!-- animated route line -->
               <path id="route-path"
                 d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z"
-                stroke="#ff6b35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"
-                stroke-dasharray="600" stroke-dashoffset="600"/>
+                stroke="#ff6b35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
               <!-- start dot -->
               <circle cx="40" cy="230" r="5" fill="#43a05a" stroke="white" stroke-width="1.5"/>
               <!-- live dot -->
@@ -1167,19 +1166,22 @@ if (savingsEl) savingsOb.observe(savingsEl.closest('.savings-card') || savingsEl
   const spdEl      = document.getElementById('map-spd');
   const kcalEl     = document.getElementById('map-kcal');
 
-  // Animation state
+  // Animation state — runs once, completes in 5s, stops at end
   let fraction = 0;
   let running  = false;
+  let done     = false;
   let startT   = null;
   let pulseR   = 5;
   let pulseDir = 1;
-  const RUN_DURATION = 8000; // 8s to complete route, then loop
+  const RUN_DURATION = 5000; // 5s to complete, no loop
 
   function tick(now) {
-    if (!running) return;
+    if (!running || done) return;
     if (!startT) startT = now;
     const elapsed = now - startT;
-    fraction = (elapsed % RUN_DURATION) / RUN_DURATION;
+
+    // Stop at 1.0 — no modulo, no loop
+    fraction = Math.min(elapsed / RUN_DURATION, 1);
 
     // Update route path
     if (routePath) routePath.setAttribute('d', pathUpTo(fraction));
@@ -1197,7 +1199,7 @@ if (savingsEl) savingsOb.observe(savingsEl.closest('.savings-card') || savingsEl
       pulseRing.setAttribute('opacity', (1 - (pulseR - 5) / 5).toFixed(2));
     }
 
-    // Update stats — simulate a 3.12km run over full animation
+    // Update stats — simulate a 3.12km run
     const totalKm   = 3.12;
     const totalSecs = 1294; // 21:34
     const totalKcal = 218;
@@ -1216,7 +1218,13 @@ if (savingsEl) savingsOb.observe(savingsEl.closest('.savings-card') || savingsEl
     if (spdEl)   spdEl.textContent   = spd;
     if (kcalEl)  kcalEl.textContent  = Math.round(fraction * totalKcal);
 
-    requestAnimationFrame(tick);
+    if (fraction < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      // Animation complete — freeze at final state, stop the pulse ring
+      done = true;
+      if (pulseRing) pulseRing.setAttribute('opacity', '0');
+    }
   }
 
   // Start when section scrolls into view

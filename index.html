@@ -57,6 +57,9 @@ h2 em{color:var(--gg);font-style:normal}
 .card-stack.on > *:nth-child(2){transition-delay:.12s}
 .card-stack.on > *:nth-child(3){transition-delay:.20s}
 .card-stack.on > *:nth-child(4){transition-delay:.28s}
+/* GPS pulse ring */
+@keyframes pulse-fade{0%{r:5;opacity:.8}100%{r:14;opacity:0}}
+
 /* Bar chart animate */
 @keyframes bar-grow{from{width:0}to{width:var(--w)}}
 .split-bar{animation:none}
@@ -89,8 +92,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,21,16,.92)
 .hgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(67,160,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.06) 1px,transparent 1px);background-size:44px 44px;animation:gm 18s linear infinite}
 @keyframes gm{to{background-position:44px 44px}}
 .hcon{position:relative;z-index:2;width:100%;max-width:460px}
-.bolt{width:76px;height:76px;border-radius:20px;background:linear-gradient(135deg,#1a4a28,#0d2a16);border:2px solid rgba(67,160,90,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 0 48px rgba(67,160,90,.3);animation:bp 3s ease-in-out infinite}
+.bolt{width:130px;height:130px;border-radius:20px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:none;animation:none}
 @keyframes bp{0%,100%{box-shadow:0 0 48px rgba(67,160,90,.3)}50%{box-shadow:0 0 72px rgba(67,160,90,.5)}}
+@keyframes logo-pulse{0%{r:42;opacity:.4;stroke-width:1.5}50%{r:46;opacity:0;stroke-width:1}100%{r:42;opacity:.4;stroke-width:1.5}}
+@keyframes bolt-glow{0%,100%{opacity:.9}50%{opacity:1}}
 .bolt svg{width:42px;height:42px}
 .hero h1{font-family:var(--fd);font-size:clamp(64px,18vw,96px);line-height:.9;color:#fff;letter-spacing:.02em;margin-bottom:6px}
 .hero h1 span{color:var(--gg)}
@@ -278,7 +283,14 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
 <body>
 
 <nav>
-  <div class="nlogo">FITFLOW PRO</div>
+  <div style="display:flex;align-items:center;gap:9px">
+    <svg viewBox="0 0 36 36" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" fill="none" stroke="rgba(67,160,90,.5)" stroke-width="1.5"/>
+      <circle cx="18" cy="18" r="14" fill="#43a05a"/>
+      <path d="M21 6 L12 19 L17 19 L14 30 L24 17 L19 17 Z" fill="white"/>
+    </svg>
+    <div class="nlogo">FITFLOW PRO</div>
+  </div>
   <a href="#cta" class="nbtn">⚡ Get for ₹299</a>
 </nav>
 
@@ -286,10 +298,24 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
 <section class="hero">
   <div class="hbg"></div><div class="hgrid"></div>
   <div class="hcon">
-    <div class="bolt">
-      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="46,10 28,42 40,42 32,70 54,36 41,36" fill="#4caf50"/>
-        <polygon points="46,10 28,42 40,42 32,70 54,36 41,36" fill="none" stroke="rgba(126,217,160,.4)" stroke-width="1.5"/>
+    <div class="bolt" style="background:transparent;border:none;box-shadow:none;width:130px;height:130px;padding:0;animation:none">
+      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg" width="130" height="130" id="hero-logo">
+        <defs>
+          <filter id="logo-glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Outer dark ring (matches photo) -->
+        <circle cx="44" cy="44" r="42" fill="none" stroke="rgba(46,125,70,.6)" stroke-width="2.5"/>
+        <!-- Animated pulse ring -->
+        <circle cx="44" cy="44" r="42" fill="none" stroke="rgba(67,160,90,.3)" stroke-width="1.5" id="logo-pulse-ring"/>
+        <!-- Green filled circle -->
+        <circle cx="44" cy="44" r="36" fill="#43a05a"/>
+        <!-- Subtle inner highlight -->
+        <circle cx="44" cy="44" r="36" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+        <!-- White lightning bolt (exact shape from logo) -->
+        <path d="M50 14 L30 46 L42 46 L34 74 L58 40 L46 40 Z" fill="white" filter="url(#logo-glow)"/>
       </svg>
     </div>
     <div class="ey">FitFlow Pro · Your Fitness Companion</div>
@@ -323,6 +349,72 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
       <div class="pc"><div class="ic">📶</div><h3>Internet-Dependent</h3><p>At the gym, in the park, on a trek — most fitness apps stop working when signal drops.</p></div>
       <div class="pc"><div class="ic">🔐</div><h3>No Privacy</h3><p>Big apps sell your health data. Your body isn't their product.</p></div>
     </div>
+  </div>
+</section>
+
+
+<!-- FOUNDER STORY -->
+<section style="background:linear-gradient(180deg,#040d08,#071510);padding:60px 18px">
+  <div class="wrap rev">
+    <div class="ey rev-l">Why We Built This</div>
+    <h2>WE FELT IT<br/><em>TOO</em></h2>
+    <div class="div"></div>
+
+    <div style="background:rgba(67,160,90,.05);border:1px solid rgba(67,160,90,.15);border-radius:20px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:-20px;right:-20px;font-size:100px;opacity:.04;line-height:1">💪</div>
+      <div style="font-size:15px;color:var(--t2);line-height:1.85;position:relative">
+        We are not a startup that spotted a market gap on a spreadsheet. We are people from the fitness community — runners who got frustrated with expensive GPS locks, gym-goers who lost months of progress data when an app updated, beginners who quit because the apps felt built for athletes, not humans.
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px" class="stag">
+
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">😤</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We switched between 5 apps every morning</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Run log here. Gym plan there. Diet on another. By the time we were ready to work out, we'd already spent 10 minutes just organising. So we built one place for all of it.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(30,136,229,.1);border:1px solid rgba(30,136,229,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💸</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We watched friends quit because of subscription guilt</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">A student skipping the gym app because ₹300/month felt too much. A working professional cancelling during a tough month and losing their streak. Price should never be why someone stops taking care of themselves.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(156,39,176,.1);border:1px solid rgba(156,39,176,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📶</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We trained in places with no signal</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Rooftops, basements, rural roads, trek trails. Apps that need internet to show you your own workout plan felt like a joke. Fitness shouldn't depend on your carrier.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(229,57,53,.1);border:1px solid rgba(229,57,53,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏃</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We are runners, lifters, walkers — just like you</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Not just coders who built a fitness app. We use FitFlow every day. When something doesn't feel right, we feel it first. That's why it keeps getting better.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Motto -->
+    <div style="background:linear-gradient(135deg,rgba(46,125,70,.15),rgba(67,160,90,.08));border:1px solid rgba(67,160,90,.3);border-radius:18px;padding:24px;text-align:center">
+      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gl);margin-bottom:12px;font-weight:600">Our Motto</div>
+      <div style="font-family:var(--fd);font-size:clamp(24px,7vw,38px);color:#fff;line-height:1.15;margin-bottom:14px">
+        BUILT BY THE<br/><span style="color:var(--gg)">FITNESS COMMUNITY,</span><br/>FOR THE FITNESS COMMUNITY
+      </div>
+      <div style="width:44px;height:2px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:0 auto 14px"></div>
+      <div style="font-size:13px;color:var(--t2);line-height:1.75;max-width:400px;margin:0 auto">
+        Whether you're a first-time walker, a calisthenics enthusiast, a runner training for your first 5K, or a gym regular chasing progressive overload — FitFlow was built with you in mind. Because we've been all of those people at some point.
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -392,10 +484,14 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
     </div>
 
     <!-- Stats row — full-width ₹299, then 2x2 grid -->
-    <div style="background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.3);border-radius:13px;padding:18px;text-align:center;margin-bottom:9px">
-      <div style="font-family:var(--fd);font-size:44px;color:var(--ac);line-height:1">₹299</div>
-      <div style="font-size:14px;font-weight:700;color:#fff;margin-top:4px">One-time. Own it forever.</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:6px;line-height:1.6">Top activity trackers cost ₹349–499/month → ₹4,188–5,988/year → ₹12,564+ over 3 years.<br/>FitFlow Pro: ₹299. Once. That's it.</div>
+    <div class="price-hero-card" style="background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.3);border-radius:13px;padding:24px;text-align:center;margin-bottom:9px">
+      <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,192,64,.6);margin-bottom:8px;font-weight:600">One-time payment</div>
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:2px">
+        <span style="font-family:var(--fd);font-size:28px;color:var(--ac);line-height:1">₹</span>
+        <span id="price-counter" style="font-family:var(--fd);font-size:72px;color:var(--ac);line-height:1;letter-spacing:-.02em">0</span>
+      </div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:6px">Own it forever. No renewals ever.</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.6">Top activity trackers cost ₹349–499/month → ₹4,188–5,988/year → ₹12,564+ over 3 years.<br/>FitFlow Pro: ₹299. Once. That's it.</div>
     </div>
     <div class="srow">
       <div class="sb"><div class="sbn">9+</div><div class="sbl">Modules. Not lite versions.</div></div>
@@ -494,33 +590,41 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
     <div class="pw rev-s">
       <div class="phone">
         <div class="pscreen">
-          <div class="pmap">
-            <svg viewBox="0 0 200 270" class="mr" xmlns="http://www.w3.org/2000/svg">
+          <div class="pmap" id="map-anim-wrap">
+            <svg id="map-svg" viewBox="0 0 200 270" class="mr" xmlns="http://www.w3.org/2000/svg">
+              <!-- grid -->
               <line x1="0" y1="67"  x2="200" y2="67"  class="mgl"/>
               <line x1="0" y1="134" x2="200" y2="134" class="mgl"/>
               <line x1="0" y1="201" x2="200" y2="201" class="mgl"/>
               <line x1="50"  y1="0" x2="50"  y2="270" class="mgl"/>
               <line x1="100" y1="0" x2="100" y2="270" class="mgl"/>
               <line x1="150" y1="0" x2="150" y2="270" class="mgl"/>
+              <!-- route glow -->
               <path d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z"
-                stroke="rgba(255,107,53,.25)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <path d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z" class="rl" stroke-width="3"/>
-              <circle cx="40"  cy="230" r="5" fill="#43a05a" stroke="white" stroke-width="1.5"/>
-              <circle cx="60"  cy="230" r="5" fill="#f0c040" stroke="white" stroke-width="1.5"/>
-              <circle cx="150" cy="67"  r="7" fill="rgba(66,133,244,.25)"/>
-              <circle cx="150" cy="67"  r="3" class="gd" stroke="white" stroke-width="1.5"/>
+                stroke="rgba(255,107,53,.2)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <!-- animated route line -->
+              <path id="route-path"
+                d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z"
+                stroke="#ff6b35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"
+                stroke-dasharray="600" stroke-dashoffset="600"/>
+              <!-- start dot -->
+              <circle cx="40" cy="230" r="5" fill="#43a05a" stroke="white" stroke-width="1.5"/>
+              <!-- live dot -->
+              <circle id="live-dot" cx="40" cy="230" r="5" fill="#4285f4" stroke="white" stroke-width="1.5"/>
+              <!-- pulse ring -->
+              <circle id="pulse-ring" cx="40" cy="230" r="5" fill="none" stroke="rgba(66,133,244,.5)" stroke-width="2"/>
             </svg>
-            <div style="position:absolute;top:8px;right:8px;background:rgba(67,160,90,.85);color:#fff;font-size:7px;font-weight:700;padding:2px 6px;border-radius:7px">GPS ●</div>
+            <div style="position:absolute;top:8px;right:8px;background:rgba(67,160,90,.85);color:#fff;font-size:7px;font-weight:700;padding:2px 6px;border-radius:7px" id="gps-badge">GPS ●</div>
             <div style="position:absolute;top:8px;left:8px;background:rgba(7,21,16,.8);color:#fff;font-size:8px;font-weight:700;padding:2px 7px;border-radius:7px">🏃 Run</div>
           </div>
           <div class="psp">
             <div style="font-size:7px;color:rgba(255,255,255,.35);text-align:center;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Elapsed Time</div>
-            <div class="pt">21:34</div>
+            <div class="pt" id="map-timer">00:00</div>
             <div class="psr">
-              <div><div class="pv">3.12</div><div class="pl">KM</div></div>
-              <div><div class="pv">6:55</div><div class="pl">PACE</div></div>
-              <div><div class="pv">8.7</div><div class="pl">SPD KM/H</div></div>
-              <div><div class="pv">218</div><div class="pl">KCAL</div></div>
+              <div><div class="pv" id="map-km">0.00</div><div class="pl">KM</div></div>
+              <div><div class="pv" id="map-pace">--:--</div><div class="pl">PACE</div></div>
+              <div><div class="pv" id="map-spd">0.0</div><div class="pl">SPD KM/H</div></div>
+              <div><div class="pv" id="map-kcal">0</div><div class="pl">KCAL</div></div>
             </div>
             <div class="pbs">
               <div class="pb1">⏸ Pause</div>
@@ -637,11 +741,15 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
         <div style="font-size:11px;color:var(--ac);line-height:1.6">₹299 total<br/>₹299 in 3 years<br/>₹299 forever.</div>
       </div>
     </div>
-    <div style="background:rgba(67,160,90,.08);border:1px solid rgba(67,160,90,.2);border-radius:16px;padding:18px;margin-bottom:20px;text-align:center">
-      <div style="font-size:13px;color:var(--gg);font-weight:700;margin-bottom:6px">💡 What you save vs popular activity trackers</div>
-      <div style="font-family:var(--fd);font-size:44px;color:var(--gg);line-height:1">₹3,889</div>
-      <div style="font-size:12px;color:var(--t2);margin-top:4px">in the first year alone</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:6px;line-height:1.5">New running shoes + protein powder + 3 months of groceries.<br/>And FitFlow does far more.</div>
+    <div class="savings-card rev-s" style="background:linear-gradient(135deg,rgba(46,125,70,.18),rgba(67,160,90,.08));border:1px solid rgba(67,160,90,.3);border-radius:20px;padding:28px 20px;margin-bottom:20px;text-align:center">
+      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(126,217,160,.7);margin-bottom:10px;font-weight:600">💡 What you save vs popular activity trackers</div>
+      <div style="font-size:13px;color:var(--t3);margin-bottom:4px">in the first year alone</div>
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:3px;margin-bottom:6px">
+        <span style="font-family:var(--fd);font-size:32px;color:var(--gg);line-height:1">₹</span>
+        <span id="savings-counter" style="font-family:var(--fd);font-size:88px;color:var(--gg);line-height:1;letter-spacing:-.02em">0</span>
+      </div>
+      <div style="width:60px;height:2px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:0 auto 14px"></div>
+      <div style="font-size:13px;color:var(--t2);line-height:1.7">That's new running shoes + 3 months of protein + gym gear.<br/>And you still have your entire fitness app.</div>
     </div>
     <div style="background:rgba(30,136,229,.07);border:1px solid rgba(30,136,229,.2);border-radius:16px;padding:20px">
       <div style="font-size:20px;margin-bottom:10px;text-align:center">🧘</div>
@@ -789,9 +897,28 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
       </div>
     </div>
 
-    <div style="background:rgba(30,136,229,.07);border:1px solid rgba(30,136,229,.2);border-radius:14px;padding:16px;text-align:center">
-      <div style="font-size:13px;color:#64b5f6;font-weight:700;margin-bottom:6px">₹299 buys you more than an app</div>
-      <div style="font-size:12px;color:var(--t2);line-height:1.65">It buys you a direct line to the team building it. Your gym routine missing something? Tell us. A module needs a new exercise? Tell us. That's the deal — you get the app, we get better at making it.</div>
+    <div style="background:linear-gradient(135deg,rgba(30,136,229,.1),rgba(46,125,70,.08));border:1px solid rgba(67,160,90,.25);border-radius:20px;padding:28px 20px;text-align:center">
+      <div style="font-family:var(--fd);font-size:clamp(22px,6vw,34px);color:#fff;line-height:1.2;margin-bottom:14px">
+        ONE PURCHASE.<br/><span style="color:var(--gg)">LIFETIME OF FITNESS.</span>
+      </div>
+      <div style="width:44px;height:2px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:0 auto 16px"></div>
+      <div style="font-size:14px;color:var(--t2);line-height:1.8;max-width:380px;margin:0 auto 20px">
+        No monthly bills. No "premium features" locked behind a paywall. No cancelling when money gets tight and losing everything. Pay once at ₹299 — and every update, every new feature, every improvement we ship is yours. Forever.
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 8px;text-align:center">
+          <div style="font-family:var(--fd);font-size:22px;color:var(--gg)">Year 1</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:3px">₹299</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 8px;text-align:center">
+          <div style="font-family:var(--fd);font-size:22px;color:var(--gg)">Year 3</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:3px">still ₹299</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 8px;text-align:center">
+          <div style="font-family:var(--fd);font-size:22px;color:var(--gg)">Year 10</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:3px">still ₹299</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -925,7 +1052,7 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
 </footer>
 
 <script>
-// Scroll reveal — handles all animation variant classes
+// Scroll reveal
 const obOpts = {threshold:.12, rootMargin:'0px 0px -40px 0px'};
 const ob = new IntersectionObserver(es => {
   es.forEach(e => {
@@ -935,11 +1062,173 @@ const ob = new IntersectionObserver(es => {
     }
   });
 }, obOpts);
+document.querySelectorAll('.rev,.rev-l,.rev-r,.rev-s,.stag,.card-stack,.mgrid,.splits-preview').forEach(el => ob.observe(el));
 
-// Observe all animatable elements
-document.querySelectorAll('.rev,.rev-l,.rev-r,.rev-s,.stag,.card-stack,.mgrid,.splits-preview').forEach(el => {
-  ob.observe(el);
-});
+// ── COUNTER ANIMATION UTILITY ───────────────────────────────────────
+function animateNumber(el, target, duration, prefix) {
+  if (!el) return;
+  const start = performance.now();
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  function frame(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const val = Math.round(easeOut(progress) * target);
+    el.textContent = val.toLocaleString('en-IN');
+    if (progress < 1) requestAnimationFrame(frame);
+    else el.textContent = target.toLocaleString('en-IN');
+  }
+  requestAnimationFrame(frame);
+}
+
+// ── PRICE COUNTER ₹299 ──────────────────────────────────────────────
+const priceOb = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) {
+    animateNumber(document.getElementById('price-counter'), 299, 1600);
+    priceOb.disconnect();
+  }
+}, {threshold:.5});
+const priceEl = document.getElementById('price-counter');
+if (priceEl) priceOb.observe(priceEl.closest('.price-hero-card') || priceEl);
+
+// ── SAVINGS COUNTER ₹3,889 ──────────────────────────────────────────
+const savingsOb = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) {
+    animateNumber(document.getElementById('savings-counter'), 3889, 2000);
+    savingsOb.disconnect();
+  }
+}, {threshold:.5});
+const savingsEl = document.getElementById('savings-counter');
+if (savingsEl) savingsOb.observe(savingsEl.closest('.savings-card') || savingsEl);
+
+// ── ANIMATED GPS MAP ────────────────────────────────────────────────
+(function() {
+  const wrap = document.getElementById('map-anim-wrap');
+  if (!wrap) return;
+
+  // Route waypoints in SVG coords: [x, y]
+  const waypoints = [
+    [40,230],[40,190],[40,134],[70,134],[100,134],
+    [100,100],[100,67],[125,67],[150,67],
+    [150,100],[150,134],[125,134],[100,134],
+    [100,162],[100,190],[80,190],[60,190],[60,210],[60,230]
+  ];
+
+  // Precompute cumulative distances for interpolation
+  function dist(a, b) { return Math.sqrt((b[0]-a[0])**2+(b[1]-a[1])**2); }
+  const segs = [];
+  let total = 0;
+  for (let i = 1; i < waypoints.length; i++) {
+    const d = dist(waypoints[i-1], waypoints[i]);
+    total += d;
+    segs.push({from: waypoints[i-1], to: waypoints[i], cumDist: total, segDist: d});
+  }
+
+  // Get position along route (0–1)
+  function posAtFraction(f) {
+    const target = f * total;
+    for (const seg of segs) {
+      if (seg.cumDist >= target) {
+        const prev = seg.cumDist - seg.segDist;
+        const t = seg.segDist > 0 ? (target - prev) / seg.segDist : 0;
+        return [
+          seg.from[0] + t * (seg.to[0] - seg.from[0]),
+          seg.from[1] + t * (seg.to[1] - seg.from[1])
+        ];
+      }
+    }
+    return waypoints[waypoints.length - 1];
+  }
+
+  // Build path string up to fraction
+  function pathUpTo(f) {
+    const target = f * total;
+    let d = 'M' + waypoints[0][0] + ',' + waypoints[0][1];
+    let acc = 0;
+    for (const seg of segs) {
+      if (acc + seg.segDist <= target) {
+        d += ' L' + seg.to[0] + ',' + seg.to[1];
+        acc += seg.segDist;
+      } else {
+        const t = seg.segDist > 0 ? (target - acc) / seg.segDist : 0;
+        const x = seg.from[0] + t * (seg.to[0] - seg.from[0]);
+        const y = seg.from[1] + t * (seg.to[1] - seg.from[1]);
+        d += ' L' + x.toFixed(1) + ',' + y.toFixed(1);
+        break;
+      }
+    }
+    return d;
+  }
+
+  const routePath  = document.getElementById('route-path');
+  const liveDot    = document.getElementById('live-dot');
+  const pulseRing  = document.getElementById('pulse-ring');
+  const timerEl    = document.getElementById('map-timer');
+  const kmEl       = document.getElementById('map-km');
+  const paceEl     = document.getElementById('map-pace');
+  const spdEl      = document.getElementById('map-spd');
+  const kcalEl     = document.getElementById('map-kcal');
+
+  // Animation state
+  let fraction = 0;
+  let running  = false;
+  let startT   = null;
+  let pulseR   = 5;
+  let pulseDir = 1;
+  const RUN_DURATION = 8000; // 8s to complete route, then loop
+
+  function tick(now) {
+    if (!running) return;
+    if (!startT) startT = now;
+    const elapsed = now - startT;
+    fraction = (elapsed % RUN_DURATION) / RUN_DURATION;
+
+    // Update route path
+    if (routePath) routePath.setAttribute('d', pathUpTo(fraction));
+
+    // Update live dot
+    const pos = posAtFraction(fraction);
+    if (liveDot)   { liveDot.setAttribute('cx', pos[0]); liveDot.setAttribute('cy', pos[1]); }
+    if (pulseRing) {
+      pulseR += 0.15 * pulseDir;
+      if (pulseR > 10) pulseDir = -1;
+      if (pulseR < 5)  pulseDir =  1;
+      pulseRing.setAttribute('cx', pos[0]);
+      pulseRing.setAttribute('cy', pos[1]);
+      pulseRing.setAttribute('r', pulseR.toFixed(1));
+      pulseRing.setAttribute('opacity', (1 - (pulseR - 5) / 5).toFixed(2));
+    }
+
+    // Update stats — simulate a 3.12km run over full animation
+    const totalKm   = 3.12;
+    const totalSecs = 1294; // 21:34
+    const totalKcal = 218;
+    const elapsedSim = Math.round(fraction * totalSecs);
+    const km        = (fraction * totalKm).toFixed(2);
+    const spd       = fraction > 0.02 ? (8.2 + Math.sin(fraction * 20) * 0.8).toFixed(1) : '0.0';
+    const paceSecPerKm = fraction > 0.02 ? Math.round(60 / parseFloat(spd) * 60) : 0;
+    const paceMin   = Math.floor(paceSecPerKm / 60);
+    const paceSec   = String(paceSecPerKm % 60).padStart(2,'0');
+    const mm        = String(Math.floor(elapsedSim / 60)).padStart(2,'0');
+    const ss        = String(elapsedSim % 60).padStart(2,'0');
+
+    if (timerEl) timerEl.textContent = mm + ':' + ss;
+    if (kmEl)    kmEl.textContent    = km;
+    if (paceEl)  paceEl.textContent  = fraction > 0.02 ? paceMin + ':' + paceSec : '--:--';
+    if (spdEl)   spdEl.textContent   = spd;
+    if (kcalEl)  kcalEl.textContent  = Math.round(fraction * totalKcal);
+
+    requestAnimationFrame(tick);
+  }
+
+  // Start when section scrolls into view
+  const mapOb = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !running) {
+      running = true;
+      requestAnimationFrame(tick);
+      mapOb.disconnect();
+    }
+  }, {threshold:.3});
+  mapOb.observe(wrap);
+})();
 
 // Smooth number counter for hero stats
 function animateCount(el, target, suffix='') {
@@ -1000,6 +1289,35 @@ if (phone) {
     phone.style.transform = `translateY(${-offset}px)`;
   }, {passive: true});
 }
+
+// Hero logo — animated pulse ring
+(function() {
+  const ring = document.getElementById('logo-pulse-ring');
+  if (!ring) return;
+  let r = 42, growing = true, opacity = 0.4;
+  function animRing() {
+    if (growing) { r += 0.12; opacity -= 0.004; }
+    else         { r -= 0.12; opacity += 0.004; }
+    if (r >= 50) growing = false;
+    if (r <= 42) growing = true;
+    ring.setAttribute('r', r.toFixed(2));
+    ring.setAttribute('opacity', Math.max(0, Math.min(0.5, opacity)).toFixed(3));
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Bolt subtle glow pulse
+  const bolt = document.querySelector('#hero-logo path');
+  if (bolt) {
+    let t = 0;
+    function animBolt() {
+      t += 0.02;
+      bolt.style.opacity = (0.88 + Math.sin(t) * 0.12).toFixed(3);
+      requestAnimationFrame(animBolt);
+    }
+    animBolt();
+  }
+})();
 </script>
 </body>
 </html>

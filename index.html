@@ -795,8 +795,8 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
     <div class="div"></div>
     <p class="lead">We believe in being honest. Here's exactly what FitFlow needs internet for — and what runs on minimal or no data.</p>
 
-    <div class="conn-g card-stack">
-      <div class="conn-card conn-g2">
+    <div class="conn-g">
+      <div class="conn-card conn-g2 rev">
         <div class="conn-head">
           <div class="conn-ic">✅</div>
           <div>
@@ -809,7 +809,7 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
         </div>
       </div>
 
-      <div class="conn-card conn-y">
+      <div class="conn-card conn-y rev">
         <div class="conn-head">
           <div class="conn-ic">📶</div>
           <div>
@@ -833,7 +833,7 @@ footer p{font-size:12px;color:var(--t3);line-height:1.6}
         </div>
       </div>
 
-      <div class="conn-card conn-b">
+      <div class="conn-card conn-b rev">
         <div class="conn-head">
           <div class="conn-ic">☁️</div>
           <div>
@@ -916,15 +916,15 @@ window.addEventListener('load', () => {
 });
 
 // Add stagger delay to feature list items inside revealed sections
-document.querySelectorAll('.fl li, .feat-list li, .blist li, .fl li, .conn-card').forEach((el, i) => {
+document.querySelectorAll('.fl li, .feat-list li, .blist li').forEach((el, i) => {
   el.style.opacity = '0';
   el.style.transform = 'translateX(-16px)';
   el.style.transition = 'opacity .4s ease, transform .4s ease';
-  const parent = el.closest('.rev, .card-stack, [class*="conn"]');
+  const parent = el.closest('.rev');
   if (parent) {
     const parentOb = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        const siblings = parent.querySelectorAll('.fl li, .feat-list li, .blist li, .conn-card');
+        const siblings = parent.querySelectorAll('.fl li, .feat-list li, .blist li');
         siblings.forEach((sib, j) => {
           setTimeout(() => {
             sib.style.opacity = '1';

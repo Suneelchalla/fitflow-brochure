@@ -1,1331 +1,2836 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<meta name="theme-color" content="#071510"/>
-<title>FitFlow Pro — Your All-in-One Fitness App</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitFlow Pro — Train Smart. Track Honestly.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --gd:#071510;--gm:#0d1f14;--gb:#2e7d46;--gl:#43a05a;--gg:#7ed9a0;
-  --ac:#f0c040;--bl:#1e88e5;--tx:#e8f5e9;--t2:#a5d6b0;--t3:#5a8a65;
-  --sf:rgba(255,255,255,.04);--br:rgba(67,160,90,.15);
-  --fd:'Bebas Neue',cursive;--fb:'DM Sans',sans-serif;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0f0c;
+  --bg2: #0e2218;
+  --surface: #1a3328;
+  --border: rgba(255,255,255,0.08);
+  --g3: #3d8b4a;
+  --g4: #43a05a;
+  --g5: #6dc880;
+  --accent: #f0c040;
+  --red: #e53935;
+  --text: #e8f5e9;
+  --text2: #a5c8ac;
+  --text3: #6a8a73;
+  --display: 'Bebas Neue', system-ui, sans-serif;
+  --body: 'DM Sans', system-ui, sans-serif;
 }
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--fb);background:var(--gd);color:var(--tx);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-section{padding:60px 18px}
-.wrap{max-width:660px;margin:0 auto}
-.ey{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gl);margin-bottom:10px;font-weight:600;opacity:.8}
-h2{font-family:var(--fd);font-size:clamp(52px,14vw,80px);line-height:.93;letter-spacing:.02em;color:#fff;margin-bottom:14px}
-h2 em{color:var(--gg);font-style:normal}
-.lead{font-size:15px;color:var(--t2);font-weight:300;line-height:1.7;margin-bottom:36px}
-.div{width:44px;height:3px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:14px 0 26px}
-/* Scroll animations */
-.rev{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
-.rev.on{opacity:1;transform:none}
-.rev-l{opacity:0;transform:translateX(-32px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
-.rev-l.on{opacity:1;transform:none}
-.rev-r{opacity:0;transform:translateX(32px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
-.rev-r.on{opacity:1;transform:none}
-.rev-s{opacity:0;transform:scale(.94);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
-.rev-s.on{opacity:1;transform:scale(1)}
-/* Stagger children inside a revealed parent */
-.stag > *{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
-.stag.on > *:nth-child(1){opacity:1;transform:none;transition-delay:.05s}
-.stag.on > *:nth-child(2){opacity:1;transform:none;transition-delay:.13s}
-.stag.on > *:nth-child(3){opacity:1;transform:none;transition-delay:.21s}
-.stag.on > *:nth-child(4){opacity:1;transform:none;transition-delay:.29s}
-.stag.on > *:nth-child(5){opacity:1;transform:none;transition-delay:.37s}
-.stag.on > *:nth-child(6){opacity:1;transform:none;transition-delay:.45s}
-.stag.on > *:nth-child(7){opacity:1;transform:none;transition-delay:.53s}
-.stag.on > *:nth-child(8){opacity:1;transform:none;transition-delay:.61s}
-/* Number counter animation */
-@keyframes count-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-/* Pulse on hero stat numbers */
-@keyframes stat-pop{0%{transform:scale(.85);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
-.hero .hsn{animation:stat-pop .6s cubic-bezier(.22,1,.36,1) both}
-.hero .hs:nth-child(1) .hsn{animation-delay:.3s}
-.hero .hs:nth-child(2) .hsn{animation-delay:.45s}
-.hero .hs:nth-child(3) .hsn{animation-delay:.6s}
-/* Slide-up card stack */
-.card-stack > *{opacity:0;transform:translateY(24px) scale(.98)}
-.card-stack.on > *{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
-.card-stack.on > *:nth-child(1){transition-delay:.04s}
-.card-stack.on > *:nth-child(2){transition-delay:.12s}
-.card-stack.on > *:nth-child(3){transition-delay:.20s}
-.card-stack.on > *:nth-child(4){transition-delay:.28s}
-/* GPS pulse ring */
-@keyframes pulse-fade{0%{r:5;opacity:.8}100%{r:14;opacity:0}}
 
-/* Bar chart animate */
-@keyframes bar-grow{from{width:0}to{width:var(--w)}}
-.split-bar{animation:none}
-.splits-preview.on .split-bar{animation:bar-grow .8s cubic-bezier(.22,1,.36,1) both}
-.splits-preview.on .split-row:nth-child(1) .split-bar{animation-delay:.1s}
-.splits-preview.on .split-row:nth-child(2) .split-bar{animation-delay:.2s}
-.splits-preview.on .split-row:nth-child(3) .split-bar{animation-delay:.3s}
-.splits-preview.on .split-row:nth-child(4) .split-bar{animation-delay:.4s}
-/* Module grid cards stagger */
-.mgrid.stag > *{opacity:0;transform:translateY(20px) scale(.97)}
-.mgrid.stag.on > *{opacity:1;transform:none;transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1)}
-.mgrid.stag.on > *:nth-child(1){transition-delay:.04s}
-.mgrid.stag.on > *:nth-child(2){transition-delay:.10s}
-.mgrid.stag.on > *:nth-child(3){transition-delay:.16s}
-.mgrid.stag.on > *:nth-child(4){transition-delay:.22s}
-.mgrid.stag.on > *:nth-child(5){transition-delay:.28s}
-.mgrid.stag.on > *:nth-child(6){transition-delay:.34s}
-.mgrid.stag.on > *:nth-child(7){transition-delay:.40s}
-.mgrid.stag.on > *:nth-child(8){transition-delay:.46s}
-.mgrid.stag.on > *:nth-child(9){transition-delay:.52s}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(67,160,90,0.10) 0%, transparent 35%),
+    radial-gradient(circle at 85% 88%, rgba(240,192,64,0.06) 0%, transparent 35%);
+  pointer-events: none;
+  z-index: 0;
+}
+.container { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+.section { padding: 64px 0; }
+.section-tight { padding: 36px 0; }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,21,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(67,160,90,.1);padding:11px 18px;display:flex;align-items:center;justify-content:space-between}
-.nlogo{font-family:var(--fd);font-size:22px;color:var(--gg)}
-.nbtn{font-size:11px;font-weight:700;background:rgba(46,125,70,.9);color:#fff;padding:6px 14px;border-radius:20px;text-decoration:none}
+h1 { font-family: var(--display); font-size: clamp(34px, 8.5vw, 92px); letter-spacing: 0.01em; line-height: 0.95; margin-bottom: 18px; }
+h2 { font-family: var(--display); font-size: clamp(28px, 6vw, 60px); letter-spacing: 0.02em; line-height: 1; margin-bottom: 14px; }
+h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.subtitle { font-size: clamp(14px, 1.8vw, 17px); color: var(--text2); max-width: 580px; margin: 0 auto 28px; }
+.kicker {
+  display: inline-block;
+  background: rgba(67,160,90,0.14);
+  color: var(--g5);
+  border: 1px solid rgba(67,160,90,0.3);
+  padding: 5px 13px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.text-center { text-align: center; }
+.green { color: var(--g5); }
+.amber { color: var(--accent); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 50px;
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  border: none;
+  white-space: nowrap;
+}
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+}
+.btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(37,211,102,0.5); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--g4), var(--g3));
+  color: white;
+  box-shadow: 0 6px 20px rgba(67,160,90,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(67,160,90,0.5); }
 
 /* HERO */
-.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 18px 60px;position:relative;overflow:hidden}
-.hbg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 120% 60% at 50% 0%,rgba(46,125,70,.3) 0%,transparent 65%),radial-gradient(ellipse 80% 50% at 10% 90%,rgba(30,136,229,.1) 0%,transparent 60%),var(--gd)}
-.hgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(67,160,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.06) 1px,transparent 1px);background-size:44px 44px;animation:gm 18s linear infinite}
-@keyframes gm{to{background-position:44px 44px}}
-.hcon{position:relative;z-index:2;width:100%;max-width:460px}
-/* bolt class removed */
-@keyframes bp{0%,100%{box-shadow:0 0 48px rgba(67,160,90,.3)}50%{box-shadow:0 0 72px rgba(67,160,90,.5)}}
-@keyframes logo-pulse{0%{r:42;opacity:.4;stroke-width:1.5}50%{r:46;opacity:0;stroke-width:1}100%{r:42;opacity:.4;stroke-width:1.5}}
-@keyframes bolt-glow{0%,100%{opacity:.9}50%{opacity:1}}
-.bolt svg{width:42px;height:42px}
-.hero h1{font-family:var(--fd);font-size:clamp(64px,18vw,96px);line-height:.9;color:#fff;letter-spacing:.02em;margin-bottom:6px}
-.hero h1 span{color:var(--gg)}
-.hsub{font-size:15px;color:var(--t2);margin:14px auto 26px;max-width:340px;font-weight:300;line-height:1.6}
-.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
-.pill{font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid rgba(67,160,90,.3);background:rgba(67,160,90,.08);color:var(--gg);font-weight:600}
-.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(67,160,90,.15);border:1px solid rgba(67,160,90,.2);border-radius:16px;overflow:hidden}
-.hs{background:rgba(7,21,16,.8);padding:15px 8px;text-align:center}
-.hsn{font-family:var(--fd);font-size:34px;color:var(--gg);line-height:1}
-.hsl{font-size:10px;color:var(--t3);margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 0 40px; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.hero-left h1 .accent-text { color: var(--g5); position: relative; display: inline-block; }
+.hero-left h1 .accent-text::after {
+  content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 8px;
+  background: var(--accent); z-index: -1; opacity: 0.5;
+  transform: scaleX(0); transform-origin: left;
+  animation: underline 1.2s ease-out 0.6s forwards;
+}
+@keyframes underline { to { transform: scaleX(1); } }
+.hero-left p { font-size: clamp(15px, 1.8vw, 17px); color: var(--text2); margin-bottom: 26px; max-width: 520px; }
+.hero-trust { margin-top: 24px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--text3); }
+.hero-trust strong { color: var(--g5); font-weight: 700; }
 
-/* CONNECTIVITY BANNER */
-.conn-s{background:linear-gradient(135deg,#040d08,#071a0f)}
-.conn-g{display:grid;grid-template-columns:1fr;gap:10px}
-.conn-card{border-radius:16px;padding:18px 16px;border:1px solid}
-.conn-y{background:rgba(240,192,64,.06);border-color:rgba(240,192,64,.25)}
-.conn-g2{background:rgba(67,160,90,.06);border-color:rgba(67,160,90,.25)}
-.conn-b{background:rgba(30,136,229,.06);border-color:rgba(30,136,229,.2)}
-.conn-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.conn-ic{font-size:22px;flex-shrink:0}
-.conn-title{font-size:14px;font-weight:700;color:#fff}
-.conn-sub{font-size:11px;color:var(--t3);line-height:1.5;margin-top:2px}
-.conn-body{font-size:12px;color:var(--t2);line-height:1.65}
 
-/* PROBLEM */
-.ps{background:linear-gradient(180deg,var(--gd),#040d08)}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pc{background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.18);border-radius:16px;padding:16px}
-.pc .ic{font-size:26px;margin-bottom:9px}
-.pc h3{font-size:13px;font-weight:700;color:#ef9a9a;margin-bottom:5px}
-.pc p{font-size:11px;color:var(--t3);line-height:1.55}
 
-/* MODULES */
-.ms{background:#040d08}
-.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:24px}
-.mc{border-radius:15px;padding:15px;border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden}
-.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--ca,#43a05a)}
-.mc.ca{background:rgba(67,160,90,.06);--ca:#43a05a}
-.mc.gm{background:rgba(30,136,229,.06);--ca:#1e88e5}
-.mc.yo{background:rgba(156,39,176,.06);--ca:#9c27b0}
-.mc.ci{background:rgba(255,87,34,.06);--ca:#ff5722}
-.mc.ru{background:rgba(240,192,64,.06);--ca:#f0c040}
-.mc.st{background:rgba(0,188,212,.06);--ca:#00bcd4}
-.mc.cu{background:rgba(233,30,99,.06);--ca:#e91e63}
-.mc.dt{background:rgba(76,175,80,.06);--ca:#4caf50}
-.mc.co{background:rgba(229,57,53,.06);--ca:#ef5350}
-.mc.full{grid-column:span 2;background:rgba(240,192,64,.06);--ca:#f0c040}
-.mme{font-size:26px;margin-bottom:9px}
-.mc h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
-.mc p{font-size:11px;color:var(--t3);line-height:1.5}
-.mtags{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px}
-.mt{font-size:9px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:var(--t2)}
-.new-badge{font-size:8px;font-weight:700;background:var(--ac);color:#000;padding:1px 6px;border-radius:6px;vertical-align:middle;margin-left:4px}
-.srow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.sb{background:rgba(67,160,90,.07);border:1px solid rgba(67,160,90,.18);border-radius:13px;padding:15px;text-align:center}
-.sbn{font-family:var(--fd);font-size:40px;color:var(--gg);line-height:1}
-.sbl{font-size:11px;color:var(--t2);margin-top:5px;line-height:1.4}
+/* ═══════════════════ BRAND BAR — exact match of app splash ═══════════════════ */
+.brand-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 15, 12, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.brand-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
 
-/* MODULE DEEP DIVES */
-.deep-s{background:linear-gradient(180deg,#040d08,#071510)}
-.deep-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;margin-bottom:14px}
-.deep-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.deep-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.deep-title{font-size:15px;font-weight:700;color:#fff}
-.deep-sub{font-size:11px;color:var(--t3);margin-top:2px}
-.feat-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-.feat-list li{font-size:12px;color:var(--t2);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.feat-list li::before{content:'→';color:var(--gl);flex-shrink:0;margin-top:1px}
+/* The clickable brand block */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--text);
+}
 
-/* GPS RUNNING */
-.rs{background:linear-gradient(135deg,#040d08,#071a0f);position:relative}
-.pw{max-width:240px;margin:0 auto 32px}
-.phone{background:linear-gradient(135deg,#0a1f12,#071510);border:1.5px solid rgba(67,160,90,.3);border-radius:30px;padding:14px;box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 50px rgba(67,160,90,.08)}
-.pscreen{background:#0a1810;border-radius:18px;overflow:hidden;aspect-ratio:9/18;display:flex;flex-direction:column}
-.pmap{flex:1;background:linear-gradient(135deg,#0f2318,#0a1a10);position:relative;display:flex;align-items:center;justify-content:center}
-.mr{position:absolute;width:82%;height:72%}
-.mgl{stroke:rgba(67,160,90,.1);stroke-width:1}
-.rl{stroke:#ff6b35;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.gd{fill:#4285f4}
-.psp{background:rgba(7,21,16,.95);backdrop-filter:blur(10px);padding:10px;border-top:1px solid rgba(67,160,90,.12)}
-.pt{font-family:var(--fd);font-size:33px;color:#fff;text-align:center;line-height:1;margin-bottom:9px}
-.psr{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;text-align:center;margin-bottom:9px}
-.pv{font-family:var(--fd);font-size:16px;color:var(--gl)}
-.pl{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-top:1px}
-.pbs{display:flex;gap:7px}
-.pb1{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px;text-align:center;font-size:9px;font-weight:700;color:#fff}
-.pb2{flex:1;background:rgba(229,57,53,.8);border-radius:14px;padding:6px;text-align:center;font-size:9px;font-weight:700;color:#fff}
-.fl{list-style:none}
-.fl li{display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-bottom:1px solid rgba(67,160,90,.08)}
-.fl li:last-child{border:none}
-.fi{width:34px;height:34px;border-radius:10px;background:rgba(67,160,90,.1);border:1px solid rgba(67,160,90,.18);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.ft{font-weight:700;font-size:13px;color:#fff;margin-bottom:2px}
-.fd{font-size:12px;color:var(--t3);line-height:1.5}
-.fdesc{font-size:12px;color:var(--t3);line-height:1.5}
+/* LOGO MARK — animated like app splash */
+.brand-mark {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
 
-/* KM SPLITS PREVIEW */
-.splits-preview{background:rgba(7,21,16,.8);border:1px solid rgba(67,160,90,.15);border-radius:14px;padding:14px;margin:16px 0}
-.split-row{display:flex;align-items:center;gap:8px;padding:4px 0}
-.split-km{width:20px;font-size:12px;font-weight:700;color:var(--t3);text-align:right;flex-shrink:0}
-.split-pace{width:44px;font-size:12px;font-weight:700;flex-shrink:0}
-.split-bar-wrap{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.split-bar{height:100%;border-radius:4px}
-.split-time{width:38px;text-align:right;font-size:10px;color:var(--t3);flex-shrink:0}
+.brand-pulse-ring {
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(76,175,80,0.18) 0%, transparent 70%);
+  animation: brand-pulse 2.5s ease-in-out infinite;
+}
+@keyframes brand-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%      { transform: scale(1.15);opacity: 1;   }
+}
 
-/* BEFORE AFTER */
-.bas{background:#040d08}
-.bag{display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:17px;overflow:hidden}
-.bb{background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.15);padding:18px 14px;border-radius:16px 0 0 16px}
-.ba{background:rgba(67,160,90,.05);border:1px solid rgba(67,160,90,.2);padding:18px 14px;border-radius:0 16px 16px 0}
-.bl2{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-.bb .bl2{color:#ef9a9a}.ba .bl2{color:var(--gg)}
-.blist{list-style:none}
-.blist li{font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:6px;line-height:1.45}
-.blist li:last-child{border:none}
-.bb .blist li{color:#ef9a9a}.ba .blist li{color:var(--t2)}
+.brand-spin-ring-1 {
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-top-color: #4caf50;
+  border-right-color: #2e7d46;
+  animation: brand-spin 3s linear infinite;
+}
+.brand-spin-ring-2 {
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-bottom-color: #43a05a;
+  border-left-color: #1a5c32;
+  animation: brand-spin-rev 4s linear infinite;
+}
+.brand-dashed-ring {
+  position: absolute; inset: -1px;
+  border-radius: 50%;
+  border: 1px dashed rgba(76,175,80,0.35);
+  animation: brand-spin 8s linear infinite;
+}
+@keyframes brand-spin     { from { transform: rotate(0deg);   } to { transform: rotate(360deg); } }
+@keyframes brand-spin-rev { from { transform: rotate(360deg); } to { transform: rotate(0deg);   } }
 
-/* COMPARE */
-.cs{background:var(--gd)}
-.tw{overflow-x:auto;border-radius:13px;border:1px solid rgba(67,160,90,.15)}
-table{width:100%;border-collapse:separate;border-spacing:0;min-width:360px}
-th{padding:13px 10px;font-size:11px;font-weight:700;text-align:center}
-th.ff{background:rgba(46,125,70,.25);color:var(--gg)}
-th.ot{background:rgba(255,255,255,.03);color:var(--t3)}
-th.fe{text-align:left;background:rgba(255,255,255,.02);color:var(--t3);font-size:10px}
-td{padding:10px;font-size:11px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04)}
-td.fn{text-align:left;font-weight:600;color:var(--t2)}
-td.fc{background:rgba(67,160,90,.04);border-left:1px solid rgba(67,160,90,.12);border-right:1px solid rgba(67,160,90,.12);color:var(--gg);font-weight:600}
-td.oc{color:var(--t3)}
-.ck{color:#43a05a}.cx{color:rgba(229,57,53,.7)}
+.brand-circle {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a4a28, #0d2a16);
+  border: 2px solid rgba(76,175,80,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+.brand-circle svg { animation: brand-bolt 2s ease-in-out infinite; }
+@keyframes brand-bolt {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0 transparent);   }
+  50%      { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(76,175,80,0.7)); }
+}
 
-/* STORIES */
-.ss{background:#040d08}
-.sc{background:var(--gm);border:1px solid rgba(67,160,90,.1);border-radius:17px;padding:20px;margin-bottom:12px}
-.sh{display:flex;align-items:center;gap:12px;margin-bottom:13px}
-.av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.av-a{background:linear-gradient(135deg,#1e88e5,#0d47a1)}
-.av-b{background:linear-gradient(135deg,#9c27b0,#4a148c)}
-.av-c{background:linear-gradient(135deg,#ff5722,#bf360c)}
-.av-d{background:linear-gradient(135deg,#43a05a,#1b5e20)}
-.sn{font-size:10px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
-.sti{font-size:14px;font-weight:700;color:#fff}
-.stx{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:12px}
-.sus{display:flex;flex-wrap:wrap;gap:6px}
-.stag{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:600}
+/* BIG BRAND TEXT — matches app */
+.brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1;
+}
+.brand-name {
+  font-family: var(--display);
+  font-size: 36px;
+  color: #7ed9a0;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  line-height: 1;
+}
+/* PRO badge — GREEN gradient (matches app exactly), NOT yellow */
+.brand-pro {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.3em;
+  background: linear-gradient(135deg, #2e7d46, #1a5c32);
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(76,175,80,0.4);
+  margin-top: 4px;
+}
 
-/* PILLARS */
-.pls{background:linear-gradient(180deg,#040d08,var(--gd))}
-.plg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pi{padding:18px 14px;border-radius:15px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05)}
-.pn{font-family:var(--fd);font-size:36px;color:rgba(67,160,90,.2);line-height:1;margin-bottom:9px}
-.pi h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px}
-.pi p{font-size:11px;color:var(--t3);line-height:1.55}
+.brand-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.brand-nav a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .15s;
+}
+.brand-nav a:hover { color: var(--g5); }
+.brand-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white !important;
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+  transition: transform .15s, box-shadow .15s;
+}
+.brand-nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37,211,102,0.45);
+}
 
-/* REPORT */
-.rps{background:#040d08}
-.rpc{background:linear-gradient(135deg,rgba(46,125,70,.1),rgba(67,160,90,.05));border:1px solid rgba(67,160,90,.2);border-radius:20px;padding:22px;max-width:340px;margin:0 auto}
-.grade{font-family:var(--fd);font-size:76px;color:#43a05a;line-height:1;text-align:center}
-.gl2{font-size:17px;font-weight:700;text-align:center;color:#fff;margin-bottom:3px}
-.gs{font-size:11px;color:var(--t3);text-align:center;margin-bottom:18px}
-.wg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:16px}
-.wh{font-size:9px;color:var(--t3);text-align:center;font-weight:700}
-.wd{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
-.wd.ac{background:rgba(67,160,90,.6)}.wd.mi{background:rgba(229,57,53,.18);font-size:8px;color:#ef9a9a}
-.rsg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
-.rst{background:rgba(7,21,16,.7);border-radius:11px;padding:11px;text-align:center}
-.rsn{font-family:var(--fd);font-size:26px;color:var(--gg);line-height:1}
-.rsl{font-size:10px;color:var(--t3);margin-top:2px}
-.rsd{font-size:9px;color:#43a05a;margin-top:2px}
-.rq{background:rgba(67,160,90,.07);border:1px solid rgba(67,160,90,.18);border-radius:11px;padding:12px;font-size:12px;color:var(--t2);font-style:italic;line-height:1.6;text-align:center}
+@media (max-width: 880px) {
+  .brand-mark { width: 50px; height: 50px; }
+  .brand-name { font-size: 32px; }
+}
+@media (max-width: 720px) {
+  .brand-mark { width: 44px; height: 44px; }
+  .brand-name { font-size: 26px; letter-spacing: 0.06em; }
+  .brand-pro { font-size: 11px; }
+}
+@media (max-width: 540px) {
+  .brand-mark { width: 40px; height: 40px; }
+  .brand-name { font-size: 22px; letter-spacing: 0.06em; }
+  .brand-pro { font-size: 10px; padding: 2px 9px; letter-spacing: 0.22em; }
+  .brand-nav { gap: 10px; }
+  .brand-nav a:not(.brand-nav-cta) { display: none; }
+  .brand-logo { gap: 8px; }
+  .brand-nav-cta { padding: 7px 14px; font-size: 12px !important; }
+}
+@media (max-width: 380px) {
+  .brand-mark { width: 36px; height: 36px; }
+  .brand-circle svg { width: 22px !important; height: 22px !important; }
+  .brand-name { font-size: 18px; letter-spacing: 0.04em; }
+  .brand-pro { font-size: 9px; padding: 2px 7px; letter-spacing: 0.18em; margin-top: 2px; }
+  .brand-nav-cta { padding: 6px 12px; font-size: 11px !important; }
+  .brand-nav-cta svg { width: 12px; height: 12px; }
+  .brand-bar { padding: 10px 0; }
+  .brand-logo { gap: 7px; }
+}
 
-/* CTA */
-.ctas{text-align:center;padding:76px 18px;background:radial-gradient(ellipse 120% 70% at 50% 50%,rgba(46,125,70,.18) 0%,transparent 70%),var(--gd);position:relative;overflow:hidden}
-.ctas::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(67,160,90,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(67,160,90,.04) 1px,transparent 1px);background-size:32px 32px}
-.ctai{position:relative;z-index:2}
-.ctas h2{font-size:clamp(52px,16vw,80px);margin-bottom:13px}
-.ctas p{font-size:15px;color:var(--t2);margin-bottom:30px;max-width:300px;margin-left:auto;margin-right:auto;line-height:1.6}
-.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#2e7d46,#43a05a);color:#fff;font-size:15px;font-weight:700;padding:14px 30px;border-radius:50px;text-decoration:none;box-shadow:0 8px 28px rgba(46,125,70,.4)}
-.ctaf{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-size:12px;color:var(--t3)}
+/* ═══════════════════ HERO SCENE — human thinking with phone, apps orbiting ═══════════════════ */
+.hero-scene {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  aspect-ratio: 1/1;
+}
 
-footer{background:#020a05;border-top:1px solid rgba(67,160,90,.08);padding:28px 18px;text-align:center}
-.flogo{font-family:var(--fd);font-size:24px;color:var(--gg);margin-bottom:5px}
-footer p{font-size:12px;color:var(--t3);line-height:1.6}
+/* Soft glow behind person */
+.hero-scene::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(67,160,90,0.15) 0%, transparent 65%);
+  filter: blur(40px);
+  z-index: 0;
+  animation: hero-glow 4s ease-in-out infinite;
+}
+@keyframes hero-glow {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.85; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* The person illustration */
+.person-illust {
+  position: relative;
+  width: 60%;
+  max-width: 240px;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.4));
+}
+.person-head {
+  transform-origin: 120px 138px;
+  animation: head-confused 6s ease-in-out infinite;
+}
+/* Head looks around at each app - confused which to pick */
+@keyframes head-confused {
+  0%   { transform: rotate(0deg); }
+  16%  { transform: rotate(-5deg); }   /* looks at upper left app */
+  33%  { transform: rotate(4deg); }    /* looks at upper right app */
+  50%  { transform: rotate(-3deg); }   /* looks at left side */
+  66%  { transform: rotate(5deg); }    /* looks at right side */
+  83%  { transform: rotate(-2deg); }   /* looks at bottom left */
+  100% { transform: rotate(0deg); }
+}
+.person-phone {
+  transform-origin: 120px 240px;
+  animation: phone-tilt 4s ease-in-out infinite;
+}
+@keyframes phone-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+/* Floating "app cards" orbiting around the confused person — look like real apps */
+.orbit-app {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 8px 12px 8px 8px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  z-index: 4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+.orbit-app-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--app-c1, #43a05a), var(--app-c2, #1a5c32));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.orbit-app-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.oa-1 { top: 2%;   left: -8%;  animation: orbit-a 4s   ease-in-out infinite; }
+.oa-2 { top: 2%;   right: -8%; animation: orbit-b 4.4s ease-in-out infinite 0.3s; }
+.oa-3 { top: 35%;  left: -16%; animation: orbit-c 4.8s ease-in-out infinite 0.6s; }
+.oa-4 { top: 35%;  right: -16%;animation: orbit-d 4.6s ease-in-out infinite 0.9s; }
+.oa-5 { bottom: 18%; left: -10%; animation: orbit-b 4.2s ease-in-out infinite 1.2s; }
+.oa-6 { bottom: 18%; right: -10%;animation: orbit-a 4.5s ease-in-out infinite 1.5s; }
+
+@keyframes orbit-a {
+  0%, 100% { transform: translate(0, 0) rotate(-4deg) scale(1); }
+  25%      { transform: translate(-3px, -5px) rotate(-2deg) scale(1.04); }
+  50%      { transform: translate(6px, -10px) rotate(3deg) scale(1); }
+  75%      { transform: translate(2px, -3px) rotate(-1deg) scale(0.98); }
+}
+@keyframes orbit-b {
+  0%, 100% { transform: translate(0, 0) rotate(3deg) scale(1); }
+  25%      { transform: translate(4px, -3px) rotate(1deg) scale(1.03); }
+  50%      { transform: translate(-7px, -7px) rotate(-3deg) scale(1); }
+  75%      { transform: translate(-2px, 2px) rotate(2deg) scale(0.97); }
+}
+@keyframes orbit-c {
+  0%, 100% { transform: translate(0, 0) rotate(-3deg) scale(1); }
+  25%      { transform: translate(5px, 2px) rotate(0deg) scale(1.05); }
+  50%      { transform: translate(9px, 5px) rotate(4deg) scale(1); }
+  75%      { transform: translate(3px, 0px) rotate(-2deg) scale(0.98); }
+}
+@keyframes orbit-d {
+  0%, 100% { transform: translate(0, 0) rotate(2deg) scale(1); }
+  25%      { transform: translate(-3px, 4px) rotate(0deg) scale(1.04); }
+  50%      { transform: translate(-6px, 7px) rotate(-3deg) scale(1); }
+  75%      { transform: translate(-1px, 2px) rotate(1deg) scale(0.99); }
+}
+
+/* Question marks bouncing above head */
+.thought-q {
+  position: absolute;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  z-index: 5;
+}
+.tq-1 {
+  top: 14%; left: 38%;
+  color: var(--accent);
+  animation: q-bounce 1.6s ease-in-out infinite;
+  text-shadow: 0 0 12px rgba(240,192,64,0.5);
+}
+.tq-2 {
+  top: 8%; right: 38%;
+  color: #ff7847;
+  font-size: 22px;
+  animation: q-bounce 1.6s ease-in-out infinite 0.3s;
+  text-shadow: 0 0 12px rgba(255,120,71,0.5);
+}
+.tq-3 {
+  top: 18%; left: 50%;
+  color: var(--accent);
+  font-size: 18px;
+  animation: q-bounce 1.6s ease-in-out infinite 0.6s;
+  text-shadow: 0 0 8px rgba(240,192,64,0.5);
+}
+@keyframes q-bounce {
+  0%, 100% { opacity: 0.4; transform: translateY(0) scale(0.9); }
+  50%      { opacity: 1;   transform: translateY(-8px) scale(1.1); }
+}
+
+/* Connector lines from person to apps */
+.orbit-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.3;
+  pointer-events: none;
+}
+.orbit-line {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  fill: none;
+  animation: line-flow 3s linear infinite;
+  opacity: 0;
+}
+@keyframes line-flow {
+  0%, 100% { opacity: 0; stroke-dashoffset: 0; }
+  50%      { opacity: 0.8; stroke-dashoffset: -16; }
+}
+
+@media (max-width: 880px) {
+  .hero-scene { max-width: 400px; }
+  .orbit-app { padding: 6px 9px 6px 6px; gap: 6px; }
+  .orbit-app-icon { width: 26px; height: 26px; font-size: 13px; border-radius: 6px; }
+  .orbit-app-name { font-size: 9px; }
+}
+@media (max-width: 540px) {
+  .hero-scene { max-width: 340px; }
+}
+
+/* PROBLEM CARDS */
+/* PROBLEM CARDS */
+/* PROBLEM CARDS */
+/* PROBLEM CARDS */
+.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 32px; }
+.problem-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 24px;
+  transition: transform .25s, border-color .25s;
+}
+.problem-card:hover { transform: translateY(-4px); border-color: rgba(229,57,53,0.3); }
+.problem-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(229,57,53,0.12); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 14px;
+}
+.problem-card p { font-size: 14px; color: var(--text2); line-height: 1.55; }
+
+/* EMPATHY */
+.empathy {
+  background: linear-gradient(135deg, rgba(67,160,90,0.06), rgba(240,192,64,0.04));
+  border: 1px solid rgba(67,160,90,0.2); border-radius: 24px;
+  padding: 32px 28px; text-align: center; max-width: 720px; margin: 0 auto;
+}
+.empathy h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 10px; }
+.empathy p { font-size: 16px; color: var(--text2); }
+
+
+
+
+/* WEEKLY */
+.weekly-showcase {
+  background: linear-gradient(135deg, rgba(240,192,64,0.04), rgba(67,160,90,0.04));
+  border: 1px solid rgba(240,192,64,0.2); border-radius: 24px; padding: 36px;
+  margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center;
+}
+.weekly-card-mock {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 22px; position: relative; overflow: hidden;
+}
+.weekly-grade {
+  font-family: var(--display); font-size: 86px; color: var(--accent);
+  line-height: 0.9; text-align: center; text-shadow: 0 0 30px rgba(240,192,64,0.4);
+}
+.weekly-grade-label { text-align: center; font-size: 11px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin: -2px 0 14px; }
+.weekly-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+.weekly-stat-val { font-family: var(--display); font-size: 24px; color: var(--g5); text-align: center; }
+.weekly-stat-label { font-size: 9px; text-align: center; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; }
+.weekly-quote { background: rgba(240,192,64,0.08); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12px; color: var(--text2); font-style: italic; }
+
+/* FEATURES */
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 28px; }
+.feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; transition: transform .25s, border-color .25s; }
+.feature-card:hover { transform: translateY(-3px); border-color: rgba(67,160,90,0.3); }
+.feature-card-icon { width: 38px; height: 38px; border-radius: 11px; background: rgba(67,160,90,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 10px; }
+.feature-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.feature-card p { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 700px; margin: 32px auto 0; }
+.price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 30px 24px; text-align: center; position: relative; transition: transform .25s, border-color .25s, box-shadow .25s; }
+.price-card:hover { transform: translateY(-4px); border-color: rgba(67,160,90,0.4); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+.price-card.featured { border: 2px solid var(--accent); background: linear-gradient(160deg, var(--surface) 0%, rgba(240,192,64,0.05) 100%); box-shadow: 0 12px 32px rgba(240,192,64,0.18); }
+.price-tag { position: absolute; top: 14px; right: 14px; background: var(--accent); color: #000; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 50px; letter-spacing: 0.04em; text-transform: uppercase; }
+.price-amount { font-family: var(--display); font-size: 60px; color: var(--g5); line-height: 0.95; margin-bottom: 4px; }
+.price-period { font-size: 13px; color: var(--text3); margin-bottom: 14px; }
+.price-monthly { font-size: 12px; color: var(--text3); margin-bottom: 18px; }
+.price-monthly strong { color: var(--accent); font-weight: 700; }
+
+.comparison-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 22px; max-width: 700px; margin: 28px auto 0; }
+.comparison-card h4 { text-align: center; font-size: 12px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
+.compare-row { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.compare-row:last-child { border-bottom: none; }
+.compare-row.us { background: rgba(67,160,90,0.08); margin: 4px -10px 0; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(67,160,90,0.3); }
+.compare-name { font-weight: 600; color: var(--text); }
+.compare-row.us .compare-name { color: var(--g5); font-weight: 800; }
+.compare-row.us .compare-price { color: var(--g5); font-weight: 800; font-family: var(--display); font-size: 22px; }
+.compare-price { color: var(--text3); font-family: var(--display); font-size: 18px; letter-spacing: 0.04em; }
+.savings-badge { display: inline-block; background: rgba(240,192,64,0.15); color: var(--accent); font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 50px; margin-left: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* FINAL CTA */
+.final-cta { text-align: center; padding: 80px 0; background: radial-gradient(ellipse at center, rgba(67,160,90,0.10), transparent 70%); }
+.final-cta h2 { font-size: clamp(40px, 7vw, 68px); margin-bottom: 14px; }
+.final-cta p { font-size: clamp(15px, 2vw, 17px); color: var(--text2); max-width: 540px; margin: 0 auto 28px; }
+.cta-trust { margin-top: 22px; display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 12px; color: var(--text3); }
+
+
+
+/* ═══════════════════ GPS ACTIVITIES MODULE ═══════════════════ */
+.gps-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(67,160,90,0.04) 50%, transparent 100%);
+}
+.gps-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* PHONE MOCKUP */
+.gps-phone-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+.gps-phone-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(67,160,90,0.20) 0%, transparent 60%);
+  filter: blur(50px);
+  z-index: 0;
+  animation: gps-glow-pulse 4s ease-in-out infinite;
+}
+@keyframes gps-glow-pulse {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.gps-phone {
+  position: relative;
+  z-index: 2;
+  width: 300px;
+  height: 620px;
+  background: linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%);
+  border: 2px solid #2a2a2a;
+  border-radius: 44px;
+  padding: 9px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 30px 80px rgba(0,0,0,0.6),
+    inset 0 0 30px rgba(0,0,0,0.5);
+  animation: gps-phone-float 6s ease-in-out infinite;
+}
+@keyframes gps-phone-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+.gps-phone-screen {
+  background: linear-gradient(180deg, #050a07, #0a1410);
+  border-radius: 36px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.gps-notch {
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 22px;
+  background: #000;
+  border-radius: 14px;
+  z-index: 5;
+}
+.gps-statusbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+}
+.gps-statusbar-icons {
+  display: flex;
+  gap: 4px;
+  font-size: 9px;
+}
+
+.gps-app-content {
+  flex: 1;
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gps-app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gps-tag-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(67,160,90,0.18);
+  color: var(--g5);
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(67,160,90,0.3);
+}
+.gps-pulse-dot {
+  width: 6px; height: 6px;
+  background: var(--g5);
+  border-radius: 50%;
+  animation: gps-pulse 1.6s infinite;
+}
+@keyframes gps-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(109,200,128,0.7); }
+  50%      { opacity: 0.6; box-shadow: 0 0 0 6px rgba(109,200,128,0); }
+}
+.gps-elapsed {
+  font-family: var(--display);
+  font-size: 14px;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+}
+
+.gps-distance-block { text-align: center; padding: 4px 0; }
+.gps-distance {
+  font-family: var(--display);
+  font-size: 86px;
+  line-height: 0.95;
+  background: linear-gradient(180deg, #ffffff 0%, var(--g5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.01em;
+}
+.gps-distance-unit {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: -4px;
+  font-weight: 700;
+}
+
+.gps-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.gps-stat-val {
+  font-family: var(--display);
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  line-height: 1;
+}
+.gps-stat-label {
+  font-size: 9px;
+  color: var(--text3);
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* CITY MAP */
+.gps-map {
+  flex: 1;
+  background: #061008;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.04);
+  min-height: 180px;
+}
+.city-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.street-h, .street-v {
+  stroke: rgba(255,255,255,0.05);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.building {
+  fill: rgba(67,160,90,0.04);
+  stroke: rgba(67,160,90,0.1);
+  stroke-width: 0.5;
+}
+.park {
+  fill: rgba(67,160,90,0.12);
+  stroke: rgba(109,200,128,0.2);
+  stroke-width: 0.5;
+}
+.start-marker-outer {
+  fill: rgba(255,140,66,0.25);
+  animation: start-pulse 2s ease-in-out infinite;
+}
+.start-marker-inner {
+  fill: #ff8c42;
+  filter: drop-shadow(0 0 4px #ff8c42);
+}
+@keyframes start-pulse {
+  0%, 100% { r: 8; opacity: 0.4; }
+  50%      { r: 14; opacity: 0; }
+}
+
+/* ROUTE — synchronized line draw + marker following exact path */
+/* Orange route — smooth continuous draw, loops back */
+.route-path {
+  stroke: #ff8c42;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px rgba(255,140,66,0.7));
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
+  animation: draw-route 6s ease-in-out infinite;
+}
+@keyframes draw-route {
+  0%   { stroke-dashoffset: 1100; }
+  85%  { stroke-dashoffset: 0;    }
+  100% { stroke-dashoffset: 0;    }
+}
+
+/* Path total length ≈ 1080 units */
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
+  animation: draw-route 8s linear infinite;
+}
+@keyframes draw-route {
+  0%   { stroke-dashoffset: 1100; }
+  85%  { stroke-dashoffset: 0;    }
+  100% { stroke-dashoffset: 0;    }
+}
+
+
+
+.gps-map-info {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 3;
+}
+.gps-map-info-pill {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.gps-action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.gps-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 8px;
+  border-radius: 14px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform .15s, box-shadow .15s;
+}
+.gps-btn:hover { transform: translateY(-1px); }
+.gps-btn-pause {
+  background: rgba(255,140,66,0.15);
+  color: #ff8c42;
+  border-color: rgba(255,140,66,0.3);
+}
+.gps-btn-pause:hover { box-shadow: 0 4px 12px rgba(255,140,66,0.25); }
+.gps-btn-stop {
+  background: rgba(229,57,53,0.15);
+  color: #ff7878;
+  border-color: rgba(229,57,53,0.3);
+}
+.gps-btn-stop:hover { box-shadow: 0 4px 12px rgba(229,57,53,0.25); }
+.gps-btn-icon { font-size: 14px; }
+
+/* SPLITS CARD */
+.gps-splits-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.gps-splits-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+}
+.gps-splits-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.gps-splits-stat {
+  text-align: right;
+}
+.gps-split-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  margin-bottom: 4px;
+  padding: 0 0 6px;
+}
+
+.gps-split-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+}
+.gps-split-row:last-of-type { border-bottom: none; }
+.gps-split-num {
+  width: 24px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--text3);
+  flex-shrink: 0;
+}
+.gps-split-pace {
+  width: 52px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.gps-split-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.gps-split-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Each split fills as the route reaches that km mark - matches 6s route cycle */
+.gps-split-row[data-split="1"] .gps-split-fill { animation: gps-fill-1 6s ease-in-out infinite; }
+.gps-split-row[data-split="2"] .gps-split-fill { animation: gps-fill-2 6s ease-in-out infinite; }
+.gps-split-row[data-split="3"] .gps-split-fill { animation: gps-fill-3 6s ease-in-out infinite; }
+.gps-split-row[data-split="4"] .gps-split-fill { animation: gps-fill-4 6s ease-in-out infinite; }
+.gps-split-row[data-split="5"] .gps-split-fill { animation: gps-fill-5 6s ease-in-out infinite; }
+
+/* Route draws over 0-85% of cycle, so splits fill at 0%, 17%, 34%, 51%, 68% timeline */
+@keyframes gps-fill-1 { 0%, 0%   { width: 0; } 8%,  100% { width: var(--w); } }
+@keyframes gps-fill-2 { 0%, 17%  { width: 0; } 25%, 100% { width: var(--w); } }
+@keyframes gps-fill-3 { 0%, 34%  { width: 0; } 42%, 100% { width: var(--w); } }
+@keyframes gps-fill-4 { 0%, 51%  { width: 0; } 59%, 100% { width: var(--w); } }
+@keyframes gps-fill-5 { 0%, 68%  { width: 0; } 76%, 100% { width: var(--w); } }
+
+.gps-split-time {
+  width: 44px;
+  text-align: right;
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--display);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* Best/Worst styling */
+.gps-split-best .gps-split-num,
+.gps-split-best .gps-split-pace { color: var(--g5); }
+.gps-split-best .gps-split-fill { background: linear-gradient(90deg, var(--g3), var(--g5)); }
+
+.gps-split-worst .gps-split-pace { color: #ef9a9a; }
+.gps-split-worst .gps-split-fill { background: rgba(239,154,154,0.5); }
+
+.gps-splits-legend {
+  display: flex;
+  gap: 16px;
+  padding-top: 12px;
+  margin-top: 6px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  flex-wrap: wrap;
+}
+.gps-splits-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+}
+.legend-best { background: var(--g5); }
+.legend-worst { background: #ef9a9a; }
+.legend-normal { background: rgba(255,255,255,0.2); }
+
+/* FEATURE PILLS */
+.gps-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gps-feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: transform .2s, border-color .2s;
+}
+.gps-feature-pill:hover {
+  transform: translateX(4px);
+  border-color: rgba(67,160,90,0.3);
+}
+.gps-feature-emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: rgba(67,160,90,0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gps-feature-pill div { display: flex; flex-direction: column; gap: 2px; }
+.gps-feature-pill strong { font-size: 13px; font-weight: 700; color: var(--text); }
+.gps-feature-pill span { font-size: 11px; color: var(--text2); }
+
+/* RESPONSIVE */
+@media (max-width: 880px) {
+  .gps-showcase { grid-template-columns: 1fr; gap: 36px; }
+  .gps-phone { width: 280px; height: 580px; }
+  .gps-phone-glow { width: 320px; height: 320px; }
+}
+@media (max-width: 540px) {
+  .gps-phone { width: 260px; height: 540px; }
+  .gps-distance { font-size: 72px; }
+  .gps-feature-emoji { width: 32px; height: 32px; font-size: 18px; }
+}
+
+
+
+/* ═══════════════════ TESTIMONIALS — bigger, animated ═══════════════════ */
+.testimonials-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(67,160,90,0.04) 50%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating soft orbs in background */
+.testimonials-section::before,
+.testimonials-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+.testimonials-section::before {
+  width: 280px; height: 280px;
+  background: rgba(67,160,90,0.10);
+  top: 20%; left: -100px;
+  animation: bg-orb 8s ease-in-out infinite;
+}
+.testimonials-section::after {
+  width: 320px; height: 320px;
+  background: rgba(240,192,64,0.08);
+  bottom: 10%; right: -120px;
+  animation: bg-orb 10s ease-in-out infinite reverse;
+}
+@keyframes bg-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(40px, -30px) scale(1.15); }
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial-card {
+  position: relative;
+  background: linear-gradient(160deg, var(--surface) 0%, rgba(67,160,90,0.06) 100%);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 36px 30px 28px;
+  transition: transform .4s cubic-bezier(0.34,1.2,0.64,1), border-color .4s, box-shadow .4s;
+  overflow: hidden;
+}
+
+/* Animated stripe at top of each card when visible */
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--g4), var(--g5), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s ease;
+}
+.testimonial-card:hover::before { transform: scaleX(1); }
+.testimonial-card.visible::before {
+  animation: card-stripe-glow 2.4s ease-in-out infinite;
+}
+@keyframes card-stripe-glow {
+  0%, 100% { transform: scaleX(0.3); opacity: 0.5; }
+  50%      { transform: scaleX(1); opacity: 1; }
+}
+
+/* Avatar pulse ring */
+.testimonial-avatar {
+  position: relative;
+}
+.testimonial-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(67,160,90,0.4);
+  animation: avatar-pulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes avatar-pulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.1); }
+}
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--g3), var(--g5), var(--accent));
+  opacity: 0.7;
+}
+.testimonial-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(67,160,90,0.5);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(67,160,90,0.2);
+}
+.testimonial-card:hover::before {
+  opacity: 1;
+  height: 4px;
+}
+
+/* Big decorative quote mark */
+.testimonial-quote-mark {
+  position: absolute;
+  top: 0;
+  right: 22px;
+  font-family: var(--display);
+  font-size: 140px;
+  line-height: 1;
+  background: linear-gradient(180deg, var(--g4), var(--g3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.18;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 700;
+  animation: quote-float 4s ease-in-out infinite;
+}
+@keyframes quote-float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.18; }
+  50%      { transform: translateY(-4px) scale(1.05); opacity: 0.28; }
+}
+
+/* THE QUOTE — now the hero of the card */
+.testimonial-quote strong {
+  color: var(--g5);
+  font-weight: 700;
+}
+.testimonial-quote em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 600;
+}
+.testimonial-quote {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text);
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 22px;
+  padding: 0;
+  border: none;
+  position: relative;
+  z-index: 1;
+}
+
+/* Routine tags below quote */
+.testimonial-routine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.routine-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--g5);
+  background: rgba(67,160,90,0.10);
+  border: 1px solid rgba(67,160,90,0.25);
+  padding: 5px 11px;
+  border-radius: 50px;
+  transition: transform .2s, background .2s;
+}
+.testimonial-card:hover .routine-tag {
+  background: rgba(67,160,90,0.18);
+  transform: translateY(-2px);
+}
+
+/* Header at the bottom */
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.testimonial-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+.testimonial-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0;
+  animation: avatar-ring 2.5s ease-out infinite;
+}
+.testimonial-card:nth-child(1) .testimonial-avatar { color: #43a05a; }
+.testimonial-card:nth-child(2) .testimonial-avatar { color: #b56dd6; }
+.testimonial-card:nth-child(3) .testimonial-avatar { color: #ff7847; }
+@keyframes avatar-ring {
+  0%   { opacity: 0.6; transform: scale(0.85); }
+  100% { opacity: 0;   transform: scale(1.4);  }
+}
+.testimonial-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.testimonial-meta {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 3px;
+}
+
+@media (max-width: 880px) {
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .testimonial-card { padding: 30px 24px 24px; }
+  .testimonial-quote { font-size: 17px; }
+  .testimonial-quote-mark { font-size: 110px; }
+}
+@media (max-width: 540px) {
+  .testimonial-card { padding: 26px 20px 20px; }
+  .testimonial-quote { font-size: 16px; line-height: 1.5; }
+  .testimonial-quote-mark { font-size: 90px; right: 14px; }
+  .testimonial-avatar { width: 46px; height: 46px; font-size: 18px; }
+  .testimonial-name { font-size: 15px; }
+  .testimonial-meta { font-size: 11px; }
+  .routine-tag { font-size: 11px; padding: 4px 9px; }
+}
+
+/* ═══════════════════ COMPARISON TABLE ═══════════════════ */
+
+/* Tighten the bottom of compare-section before Start Your Journey */
+.compare-section { padding-bottom: 36px; }
+.testimonials-section { padding-bottom: 36px; }
+.compare-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(240,192,64,0.03) 50%, transparent 100%);
+}
+.compare-table {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 32px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.compare-table-head {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  background: linear-gradient(135deg, rgba(67,160,90,0.08), rgba(240,192,64,0.04));
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cth-feature, .cth-us, .cth-them {
+  padding: 14px 12px;
+}
+.cth-feature { color: var(--text3); }
+.cth-us {
+  color: var(--g5);
+  text-align: center;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: rgba(67,160,90,0.06);
+}
+.cth-them {
+  color: var(--text3);
+  text-align: center;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+  align-items: center;
+}
+.compare-row:last-child { border-bottom: none; }
+.cr-name {
+  padding: 12px 14px;
+  color: var(--text);
+  font-weight: 500;
+}
+.cr-us {
+  padding: 12px;
+  text-align: center;
+  color: var(--g5);
+  font-weight: 600;
+  background: rgba(67,160,90,0.04);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.cr-them {
+  padding: 12px;
+  text-align: center;
+  color: var(--text3);
+}
+.cr-us .check, .cr-them .cross, .cr-them .paid, .cr-them .partial {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.cr-us .check {
+  background: var(--g5);
+  color: #0a0f0c;
+}
+.cr-them .cross {
+  background: rgba(229,57,53,0.2);
+  color: #ff7878;
+}
+.cr-them .paid {
+  background: rgba(240,192,64,0.2);
+  color: var(--accent);
+}
+.cr-them .partial {
+  background: rgba(255,255,255,0.08);
+  color: var(--text3);
+}
+
+.compare-total {
+  background: linear-gradient(135deg, rgba(67,160,90,0.12), rgba(240,192,64,0.08));
+  font-size: 15px;
+  border-top: 2px solid rgba(67,160,90,0.3);
+}
+.compare-total .cr-name { color: var(--text); }
+.compare-total .cr-us {
+  background: rgba(67,160,90,0.12);
+  color: var(--g5);
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+.compare-total .cr-them {
+  color: #ff7878;
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+
+
+
+/* TIGHT spacing — every element controlled explicitly */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  50%      { transform: translate(20px, -20px); }
+}
+
+.sj-title {
+  font-size: clamp(36px, 6vw, 56px);
+  margin: 0 0 12px;
+  line-height: 1;
+}
+
+
+
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s, transform .7s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 880px) {
+  .hero-grid, .showcase-grid, .weekly-showcase { grid-template-columns: 1fr; gap: 32px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 360px; }
+}
+@media (max-width: 540px) {
+  .section { padding: 48px 0; }
+  .hero { padding: 64px 0 32px; }
+  .btn { padding: 14px 22px; font-size: 14px; }
+  .weekly-showcase, .empathy { padding: 24px; }
+  .price-card { padding: 26px 22px; }
+}
+
+
+/* ALL MODULES SECTION */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+.module-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s, border-color .25s;
+}
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-1, var(--g4)), var(--accent-2, var(--g5)));
+}
+.module-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(67,160,90,0.3);
+}
+.module-cardio    { --accent-1: #ff7847; --accent-2: #f0c040; }
+.module-gym       { --accent-1: #5b8def; --accent-2: #43a05a; }
+.module-yoga      { --accent-1: #b56dd6; --accent-2: #ec7ed4; }
+.module-running   { --accent-1: var(--g4); --accent-2: var(--g5); }
+.module-stretching{ --accent-1: #4ec1d2; --accent-2: #6dc880; }
+.module-cali      { --accent-1: #f0c040; --accent-2: #ff7847; }
+.module-core      { --accent-1: #e53935; --accent-2: #ff7847; }
+.module-custom    { --accent-1: #f0c040; --accent-2: var(--g5); }
+
+.module-emoji {
+  font-size: 36px;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.module-card h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.module-card p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.module-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.module-stats span {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  padding: 4px 9px;
+  border-radius: 50px;
+}
+
+.module-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+}
+.module-flow-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 200px;
+}
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--g4);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.module-flow-arrow {
+  color: var(--text3);
+  font-size: 18px;
+  font-weight: 700;
+}
+@media (max-width: 720px) {
+  .module-flow-arrow { display: none; }
+  .module-flow { flex-direction: column; align-items: stretch; }
+}
+
+
+
+
+/* Subtle horizontal grid lines */
+
+
+
+
+
+
+
+
+.splits-viz.visible .splits-viz.visible 
+@keyframes fade-area { to { opacity: 1; } }
+  60% { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 1; transform: scale(1); }
+}
+  50% { opacity: 0.4; }
+  100% { opacity: 0.2; r: 12; }
+}
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+/* MOBILE SAFETY — prevent overflow on tiny screens */
+* { max-width: 100%; }
+img, svg, video, iframe { max-width: 100%; height: auto; }
+.container, section { max-width: 100vw; }
+
+/* Ensure brand bar contents wrap if needed */
+.brand-bar .container {
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.brand-logo {
+  min-width: 0;
+  flex-shrink: 1;
+}
+.brand-text {
+  min-width: 0;
+  overflow: hidden;
+}
+.brand-nav { flex-shrink: 0; }
+
+/* ═══════════════════ MOBILE-FIRST OVERHAUL ═══════════════════ */
+
+/* Tighten viewport on smaller screens */
+@media (max-width: 880px) {
+  .container { padding: 0 16px; }
+  .section { padding: 48px 0; }
+  .section-tight { padding: 32px 0; }
+
+  /* Hero stacks - text first, illustration below */
+  .hero { padding: 28px 0 32px; min-height: auto; }
+  .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+  .hero-text { text-align: center; }
+  .hero-text p { margin-left: auto; margin-right: auto; }
+  .hero-trust { justify-content: center; }
+
+  /* Hero illustration smaller */
+  .hero-scene { max-width: 320px; }
+
+  /* GPS section stacks */
+  .gps-showcase { grid-template-columns: 1fr; gap: 28px; }
+  .gps-phone { width: 240px; height: 500px; }
+  .gps-distance { font-size: 64px; }
+  .gps-stat-val { font-size: 18px; }
+  .gps-app-content { padding: 12px 12px 12px; gap: 8px; }
+
+  /* Splits + features stack */
+  .gps-splits-wrap { gap: 12px; }
+
+  /* Modules grid - 2 per row */
+  .modules-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .module-card { padding: 16px 14px; }
+  .module-card h4 { font-size: 14px; }
+  .module-card p { font-size: 12px; }
+
+  /* Weekly stacks */
+  .weekly-showcase { grid-template-columns: 1fr; gap: 24px; padding: 28px 22px; }
+
+  /* Features grid: 2 per row */
+  .feature-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .feature-card { padding: 14px 12px; }
+  .feature-card h4 { font-size: 13px; }
+  .feature-card p { font-size: 12px; }
+
+  /* Pricing stacks */
+  .pricing-grid { grid-template-columns: 1fr; max-width: 360px; }
+  .price-card { padding: 26px 22px; }
+
+  /* Testimonials: 1 per row */
+  .testimonials-grid { grid-template-columns: 1fr; gap: 14px; }
+  .testimonial-card { padding: 18px; }
+}
+
+@media (max-width: 540px) {
+  .container { padding: 0 14px; }
+  .section { padding: 40px 0; }
+  .section-tight { padding: 24px 0; }
+  .hero { padding: 20px 0 28px; }
+
+  /* Tighter typography */
+  h1 { font-size: 38px; line-height: 1; }
+  h2 { font-size: 32px; line-height: 1; }
+  h3 { font-size: 16px; }
+  .subtitle { font-size: 13px; line-height: 1.5; }
+  .kicker { font-size: 10px; padding: 4px 11px; }
+
+  /* Hero scene smaller */
+  .hero-scene { max-width: 280px; aspect-ratio: 1/1; }
+  .person-illust { max-width: 180px; }
+  .orbit-app { padding: 5px 8px 5px 5px; gap: 5px; }
+  .orbit-app-icon { width: 22px; height: 22px; font-size: 11px; border-radius: 5px; }
+  .orbit-app-name { font-size: 8px; }
+
+  /* GPS phone smaller still */
+  .gps-phone { width: 220px; height: 460px; padding: 6px; }
+  .gps-phone-screen { border-radius: 30px; }
+  .gps-distance { font-size: 56px; }
+  .gps-distance-unit { font-size: 9px; }
+  .gps-stat-val { font-size: 16px; }
+  .gps-stat-label { font-size: 8px; }
+  .gps-tag-live { padding: 4px 8px; font-size: 9px; }
+  .gps-elapsed { font-size: 12px; }
+  .gps-app-content { padding: 10px 10px 10px; gap: 6px; }
+  .gps-action-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .gps-btn { padding: 10px 6px; font-size: 11px; }
+
+  /* Splits card mobile */
+  .gps-splits-card { padding: 16px 14px; }
+  .gps-split-row { font-size: 12px; gap: 8px; padding: 6px 0; }
+  .gps-split-pace { width: 44px; font-size: 14px; }
+  .gps-split-time { width: 38px; font-size: 10px; }
+  .gps-split-num { width: 18px; }
+
+  /* Feature pills mobile */
+  .gps-feature-pill { padding: 10px 12px; gap: 10px; }
+  .gps-feature-emoji { width: 32px; height: 32px; font-size: 16px; }
+  .gps-feature-pill strong { font-size: 12px; }
+  .gps-feature-pill span { font-size: 10px; }
+
+  /* Modules: 1 per row on tiny screens */
+  .modules-grid { grid-template-columns: 1fr; }
+
+  /* Features: 1 per row */
+  .feature-grid { grid-template-columns: 1fr; }
+
+  /* Weekly card mobile */
+  .weekly-card-mock { padding: 18px 16px; }
+  .weekly-grade { font-size: 64px; }
+  .weekly-stats-row { gap: 4px; }
+  .weekly-stat-val { font-size: 18px; }
+  .weekly-stat-label { font-size: 8px; }
+  .weekly-quote { font-size: 11px; padding: 8px 12px; }
+
+  /* COMPARE TABLE — mobile: tighter cells, no horizontal scroll */
+  .compare-table {
+    font-size: 12px;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+  .compare-table-head { font-size: 9px; }
+  .cth-feature, .cth-us, .cth-them,
+  .cr-name, .cr-us, .cr-them {
+    padding: 9px 8px;
+  }
+  .cr-name { font-size: 11px; }
+  .cr-us, .cr-them { font-size: 11px; }
+  .compare-row { font-size: 11px; }
+  .compare-table-head {
+    grid-template-columns: 1.6fr 1fr 1fr;
+  }
+  .compare-row {
+    grid-template-columns: 1.6fr 1fr 1fr;
+  }
+  .compare-total { font-size: 13px; }
+  .compare-total .cr-us, .compare-total .cr-them { font-size: 14px; }
+  .check, .cross, .paid, .partial {
+    width: 14px !important;
+    height: 14px !important;
+    line-height: 14px !important;
+    font-size: 9px !important;
+  }
+
+  /* Testimonials mobile */
+  .testimonial-card { padding: 16px; }
+  .testimonial-avatar { width: 42px; height: 42px; font-size: 16px; }
+  .testimonial-name { font-size: 14px; }
+  .testimonial-meta { font-size: 10px; }
+        .testimonial-quote { font-size: 12px; padding-left: 8px; }
+  .routine-tag { font-size: 10px; padding: 3px 7px; }
+
+  /* Start Journey mobile */
+  
+  .sj-title { font-size: 36px; }
+  
+  
+
+  /* Pricing mobile */
+  .price-amount { font-size: 52px; }
+  .price-period { font-size: 12px; }
+  .price-monthly { font-size: 11px; }
+
+  .compare-row.us { padding: 12px 14px; font-size: 13px; }
+  .compare-row.us .compare-price { font-size: 18px; }
+
+  /* Final CTA */
+  .final-cta { padding: 56px 0; }
+  .final-cta h2 { font-size: 32px; }
+  .final-cta .btn-whatsapp { white-space: normal; max-width: 100%; }
+  .final-cta p { font-size: 13px; }
+  .final-cta .btn { padding: 16px 26px !important; font-size: 14px !important; }
+  .cta-trust { font-size: 11px; gap: 12px; }
+
+  /* Empathy mobile */
+  .empathy { padding: 22px 18px; }
+  .empathy h2 { font-size: 26px; }
+  .empathy p { font-size: 13px; }
+
+  /* Problem grid */
+  .problem-grid { grid-template-columns: 1fr; gap: 12px; }
+  .problem-card { padding: 18px; }
+  .problem-card h3 { font-size: 15px; }
+  .problem-card p { font-size: 12px; }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  h1 { font-size: 32px; }
+  h2 { font-size: 26px; }
+  .gps-phone { width: 200px; height: 420px; }
+  .gps-distance { font-size: 48px; }
+  .compare-table-head { grid-template-columns: 1.8fr 1fr 1fr; }
+  .compare-row { grid-template-columns: 1.8fr 1fr 1fr; }
+  .cth-feature, .cth-us, .cth-them { font-size: 8px; padding: 7px 5px; }
+  .cr-name, .cr-us, .cr-them { font-size: 10px; padding: 7px 5px; }
+  .check, .cross, .paid, .partial { width: 12px !important; height: 12px !important; line-height: 12px !important; }
+}
+
+
+@media (max-width: 360px) {
+  .compare-table {
+    font-size: 9px;
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  .compare-table-head { grid-template-columns: 1.6fr 0.9fr 0.9fr; }
+  .compare-row { grid-template-columns: 1.6fr 0.9fr 0.9fr; }
+  .cth-feature, .cth-us, .cth-them { padding: 6px 4px; font-size: 8px; }
+  .cr-name, .cr-us, .cr-them { padding: 7px 4px; font-size: 9px; }
+  .compare-row.compare-total { font-size: 11px; }
+  .compare-total .cr-us, .compare-total .cr-them { font-size: 12px; }
+  .check, .cross, .paid, .partial { width: 11px !important; height: 11px !important; line-height: 11px !important; font-size: 8px !important; }
+}
+
+
+/* Start Today intro — sits compactly above pricing */
+.start-today-intro {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.start-today-intro::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+.start-today-intro .sj-title {
+  font-family: var(--display);
+  font-size: clamp(36px, 6vw, 56px);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 540px) {
+  .start-today-intro {
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+  }
+}
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div style="display:flex;align-items:center;gap:9px">
-    <svg viewBox="0 0 36 36" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="18" cy="18" r="17" fill="none" stroke="rgba(67,160,90,.5)" stroke-width="1.5"/>
-      <circle cx="18" cy="18" r="14" fill="#43a05a"/>
-      <path d="M21 6 L12 19 L17 19 L14 30 L24 17 L19 17 Z" fill="white"/>
-    </svg>
-    <div class="nlogo">FITFLOW PRO</div>
+<!-- BRAND BAR — exact match of app splash logo -->
+<header class="brand-bar">
+  <div class="container">
+    <a href="#" class="brand-logo">
+      <!-- Logo mark with multiple animated rings (matches app splash exactly) -->
+      <div class="brand-mark">
+        <div class="brand-pulse-ring"></div>
+        <div class="brand-spin-ring-1"></div>
+        <div class="brand-spin-ring-2"></div>
+        <div class="brand-dashed-ring"></div>
+        <div class="brand-circle">
+          <svg width="32" height="32" viewBox="0 0 80 80">
+            <path d="M46 10 L28 42 L40 42 L32 70 L54 36 L41 36 Z"
+                  fill="#4caf50"
+                  stroke="rgba(126,217,160,0.4)" stroke-width="1"/>
+            <path d="M46 10 L28 42 L40 42 L32 70 L54 36 L41 36 Z"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- BIG app name + green PRO badge (matches app exactly) -->
+      <div class="brand-text">
+        <div class="brand-name">FITFLOW</div>
+        <div class="brand-pro">PRO</div>
+      </div>
+    </a>
+
+    <nav class="brand-nav">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://wa.me/917306611116?text=Hi%2C%20I%20want%20to%20subscribe%20to%20FitFlow%20Pro" target="_blank" class="brand-nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.2-.5-.3z"/><path d="M20.5 3.5C18.3 1.2 15.3 0 12.1 0 5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7c1.7.9 3.6 1.4 5.5 1.4 6.5 0 11.8-5.3 11.8-11.8-.1-3.2-1.3-6.2-3.5-8.4zm-8.5 18.2c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.5-1.5-3.3-1.5-5.2 0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.7-9.9 9.7z"/></svg>
+        Subscribe
+      </a>
+    </nav>
   </div>
-  <a href="#cta" class="nbtn">⚡ Get for ₹299</a>
-</nav>
+</header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hbg"></div><div class="hgrid"></div>
-  <div class="hcon">
-    <div style="width:158px!important;height:158px!important;min-width:158px;min-height:158px;padding:0;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:158px!important;height:158px!important;min-width:158px;min-height:158px;display:block;flex-shrink:0" id="hero-logo">
-        <defs>
-          <filter id="logo-glow">
-            <feGaussianBlur stdDeviation="4" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <!-- Outer dark ring -->
-        <circle cx="80" cy="80" r="76" fill="none" stroke="rgba(46,125,70,.6)" stroke-width="3"/>
-        <!-- Animated pulse ring -->
-        <circle cx="80" cy="80" r="76" fill="none" stroke="rgba(67,160,90,.35)" stroke-width="2" id="logo-pulse-ring"/>
-        <!-- Green filled circle -->
-        <circle cx="80" cy="80" r="66" fill="#43a05a"/>
-        <!-- Subtle inner highlight -->
-        <circle cx="80" cy="80" r="66" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
-        <!-- White lightning bolt — centered, proportional -->
-        <path d="M92 24 L56 86 L76 86 L62 136 L106 72 L86 72 Z" fill="white" filter="url(#logo-glow)"/>
-      </svg>
-    </div>
-    <div class="ey" style="margin-bottom:6px">FitFlow Pro · Your Fitness Companion</div>
-    <h1>FITNESS<br/><span>REIMAGINED</span></h1>
-    <p class="hsub">One app. 9 modules. GPS tracking, training plans, live maps, calisthenics, nutrition — cloud-backed, always with you.</p>
-    <div class="pills">
-      <span class="pill">⚡ Low Data Usage</span>
-      <span class="pill">📍 GPS Live Map</span>
-      <span class="pill">🔒 100% Private</span>
-      <span class="pill">📱 Android PWA</span>
-      <span class="pill">☁️ Auto Cloud Backup</span>
-    </div>
-    <div class="hstats">
-      <div class="hs"><div class="hsn">9+</div><div class="hsl">Modules</div></div>
-      <div class="hs"><div class="hsn">4</div><div class="hsl">Run Plans</div></div>
-      <div class="hs"><div class="hsn">∞</div><div class="hsl">Custom</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEM -->
-<section class="ps">
-  <div class="wrap rev">
-    <div class="ey rev-l">The Problem</div>
-    <h2>TOO MANY<br/><em>APPS</em></h2>
-    <div class="div"></div>
-    <p class="lead">Most people juggle 4–6 apps for fitness. One for running, one for gym, one for diet, another for hydration. They drain money and motivation before the workout even starts.</p>
-    <div class="pgrid stag">
-      <div class="pc"><div class="ic">😤</div><h3>App Overload</h3><p>Switching between 4–6 different fitness apps daily kills momentum.</p></div>
-      <div class="pc"><div class="ic">💸</div><h3>Insane Subscriptions</h3><p>Popular activity trackers charge ₹300–500/month — that's ₹3,600–6,000/year just to see your own route map. Every single year.</p></div>
-      <div class="pc"><div class="ic">📶</div><h3>Internet-Dependent</h3><p>At the gym, in the park, on a trek — most fitness apps stop working when signal drops.</p></div>
-      <div class="pc"><div class="ic">🔐</div><h3>No Privacy</h3><p>Big apps sell your health data. Your body isn't their product.</p></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- FOUNDER STORY -->
-<section style="background:linear-gradient(180deg,#040d08,#071510);padding:60px 18px">
-  <div class="wrap rev">
-    <div class="ey rev-l">Why We Built This</div>
-    <h2>WE FELT IT<br/><em>TOO</em></h2>
-    <div class="div"></div>
-
-    <div style="background:rgba(67,160,90,.05);border:1px solid rgba(67,160,90,.15);border-radius:20px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden">
-      <div style="position:absolute;top:-20px;right:-20px;font-size:100px;opacity:.04;line-height:1">💪</div>
-      <div style="font-size:15px;color:var(--t2);line-height:1.85;position:relative">
-        We are not a startup that spotted a market gap on a spreadsheet. We are people from the fitness community — runners who got frustrated with expensive GPS locks, gym-goers who lost months of progress data when an app updated, beginners who quit because the apps felt built for athletes, not humans.
-      </div>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px" class="stag">
-
-      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">😤</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We switched between 5 apps every morning</div>
-          <div style="font-size:12px;color:var(--t3);line-height:1.6">Run log here. Gym plan there. Diet on another. By the time we were ready to work out, we'd already spent 10 minutes just organising. So we built one place for all of it.</div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <span class="kicker">🇮🇳 Made in India · Designed for You</span>
+        <h1>Train Smart.<br><span class="accent-text">Track Honestly.</span><br>Stay Consistent.</h1>
+        <p>The no-noise fitness companion built for real Indians. GPS-tracked runs, custom workouts, smart reminders, weekly grades — all in one clean app.</p>
+        <div class="hero-trust">
+          <span>✓ 8 workout modules</span>
+          <span>•</span>
+          <span>✓ Pro-grade GPS</span>
+          <span>•</span>
+          <span>✓ Weekly grades</span>
         </div>
       </div>
 
-      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(30,136,229,.1);border:1px solid rgba(30,136,229,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💸</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We watched friends quit because of subscription guilt</div>
-          <div style="font-size:12px;color:var(--t3);line-height:1.6">A student skipping the gym app because ₹300/month felt too much. A working professional cancelling during a tough month and losing their streak. Price should never be why someone stops taking care of themselves.</div>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(156,39,176,.1);border:1px solid rgba(156,39,176,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📶</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We trained in places with no signal</div>
-          <div style="font-size:12px;color:var(--t3);line-height:1.6">Rooftops, basements, rural roads, trek trails. Apps that need internet to show you your own workout plan felt like a joke. Fitness shouldn't depend on your carrier.</div>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px">
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(229,57,53,.1);border:1px solid rgba(229,57,53,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏃</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">We are runners, lifters, walkers — just like you</div>
-          <div style="font-size:12px;color:var(--t3);line-height:1.6">Not just coders who built a fitness app. We use FitFlow every day. When something doesn't feel right, we feel it first. That's why it keeps getting better.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Motto -->
-    <div style="background:linear-gradient(135deg,rgba(46,125,70,.15),rgba(67,160,90,.08));border:1px solid rgba(67,160,90,.3);border-radius:18px;padding:24px;text-align:center">
-      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gl);margin-bottom:12px;font-weight:600">Our Motto</div>
-      <div style="font-family:var(--fd);font-size:clamp(24px,7vw,38px);color:#fff;line-height:1.15;margin-bottom:14px">
-        BUILT BY THE<br/><span style="color:var(--gg)">FITNESS COMMUNITY,</span><br/>FOR THE FITNESS COMMUNITY
-      </div>
-      <div style="width:44px;height:2px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:0 auto 14px"></div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.75;max-width:400px;margin:0 auto">
-        Whether you're a first-time walker, a calisthenics enthusiast, a runner training for your first 5K, or a gym regular chasing progressive overload — FitFlow was built with you in mind. Because we've been all of those people at some point.
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- MODULES -->
-<section class="ms" id="features">
-  <div class="wrap rev">
-    <div class="ey rev-l">Everything You Need</div>
-    <h2>ONE APP<br/><em>ALL FITNESS</em></h2>
-    <div class="div"></div>
-    <p class="lead">9 fully-featured modules — each with guided workouts, nutrition plans, hydration tracking, and progress history. Every module built for real consistency, not app store screenshots.</p>
-
-    <div class="mgrid stag">
-      <div class="mc ca">
-        <div class="mme">🏠</div>
-        <h3>Home Cardio</h3>
-        <p>Complete 6-day programme. No equipment, no gym, no excuses.</p>
-        <div class="mtags"><span class="mt">6-day plan</span><span class="mt">No gear</span><span class="mt">Beginner–advanced</span></div>
-      </div>
-      <div class="mc gm">
-        <div class="mme">🏋️</div>
-        <h3>Gym Workouts</h3>
-        <p>6-day split. Sets, reps, rest timers. Progressive overload tracking with weight history per exercise.</p>
-        <div class="mtags"><span class="mt">6-day split</span><span class="mt">Weight tracker</span><span class="mt">Progressive</span></div>
-      </div>
-      <div class="mc yo">
-        <div class="mme">🧘</div>
-        <h3>Yoga</h3>
-        <p>Daily flows with full breathing cues, pose sequences, and recovery guidance.</p>
-        <div class="mtags"><span class="mt">6 days</span><span class="mt">All levels</span><span class="mt">Breathing cues</span></div>
-      </div>
-      <div class="mc co">
-        <div class="mme">🔥</div>
-        <h3>Core & Abs <span class="new-badge">NEW</span></h3>
-        <p>6 days of targeted core work — planks to dragon flags. 100-rep Saturday challenge.</p>
-        <div class="mtags"><span class="mt">6 days</span><span class="mt">100-rep challenge</span><span class="mt">L-sit</span></div>
-      </div>
-      <div class="mc ci">
-        <div class="mme">💪</div>
-        <h3>Calisthenics</h3>
-        <p>3 levels with skill tree. Track handstand, planche, muscle-up progress session by session.</p>
-        <div class="mtags"><span class="mt">Skill tree</span><span class="mt">3 levels</span><span class="mt">21-day challenge</span></div>
-      </div>
-      <div class="mc st">
-        <div class="mme">🤸</div>
-        <h3>Stretching</h3>
-        <p>Daily mobility routines keyed to each workout module. Recovery done right.</p>
-        <div class="mtags"><span class="mt">6 days</span><span class="mt">Module-linked</span><span class="mt">Recovery</span></div>
-      </div>
-      <div class="mc cu">
-        <div class="mme">✏️</div>
-        <h3>Custom Workouts</h3>
-        <p>Build your own routines. Name every exercise, set reps and rest. Unlimited. Cloud-synced.</p>
-        <div class="mtags"><span class="mt">Unlimited</span><span class="mt">Cloud backup</span><span class="mt">Tracked</span></div>
-      </div>
-      <div class="mc dt">
-        <div class="mme">🥗</div>
-        <h3>Nutrition</h3>
-        <p>Module-specific meal timing, pre/post-workout food guides, and daily hydration log.</p>
-        <div class="mtags"><span class="mt">Per-module meals</span><span class="mt">Hydration log</span></div>
-      </div>
-      <div class="mc full">
-        <div class="mme">🏃</div>
-        <h3>Running · Walking · Cycling</h3>
-        <p>Live GPS map with Kalman-filter smoothing (professional-grade route). Real-time pace, speed, calories. Km splits with pace chart. Save activity with custom name. Auto-pause on screen lock. 4 training plans from 5K to Full Marathon.</p>
-        <div class="mtags"><span class="mt">GPS live map</span><span class="mt">Km splits</span><span class="mt">Professional GPS line</span><span class="mt">3 modes</span><span class="mt">4 plans</span><span class="mt">Auto-pause</span></div>
-      </div>
-    </div>
-
-    <!-- Stats row — full-width ₹299, then 2x2 grid -->
-    <div class="price-hero-card" style="background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.3);border-radius:13px;padding:24px;text-align:center;margin-bottom:9px">
-      <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,192,64,.6);margin-bottom:8px;font-weight:600">One-time payment</div>
-      <div style="display:flex;align-items:baseline;justify-content:center;gap:2px">
-        <span style="font-family:var(--fd);font-size:28px;color:var(--ac);line-height:1">₹</span>
-        <span id="price-counter" style="font-family:var(--fd);font-size:72px;color:var(--ac);line-height:1;letter-spacing:-.02em">0</span>
-      </div>
-      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:6px">Own it forever. No renewals ever.</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.6">Top activity trackers cost ₹349–499/month → ₹4,188–5,988/year → ₹12,564+ over 3 years.<br/>FitFlow Pro: ₹299. Once. That's it.</div>
-    </div>
-    <div class="srow">
-      <div class="sb"><div class="sbn">9+</div><div class="sbl">Modules. Not lite versions.</div></div>
-      <div class="sb"><div class="sbn">30s</div><div class="sbl">Install on Android. Tap "Add to Home Screen."</div></div>
-      <div class="sb"><div class="sbn">☁️</div><div class="sbl">Full data backup. Switch phones anytime.</div></div>
-      <div class="sb"><div class="sbn">0 ads</div><div class="sbl">No ads. No tracking. Your data stays yours.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- MODULE DEEP DIVES -->
-<section class="deep-s">
-  <div class="wrap rev">
-    <div class="ey rev-l">Module Spotlights</div>
-    <h2>BUILT FOR<br/><em>REAL PEOPLE</em></h2>
-    <div class="div"></div>
-
-    <div class="deep-card rev">
-      <div class="deep-head">
-        <div class="deep-ic" style="background:rgba(30,136,229,.12);border:1px solid rgba(30,136,229,.2)">🏋️</div>
-        <div>
-          <div class="deep-title">Gym Workouts — beyond reps and sets</div>
-          <div class="deep-sub">6-day split · Progressive overload · Rest timers · Weight history</div>
-        </div>
-      </div>
-      <ul class="feat-list">
-        <li>Progressive overload tracker — log weight per exercise, see a 30-entry history chart of how you've grown</li>
-        <li>Rest timer overlay with haptic feedback — set buzzes when rest is over, no phone watching</li>
-        <li>Workout achievements system — 15 badges unlock as you hit milestones (first session, 10 sessions, 50 sessions...)</li>
-        <li>Module-specific nutrition and hydration guide built in — what to eat before/after gym, when to drink</li>
-        <li>Set completion checkboxes — tap each set, see progress fill. Resets daily automatically</li>
-      </ul>
-    </div>
-
-    <div class="deep-card rev">
-      <div class="deep-head">
-        <div class="deep-ic" style="background:rgba(255,87,34,.12);border:1px solid rgba(255,87,34,.2)">💪</div>
-        <div>
-          <div class="deep-title">Calisthenics — skill tree progression</div>
-          <div class="deep-sub">3 levels · Skill tree · 21-day challenge · Cloud-synced progress</div>
-        </div>
-      </div>
-      <ul class="feat-list">
-        <li>Visual skill tree — tap each step as you master it, progress saves to cloud automatically</li>
-        <li>21-day challenge with daily toggle — build the streak, miss a day, just pick back up</li>
-        <li>Beginner → Intermediate → Advanced progression with actual movement milestones</li>
-        <li>Skills tracked: handstand, planche, L-sit, muscle-up, front lever and more</li>
-        <li>All progress survives reinstalls — synced to your Google Sheet on every save</li>
-      </ul>
-    </div>
-
-    <div class="deep-card rev">
-      <div class="deep-head">
-        <div class="deep-ic" style="background:rgba(229,57,53,.12);border:1px solid rgba(229,57,53,.2)">🔥</div>
-        <div>
-          <div class="deep-title">Core & Abs — the Saturday challenge</div>
-          <div class="deep-sub">6-day plan · 100-rep challenge · Dragon flag progression</div>
-        </div>
-      </div>
-      <ul class="feat-list">
-        <li>6-day structured core programme — not random ab circuits, but progressive loading</li>
-        <li>Saturday 100-rep challenge — 100 reps across exercises, timed, tracked</li>
-        <li>Covers the full spectrum: crunches → planks → L-sit holds → dragon flag attempts</li>
-        <li>Nutrition timing built in — what to eat before core work for maximum performance</li>
-        <li>Pairs naturally with Gym or Home Cardio — designed to complement, not duplicate</li>
-      </ul>
-    </div>
-
-    <div class="deep-card rev">
-      <div class="deep-head">
-        <div class="deep-ic" style="background:rgba(67,160,90,.12);border:1px solid rgba(67,160,90,.2)">📅</div>
-        <div>
-          <div class="deep-title">History & Progress — the full picture</div>
-          <div class="deep-sub">Calendar · Activity log · PB badges · Km splits</div>
-        </div>
-      </div>
-      <ul class="feat-list">
-        <li>Activity calendar — tap any date to see every workout done that day across all modules</li>
-        <li>Multiple activities per day shown correctly — run in morning + cycle in evening, both logged</li>
-        <li>Personal best detection — every run compared to your history, PB badges shown in detail view</li>
-        <li>Km splits chart — see your pace per km with visual bars, like the best activity trackers</li>
-        <li>Activity titles preserved — "Morning Run", "Evening Walk", your custom names show everywhere</li>
-        <li>Day streak, total workouts, total km all tracked and shown on dashboard</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- GPS RUNNING -->
-<section class="rs" id="running">
-  <div class="wrap rev">
-    <div class="ey rev-l">GPS Activities Module</div>
-    <h2>TRACK<br/><em>EVERY STEP</em></h2>
-    <div class="div"></div>
-
-    <div class="pw rev-s">
-      <div class="phone">
-        <div class="pscreen">
-          <div class="pmap" id="map-anim-wrap">
-            <svg id="map-svg" viewBox="0 0 200 270" class="mr" xmlns="http://www.w3.org/2000/svg">
-              <!-- grid -->
-              <line x1="0" y1="67"  x2="200" y2="67"  class="mgl"/>
-              <line x1="0" y1="134" x2="200" y2="134" class="mgl"/>
-              <line x1="0" y1="201" x2="200" y2="201" class="mgl"/>
-              <line x1="50"  y1="0" x2="50"  y2="270" class="mgl"/>
-              <line x1="100" y1="0" x2="100" y2="270" class="mgl"/>
-              <line x1="150" y1="0" x2="150" y2="270" class="mgl"/>
-              <!-- route glow -->
-              <path d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z"
-                stroke="rgba(255,107,53,.2)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <!-- animated route line -->
-              <path id="route-path"
-                d="M40,230 L40,134 L100,134 L100,67 L150,67 L150,134 L100,134 L100,190 L60,190 L60,230 Z"
-                stroke="#ff6b35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <!-- start dot -->
-              <circle cx="40" cy="230" r="5" fill="#43a05a" stroke="white" stroke-width="1.5"/>
-              <!-- live dot -->
-              <circle id="live-dot" cx="40" cy="230" r="5" fill="#4285f4" stroke="white" stroke-width="1.5"/>
-              <!-- pulse ring -->
-              <circle id="pulse-ring" cx="40" cy="230" r="5" fill="none" stroke="rgba(66,133,244,.5)" stroke-width="2"/>
-            </svg>
-            <div style="position:absolute;top:8px;right:8px;background:rgba(67,160,90,.85);color:#fff;font-size:7px;font-weight:700;padding:2px 6px;border-radius:7px" id="gps-badge">GPS ●</div>
-            <div style="position:absolute;top:8px;left:8px;background:rgba(7,21,16,.8);color:#fff;font-size:8px;font-weight:700;padding:2px 7px;border-radius:7px">🏃 Run</div>
+      <div class="hero-right">
+        <div class="hero-scene">
+          <!-- The chaos: 6 floating fitness/diet/health apps surrounding the person -->
+          <div class="orbit-app oa-1" style="--app-c1:#43a05a;--app-c2:#1a5c32">
+            <div class="orbit-app-icon">🏋️</div>
+            <div class="orbit-app-name">Gym App</div>
           </div>
-          <div class="psp">
-            <div style="font-size:7px;color:rgba(255,255,255,.35);text-align:center;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Elapsed Time</div>
-            <div class="pt" id="map-timer">00:00</div>
-            <div class="psr">
-              <div><div class="pv" id="map-km">0.00</div><div class="pl">KM</div></div>
-              <div><div class="pv" id="map-pace">--:--</div><div class="pl">PACE</div></div>
-              <div><div class="pv" id="map-spd">0.0</div><div class="pl">SPD KM/H</div></div>
-              <div><div class="pv" id="map-kcal">0</div><div class="pl">KCAL</div></div>
+          <div class="orbit-app oa-2" style="--app-c1:#5cb8e0;--app-c2:#2a6f8f">
+            <div class="orbit-app-icon">🥗</div>
+            <div class="orbit-app-name">Diet App</div>
+          </div>
+          <div class="orbit-app oa-3" style="--app-c1:#ec7ed4;--app-c2:#a3458a">
+            <div class="orbit-app-icon">🧘</div>
+            <div class="orbit-app-name">Yoga App</div>
+          </div>
+          <div class="orbit-app oa-4" style="--app-c1:#ff8c42;--app-c2:#c25e1e">
+            <div class="orbit-app-icon">🏃</div>
+            <div class="orbit-app-name">Run Tracker</div>
+          </div>
+          <div class="orbit-app oa-5" style="--app-c1:#e53935;--app-c2:#a01f1d">
+            <div class="orbit-app-icon">❤️</div>
+            <div class="orbit-app-name">Cardio App</div>
+          </div>
+          <div class="orbit-app oa-6" style="--app-c1:#f0c040;--app-c2:#a37c20">
+            <div class="orbit-app-icon">💧</div>
+            <div class="orbit-app-name">Hydration</div>
+          </div>
+
+          <!-- Thought bubble question marks above head -->
+          <div class="thought-q tq-1">?</div>
+          <div class="thought-q tq-2">?</div>
+          <div class="thought-q tq-3">?</div>
+
+          <!-- Connector lines from person to apps -->
+          <svg class="orbit-lines" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+            <line x1="200" y1="220" x2="60"  y2="100" class="orbit-line" style="animation-delay:0s"/>
+            <line x1="200" y1="220" x2="340" y2="100" class="orbit-line" style="animation-delay:0.3s"/>
+            <line x1="200" y1="220" x2="40"  y2="220" class="orbit-line" style="animation-delay:0.6s"/>
+            <line x1="200" y1="220" x2="360" y2="220" class="orbit-line" style="animation-delay:0.9s"/>
+            <line x1="200" y1="220" x2="80"  y2="340" class="orbit-line" style="animation-delay:1.2s"/>
+            <line x1="200" y1="220" x2="320" y2="340" class="orbit-line" style="animation-delay:1.5s"/>
+          </svg>
+
+          <!-- The person (SVG illustration) -->
+          <svg class="person-illust" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shirt-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#43a05a"/>
+                <stop offset="100%" stop-color="#2e7d46"/>
+              </linearGradient>
+              <linearGradient id="phone-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1a1a1a"/>
+                <stop offset="100%" stop-color="#0a0a0a"/>
+              </linearGradient>
+              <linearGradient id="screen-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0e2218"/>
+                <stop offset="100%" stop-color="#1a3328"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Body shadow / floor -->
+            <ellipse cx="120" cy="310" rx="65" ry="6" fill="rgba(0,0,0,0.3)"/>
+
+            <!-- HAIR (back) -->
+            <path d="M 78 70 Q 78 38 120 32 Q 162 38 162 70 L 162 92 Q 120 75 78 92 Z" fill="#1a0f08"/>
+
+            <!-- HEAD/FACE — looking down at phone, slightly tilted -->
+            <g class="person-head">
+              <!-- Face -->
+              <ellipse cx="120" cy="92" rx="44" ry="50" fill="#e8b893"/>
+
+              <!-- Hair front -->
+              <path d="M 78 75 Q 95 60 120 55 Q 145 60 162 75 L 162 88 Q 120 70 78 88 Z" fill="#1a0f08"/>
+
+              <!-- Eyebrows (thinking - slightly furrowed) -->
+              <path d="M 90 88 Q 100 84 108 88" stroke="#1a0f08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M 132 88 Q 140 84 150 88" stroke="#1a0f08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+              <!-- Eyes (looking down at phone) -->
+              <ellipse cx="100" cy="100" rx="3.5" ry="5" fill="#1a1a1a"/>
+              <ellipse cx="140" cy="100" rx="3.5" ry="5" fill="#1a1a1a"/>
+              <circle cx="101" cy="98" r="1" fill="white"/>
+              <circle cx="141" cy="98" r="1" fill="white"/>
+
+              <!-- Nose -->
+              <path d="M 118 108 Q 120 116 124 118" stroke="#c9986f" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+              <!-- Mouth (slight frown - thinking/confused) -->
+              <path d="M 108 128 Q 120 124 132 128" stroke="#8b4a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+              <!-- Ear -->
+              <ellipse cx="76" cy="98" rx="5" ry="8" fill="#e8b893"/>
+              <ellipse cx="76" cy="98" rx="2" ry="4" fill="#c9986f"/>
+            </g>
+
+            <!-- NECK -->
+            <rect x="108" y="138" width="24" height="18" fill="#d8a373"/>
+
+            <!-- TORSO / SHIRT -->
+            <path d="M 70 168 Q 120 152 170 168 L 180 280 L 60 280 Z" fill="url(#shirt-grad)"/>
+
+            <!-- LEFT ARM (bent up holding phone) -->
+            <path d="M 75 175 Q 60 200 80 230 L 100 240"
+                  stroke="#e8b893" stroke-width="18" fill="none" stroke-linecap="round"/>
+
+            <!-- RIGHT ARM (bent up holding phone with both hands) -->
+            <path d="M 165 175 Q 180 200 160 230 L 140 240"
+                  stroke="#e8b893" stroke-width="18" fill="none" stroke-linecap="round"/>
+
+            <!-- HANDS holding phone -->
+            <ellipse cx="98" cy="240" rx="11" ry="9" fill="#e8b893"/>
+            <ellipse cx="142" cy="240" rx="11" ry="9" fill="#e8b893"/>
+
+            <!-- THE PHONE in their hands — slightly tilted up so we can see screen -->
+            <g class="person-phone">
+              <!-- Phone frame -->
+              <rect x="92" y="200" width="56" height="86" rx="9" fill="url(#phone-grad)"
+                    stroke="#2a2a2a" stroke-width="1"/>
+              <!-- Screen -->
+              <rect x="96" y="210" width="48" height="68" rx="4" fill="url(#screen-grad)"/>
+              <!-- Screen content - mini app icons grid -->
+              <rect x="100" y="216" width="10" height="10" rx="2" fill="#43a05a" opacity="0.8"/>
+              <rect x="115" y="216" width="10" height="10" rx="2" fill="#f0c040" opacity="0.7"/>
+              <rect x="130" y="216" width="10" height="10" rx="2" fill="#ff7847" opacity="0.7"/>
+              <rect x="100" y="231" width="10" height="10" rx="2" fill="#5cb8e0" opacity="0.7"/>
+              <rect x="115" y="231" width="10" height="10" rx="2" fill="#ec7ed4" opacity="0.7"/>
+              <rect x="130" y="231" width="10" height="10" rx="2" fill="#b56dd6" opacity="0.7"/>
+              <rect x="100" y="246" width="10" height="10" rx="2" fill="#e53935" opacity="0.7"/>
+              <rect x="115" y="246" width="10" height="10" rx="2" fill="#4ec1d2" opacity="0.7"/>
+              <rect x="130" y="246" width="10" height="10" rx="2" fill="#43a05a" opacity="0.6"/>
+              <!-- Search bar at bottom -->
+              <rect x="100" y="263" width="40" height="8" rx="4" fill="rgba(255,255,255,0.1)"/>
+              <!-- Phone notch -->
+              <rect x="113" y="203" width="14" height="3" rx="1.5" fill="#000"/>
+            </g>
+
+            <!-- Sweat drop showing concern -->
+            <path d="M 165 105 Q 170 115 165 125 Q 160 115 165 105 Z" fill="#5cb8e0" opacity="0.85"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">⚡ THE REAL ISSUE</span>
+      <h2>Why Most Apps <span class="green">Fail You</span></h2>
+      <p class="subtitle">We've all downloaded ten apps, used them for two weeks, and quietly deleted them.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-icon">😩</div>
+        <h3>Plans You Abandon</h3>
+        <p>Generic 12-week schedules that don't adapt. Miss one day and the whole plan collapses. You give up by week two.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">💸</div>
+        <h3>Endless Paywalls</h3>
+        <p>Free trial → ₹3,000/year subscription → "premium plus" upsells. Every basic feature locked behind another payment.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">🌀</div>
+        <h3>One-Size-Fits-Nobody</h3>
+        <p>Same plan for a 22-year-old marathoner and a 45-year-old beginner. No personalisation. No common sense.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPATHY -->
+<section class="section-tight">
+  <div class="container">
+    <div class="empathy reveal">
+      <h2>We've Been There Too</h2>
+      <p>So we built the app we always wished existed — clean, honest, and made for actual humans.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RUNNING SHOWCASE -->
+<!-- ═══════════════════ GPS ACTIVITIES MODULE ═══════════════════ -->
+<section class="section gps-section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">🏃 GPS ACTIVITIES MODULE</span>
+      <h2>Track Every <span class="green">Step</span></h2>
+      <p class="subtitle">The most accurate GPS tracking on any fitness app. Perfect line coordination, no jagged paths, no false distances — just every step you actually took.</p>
+    </div>
+
+    <div class="gps-showcase">
+      <!-- LEFT: Phone mockup with city route -->
+      <div class="gps-phone-wrap">
+        <div class="gps-phone">
+          <div class="gps-phone-screen">
+            <div class="gps-notch"></div>
+
+            <!-- Status bar -->
+            <div class="gps-statusbar">
+              <span>9:41</span>
+              <div class="gps-statusbar-icons">
+                <span style="font-size:9px">📶</span>
+                <span style="font-size:9px">🔋</span>
+              </div>
             </div>
-            <div class="pbs">
-              <div class="pb1">⏸ Pause</div>
-              <div class="pb2">⏹ Stop</div>
+
+            <!-- App content -->
+            <div class="gps-app-content">
+
+              <!-- Header -->
+              <div class="gps-app-header">
+                <span class="gps-tag-live">
+                  <span class="gps-pulse-dot"></span>
+                  Live · Running
+                </span>
+                <span class="gps-elapsed">00:28:42</span>
+              </div>
+
+              <!-- Big distance -->
+              <div class="gps-distance-block">
+                <div class="gps-distance">5.00</div>
+                <div class="gps-distance-unit">Kilometres</div>
+              </div>
+
+              <!-- Stats row -->
+              <div class="gps-stats">
+                <div class="gps-stat">
+                  <div class="gps-stat-val">5:44</div>
+                  <div class="gps-stat-label">Pace /km</div>
+                </div>
+                <div class="gps-stat">
+                  <div class="gps-stat-val">312</div>
+                  <div class="gps-stat-label">Calories</div>
+                </div>
+                <div class="gps-stat">
+                  <div class="gps-stat-val">142</div>
+                  <div class="gps-stat-label">BPM</div>
+                </div>
+              </div>
+
+              <!-- Map with city route -->
+              <div class="gps-map">
+                <svg viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="city-svg">
+                  <!-- City block grid (representing streets) -->
+                  <g class="city-blocks">
+                    <!-- Horizontal streets -->
+                    <line x1="0" y1="50"  x2="280" y2="50"  class="street-h"/>
+                    <line x1="0" y1="100" x2="280" y2="100" class="street-h"/>
+                    <line x1="0" y1="160" x2="280" y2="160" class="street-h"/>
+                    <line x1="0" y1="220" x2="280" y2="220" class="street-h"/>
+                    <!-- Vertical streets -->
+                    <line x1="50"  y1="0" x2="50"  y2="280" class="street-v"/>
+                    <line x1="110" y1="0" x2="110" y2="280" class="street-v"/>
+                    <line x1="170" y1="0" x2="170" y2="280" class="street-v"/>
+                    <line x1="230" y1="0" x2="230" y2="280" class="street-v"/>
+
+                    <!-- City buildings (subtle blocks) -->
+                    <rect x="58"  y="58"  width="44" height="34" class="building"/>
+                    <rect x="118" y="58"  width="44" height="34" class="building"/>
+                    <rect x="178" y="58"  width="44" height="34" class="building"/>
+                    <rect x="58"  y="108" width="44" height="44" class="building"/>
+                    <rect x="118" y="108" width="44" height="44" class="building"/>
+                    <rect x="178" y="108" width="44" height="44" class="building"/>
+                    <rect x="58"  y="168" width="44" height="44" class="building"/>
+                    <rect x="118" y="168" width="44" height="44" class="building"/>
+                    <rect x="178" y="168" width="44" height="44" class="building"/>
+                  </g>
+
+                  <!-- Park (green area) -->
+                  <rect x="178" y="168" width="44" height="44" class="park"/>
+
+                  <!-- Start marker -->
+                  <circle cx="32" cy="232" r="8" class="start-marker-outer"/>
+                  <circle cx="32" cy="232" r="4" class="start-marker-inner"/>
+
+                  <!-- Orange route path - draws smoothly through city, loops back to start -->
+                  <path class="route-path"
+                        d="M 32 232 L 32 220 L 50 220 L 50 160 L 110 160 L 110 100 L 170 100 L 170 50 L 230 50 L 230 100 L 230 160 L 170 160 L 170 220 L 50 220 L 32 220 L 32 232"
+                        fill="none"/>
+                </svg>
+
+                <!-- Map info overlay -->
+                <div class="gps-map-info">
+                  <span class="gps-map-info-pill">📍 Besant Nagar, Chennai</span>
+                </div>
+              </div>
+
+              <!-- Bottom action button -->
+              <div class="gps-action-row">
+                <button class="gps-btn gps-btn-pause">
+                  <span class="gps-btn-icon">⏸</span>
+                  <span>Pause</span>
+                </button>
+                <button class="gps-btn gps-btn-stop">
+                  <span class="gps-btn-icon">⏹</span>
+                  <span>Stop</span>
+                </button>
+              </div>
             </div>
+
           </div>
         </div>
+
+        <!-- Phone glow -->
+        <div class="gps-phone-glow"></div>
+      </div>
+
+      <!-- RIGHT: Splits chart (matching your app exactly) -->
+      <div class="gps-splits-wrap">
+        <div class="gps-splits-card">
+          <div class="gps-splits-head">
+            <div>
+              <h3 style="font-size:16px;font-weight:700;margin-bottom:2px;color:var(--text)">📏 Km Splits</h3>
+              <div style="font-size:11px;color:var(--text3)">5.00 km · 28:42 · 5:44 avg pace</div>
+            </div>
+            <div class="gps-splits-stat">
+              <div style="font-family:var(--display);font-size:22px;color:var(--g5);line-height:1">5.00</div>
+              <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em">km</div>
+            </div>
+          </div>
+
+          <!-- Header row -->
+          <div class="gps-split-header">
+            <span style="width:24px">KM</span>
+            <span style="width:52px">PACE</span>
+            <span style="flex:1"></span>
+            <span style="width:44px;text-align:right">TIME</span>
+          </div>
+
+          <!-- Split rows (matching your app's exact format) -->
+          <div class="gps-split-row gps-split-best" data-split="1">
+            <div class="gps-split-num">1</div>
+            <div class="gps-split-pace">5:28</div>
+            <div class="gps-split-bar"><div class="gps-split-fill" style="--w: 100%"></div></div>
+            <div class="gps-split-time">5:28</div>
+          </div>
+          <div class="gps-split-row" data-split="2">
+            <div class="gps-split-num">2</div>
+            <div class="gps-split-pace">5:42</div>
+            <div class="gps-split-bar"><div class="gps-split-fill" style="--w: 78%"></div></div>
+            <div class="gps-split-time">5:42</div>
+          </div>
+          <div class="gps-split-row" data-split="3">
+            <div class="gps-split-num">3</div>
+            <div class="gps-split-pace">5:50</div>
+            <div class="gps-split-bar"><div class="gps-split-fill" style="--w: 65%"></div></div>
+            <div class="gps-split-time">5:50</div>
+          </div>
+          <div class="gps-split-row gps-split-worst" data-split="4">
+            <div class="gps-split-num">4</div>
+            <div class="gps-split-pace">6:08</div>
+            <div class="gps-split-bar"><div class="gps-split-fill" style="--w: 38%"></div></div>
+            <div class="gps-split-time">6:08</div>
+          </div>
+          <div class="gps-split-row" data-split="5">
+            <div class="gps-split-num">5</div>
+            <div class="gps-split-pace">5:34</div>
+            <div class="gps-split-bar"><div class="gps-split-fill" style="--w: 88%"></div></div>
+            <div class="gps-split-time">5:34</div>
+          </div>
+
+          <!-- Legend -->
+          <div class="gps-splits-legend">
+            <span><span class="legend-dot legend-best"></span>Fastest</span>
+            <span><span class="legend-dot legend-worst"></span>Slowest</span>
+            <span><span class="legend-dot legend-normal"></span>Average</span>
+          </div>
+        </div>
+
+        <!-- Feature pills -->
+        <div class="gps-features-list">
+          <div class="gps-feature-pill">
+            <span class="gps-feature-emoji">🛰️</span>
+            <div>
+              <strong>Best-In-Class GPS</strong>
+              <span>Perfect line coordinates, accurate to every step</span>
+            </div>
+          </div>
+          <div class="gps-feature-pill">
+            <span class="gps-feature-emoji">🏃</span>
+            <div>
+              <strong>Run · Walk · Cycle</strong>
+              <span>3 modes, correct calorie rates each</span>
+            </div>
+          </div>
+          <div class="gps-feature-pill">
+            <span class="gps-feature-emoji">🏆</span>
+            <div>
+              <strong>4 Training Plans Built In</strong>
+              <span>5K, 10K, Half &amp; Full Marathon</span>
+            </div>
+          </div>
+          <div class="gps-feature-pill">
+            <span class="gps-feature-emoji">🥇</span>
+            <div>
+              <strong>Personal Bests in History</strong>
+              <span>Every PB labeled at the moment it set</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Km Splits Preview -->
-    <div style="margin-bottom:20px">
-      <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:10px">📏 Km Splits — per kilometre breakdown</div>
-      <div class="splits-preview">
-        <div class="split-row">
-          <div class="split-km">1</div>
-          <div class="split-pace" style="color:#43a05a">6:42</div>
-          <div class="split-bar-wrap"><div class="split-bar" style="--w:95%;width:95%;background:#43a05a"></div></div>
-          <div class="split-time">6:42</div>
-        </div>
-        <div class="split-row">
-          <div class="split-km">2</div>
-          <div class="split-pace" style="color:var(--t2)">7:05</div>
-          <div class="split-bar-wrap"><div class="split-bar" style="--w:80%;width:80%;background:rgba(255,255,255,.2)"></div></div>
-          <div class="split-time">7:05</div>
-        </div>
-        <div class="split-row">
-          <div class="split-km">3</div>
-          <div class="split-pace" style="color:var(--t2)">7:18</div>
-          <div class="split-bar-wrap"><div class="split-bar" style="--w:72%;width:72%;background:rgba(255,255,255,.2)"></div></div>
-          <div class="split-time">7:18</div>
-        </div>
-        <div class="split-row">
-          <div class="split-km" style="color:#ef9a9a">4*</div>
-          <div class="split-pace" style="color:#ef9a9a">8:30</div>
-          <div class="split-bar-wrap"><div class="split-bar" style="--w:45%;width:45%;background:rgba(239,154,154,.5)"></div></div>
-          <div class="split-time" style="color:var(--t3)">3:24</div>
-        </div>
-        <div style="font-size:10px;color:var(--t3);margin-top:8px">* partial km · fastest in green · slowest in red</div>
-      </div>
-    </div>
-
-    <ul class="fl">
-      <li><div class="fi">🗺️</div><div><div class="ft">Professional-Grade GPS Line</div><div class="fd">Kalman filter smoothing — same algorithm used by leading activity apps. Removes GPS noise, preserves every real turn and curve.</div></div></li>
-      <li><div class="fi">📊</div><div><div class="ft">Km Splits with Pace Chart</div><div class="fd">See your pace for every kilometre with a horizontal bar chart. Fastest km in green, slowest in red.</div></div></li>
-      <li><div class="fi">💾</div><div><div class="ft">Save Activity — Name Your Run</div><div class="fd">Auto-names by time of day: "Morning Run", "Evening Walk". Edit before saving. Add a description. Just like the pros.</div></div></li>
-      <li><div class="fi">🔒</div><div><div class="ft">Auto-Pause on Screen Lock</div><div class="fd">Timer pauses when screen locks, resumes when unlocked. No fake time. No fake distance.</div></div></li>
-      <li><div class="fi">🏃</div><div><div class="ft">Run · Walk · Cycle</div><div class="fd">3 activity types with correct calorie rates. Lock screen notification shows correct label — Walk shows 🚶 Walk, not Running.</div></div></li>
-      <li><div class="fi">🏆</div><div><div class="ft">4 Training Plans in Bottom Nav</div><div class="fd">Register for 5K, 10K, Half or Full Marathon — plan appears in bottom navigation. Toggle each day done/undone. Run freely in separate Run tab.</div></div></li>
-      <li><div class="fi">🥇</div><div><div class="ft">Personal Bests in History</div><div class="fd">Every historical run shows whether it was a PB at that moment — longest run, fastest pace, longest time. No false positives.</div></div></li>
-    </ul>
   </div>
 </section>
 
-<!-- BEFORE AFTER -->
-<section class="bas">
-  <div class="wrap rev">
-    <div class="ey rev-l">The Transformation</div>
-    <h2>BEFORE<br/><em>VS AFTER</em></h2>
-    <div class="div"></div>
-    <div class="bag">
-      <div class="bb" style="border-radius:16px 0 0 16px">
-        <div class="bl2">❌ Without</div>
-        <ul class="blist">
-          <li><span>✗</span> 10 min deciding which app</li>
-          <li><span>✗</span> Data scattered across 5 apps</li>
-          <li><span>✗</span> Gym weights in a notebook</li>
-          <li><span>✗</span> Cali progress lost on reinstall</li>
-          <li><span>✗</span> GPS zigzag lines in history</li>
-          <li><span>✗</span> ₹4,000–12,000/year subscriptions</li>
-          <li><span>✗</span> Workout requires internet</li>
-          <li><span>✗</span> Data sold to advertisers</li>
+<!-- ALL MODULES -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">🏋️ EVERY WORKOUT, COVERED</span>
+      <h2>7 Modules. <span class="green">One App.</span></h2>
+      <p class="subtitle">From gym lifters to yoga enthusiasts to runners — pick your modules during onboarding. Reorder them anytime. Skip the ones you don't need.</p>
+    </div>
+
+    <div class="modules-grid">
+      <div class="module-card module-cardio reveal">
+        <div class="module-emoji">🏠</div>
+        <h4>Home Cardio</h4>
+        <p>Burpees, jumping jacks, mountain climbers, shadow boxing. 8-9 exercises × 6 days. No equipment needed.</p>
+        <div class="module-stats">
+          <span>⚡ 6-day plan</span>
+          <span>🏠 No gear</span>
+        </div>
+      </div>
+
+      <div class="module-card module-gym reveal">
+        <div class="module-emoji">🏋️</div>
+        <h4>Gym Workouts</h4>
+        <p>Full split: chest, back, shoulders, arms, legs, core. Compound lifts, isolation work, video demos for every exercise.</p>
+        <div class="module-stats">
+          <span>💪 Push/Pull/Legs</span>
+          <span>📹 Form videos</span>
+        </div>
+      </div>
+
+      <div class="module-card module-yoga reveal">
+        <div class="module-emoji">🧘</div>
+        <h4>Yoga</h4>
+        <p>60-day progressive system. Sun salutations, balance poses, deep stretches. From beginner to advanced flows.</p>
+        <div class="module-stats">
+          <span>🌅 6-day flow</span>
+          <span>📈 Progressive</span>
+        </div>
+      </div>
+
+      <div class="module-card module-running reveal">
+        <div class="module-emoji">🏃</div>
+        <h4>Running & Walking</h4>
+        <p>Best-in-class GPS with perfect line tracking. Run, Walk, Cycle modes. 4 training plans (5K, 10K, Half, Full marathon).</p>
+        <div class="module-stats">
+          <span>🛰️ Pro GPS</span>
+          <span>🏆 4 plans built in</span>
+        </div>
+      </div>
+
+      <div class="module-card module-stretching reveal">
+        <div class="module-emoji">🙆</div>
+        <h4>Stretching</h4>
+        <p>6 deep stretches × 6 days. Hip flexors, hamstrings, shoulders, lower back. Recover faster, move better.</p>
+        <div class="module-stats">
+          <span>🦵 Full body</span>
+          <span>🌙 Evening routine</span>
+        </div>
+      </div>
+
+      <div class="module-card module-cali reveal">
+        <div class="module-emoji">🤸</div>
+        <h4>Calisthenics</h4>
+        <p>3-level skill tree: Beginner → Intermediate → Advanced. Pull-ups, dips, handstands, muscle-ups, planches.</p>
+        <div class="module-stats">
+          <span>🌳 Skill tree</span>
+          <span>🚀 Progressive</span>
+        </div>
+      </div>
+
+      <div class="module-card module-core reveal">
+        <div class="module-emoji">🔥</div>
+        <h4>Core & Abs</h4>
+        <p>6 targeted ab exercises × 6 days. Planks, leg raises, crunches, hollow holds. Build a strong foundation.</p>
+        <div class="module-stats">
+          <span>🎯 Focused</span>
+          <span>⏱ 15-min sessions</span>
+        </div>
+      </div>
+
+      <div class="module-card module-custom reveal">
+        <div class="module-emoji">⭐</div>
+        <h4>Custom Workouts</h4>
+        <p>Build YOUR own routines. Pick exercises, sets, reps. Save them. Reuse them. Add YouTube demo links per move.</p>
+        <div class="module-stats">
+          <span>✨ Fully custom</span>
+          <span>♾️ Unlimited</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-flow reveal">
+      <div class="module-flow-step">
+        <span class="step-num">1</span>
+        <div>
+          <strong>Onboarding picks your modules</strong><br>
+          <span style="color:var(--text2);font-size:13px">Tell us your goals — we show only what's relevant</span>
+        </div>
+      </div>
+      <div class="module-flow-arrow">→</div>
+      <div class="module-flow-step">
+        <span class="step-num">2</span>
+        <div>
+          <strong>Reorder anytime</strong><br>
+          <span style="color:var(--text2);font-size:13px">Drag your favourites to the top of the dashboard</span>
+        </div>
+      </div>
+      <div class="module-flow-arrow">→</div>
+      <div class="module-flow-step">
+        <span class="step-num">3</span>
+        <div>
+          <strong>Track everything</strong><br>
+          <span style="color:var(--text2);font-size:13px">Every session logs to your weekly report card</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEKLY REPORT (mid section) -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">🎓 ACCOUNTABILITY</span>
+      <h2>Weekly Report Card</h2>
+      <p class="subtitle">Every Monday, get an honest grade on last week's effort. Personalized message that calls out what's working — or what isn't.</p>
+    </div>
+
+    <div class="weekly-showcase reveal">
+      <div class="weekly-card-mock">
+        <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:center;margin-bottom:6px">Week of May 5–11</div>
+        <div class="weekly-grade">A+</div>
+        <div class="weekly-grade-label">Outstanding week</div>
+        <div class="weekly-stats-row">
+          <div>
+            <div class="weekly-stat-val">7</div>
+            <div class="weekly-stat-label">Workouts</div>
+          </div>
+          <div>
+            <div class="weekly-stat-val">22.5</div>
+            <div class="weekly-stat-label">km Run</div>
+          </div>
+          <div>
+            <div class="weekly-stat-val">7🔥</div>
+            <div class="weekly-stat-label">Streak</div>
+          </div>
+        </div>
+        <div class="weekly-quote">"Perfect week! 7 sessions, daily streak unbroken, pace down by 12s/km. You've earned this A+ — keep the fire burning!"</div>
+      </div>
+
+      <div>
+        <h3 style="font-size:22px;margin-bottom:14px;font-weight:700">It's like having a coach<br><span class="green">who actually pays attention.</span></h3>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;color:var(--text2);font-size:14px">
+          <li>✓ Letter grade A+ to F based on real effort</li>
+          <li>✓ Compares this week vs last week</li>
+          <li>✓ Highlights wins and gaps</li>
+          <li>✓ Personalized motivational message</li>
         </ul>
       </div>
-      <div class="ba" style="border-radius:0 16px 16px 0">
-        <div class="bl2">✅ With FitFlow</div>
-        <ul class="blist">
-          <li><span>✓</span> One app, open and go</li>
-          <li><span>✓</span> Everything in one history</li>
-          <li><span>✓</span> Gym weights tracked + charted</li>
-          <li><span>✓</span> All progress cloud-backed</li>
-          <li><span>✓</span> Smooth professional-grade route</li>
-          <li><span>✓</span> ₹299 once, yours forever</li>
-          <li><span>✓</span> Works on minimal data, syncs when online</li>
-          <li><span>✓</span> Your data in your Google Sheet</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- PRICE -->
-<section style="background:linear-gradient(135deg,#040d08,#071a0f);padding:60px 18px">
-  <div class="wrap rev">
-    <div class="ey">The Honest Price Talk</div>
-    <h2>₹299<br/><em>ONCE</em></h2>
-    <div class="div"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px">
-      <div style="background:rgba(229,57,53,.06);border:1px solid rgba(229,57,53,.2);border-radius:16px;padding:18px;text-align:center">
-        <div style="font-size:22px;margin-bottom:8px">🏃</div>
-        <div style="font-size:10px;color:rgba(239,154,154,.7);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:6px">Popular Activity Trackers</div>
-        <div style="font-family:var(--fd);font-size:32px;color:#ef9a9a;line-height:1">₹349</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:3px">per month</div>
-        <div style="height:1px;background:rgba(229,57,53,.2);margin:12px 0"></div>
-        <div style="font-size:11px;color:#ef9a9a;line-height:1.6">₹4,188/year<br/>₹12,564 in 3 years<br/>and counting...</div>
-      </div>
-      <div style="background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:16px;padding:18px;text-align:center;position:relative">
-        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--ac);color:#000;font-size:9px;font-weight:700;padding:3px 10px;border-radius:10px;white-space:nowrap">SMART CHOICE</div>
-        <div style="font-size:22px;margin-bottom:8px">⚡</div>
-        <div style="font-size:10px;color:rgba(240,192,64,.8);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:6px">FitFlow Pro</div>
-        <div style="font-family:var(--fd);font-size:32px;color:var(--ac);line-height:1">₹299</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:3px">one time. forever.</div>
-        <div style="height:1px;background:rgba(240,192,64,.2);margin:12px 0"></div>
-        <div style="font-size:11px;color:var(--ac);line-height:1.6">₹299 total<br/>₹299 in 3 years<br/>₹299 forever.</div>
-      </div>
-    </div>
-    <div class="savings-card rev-s" style="background:linear-gradient(135deg,rgba(46,125,70,.18),rgba(67,160,90,.08));border:1px solid rgba(67,160,90,.3);border-radius:20px;padding:28px 20px;margin-bottom:20px;text-align:center">
-      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(126,217,160,.7);margin-bottom:10px;font-weight:600">💡 What you save vs popular activity trackers</div>
-      <div style="font-size:13px;color:var(--t3);margin-bottom:4px">in the first year alone</div>
-      <div style="display:flex;align-items:baseline;justify-content:center;gap:3px;margin-bottom:6px">
-        <span style="font-family:var(--fd);font-size:32px;color:var(--gg);line-height:1">₹</span>
-        <span id="savings-counter" style="font-family:var(--fd);font-size:88px;color:var(--gg);line-height:1;letter-spacing:-.02em">0</span>
-      </div>
-      <div style="width:60px;height:2px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:0 auto 14px"></div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.7">That's new running shoes + 3 months of protein + gym gear.<br/>And you still have your entire fitness app.</div>
-    </div>
-    <div style="background:rgba(30,136,229,.07);border:1px solid rgba(30,136,229,.2);border-radius:16px;padding:20px">
-      <div style="font-size:20px;margin-bottom:10px;text-align:center">🧘</div>
-      <div style="font-size:15px;font-weight:700;color:#fff;text-align:center;margin-bottom:10px">No Kudos. No Competition. Just You.</div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.7">On popular fitness apps, you start running for health. Then for likes and leaderboards. Then someone posts 25km and your 5km feels small. FitFlow has no social feed — your 1km walk on a bad day is celebrated exactly the same as a 10km PR.</div>
-      <div style="height:1px;background:rgba(30,136,229,.15);margin:14px 0"></div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)"><span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> Your progress is private — only you see it</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)"><span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> Compare yourself vs yesterday's you, not others</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--t2)"><span style="color:#43a05a;font-size:14px;flex-shrink:0">✓</span> Milestone messages encourage, never shame</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPARE -->
-<section class="cs" id="compare">
-  <div class="wrap rev">
-    <div class="ey rev-l">How We Compare</div>
-    <h2>FITFLOW<br/><em>VS REST</em></h2>
-    <div class="div"></div>
-    <div class="tw rev">
-      <table>
-        <thead>
-          <tr>
-            <th class="fe">Feature</th>
-            <th class="ff">⚡ FitFlow</th>
-            <th class="ot">Popular Apps</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="fn">All-in-one hub</td><td class="fc"><span class="ck">✓ Yes</span></td><td class="oc"><span class="cx">✗ Split apps</span></td></tr>
-          <tr><td class="fn">Core & Abs module</td><td class="fc"><span class="ck">✓ Built in</span></td><td class="oc"><span class="cx">✗ None</span></td></tr>
-          <tr><td class="fn">Gym progressive overload</td><td class="fc"><span class="ck">✓ Weight history</span></td><td class="oc"><span class="cx">✗ Separate app</span></td></tr>
-          <tr><td class="fn">GPS live map</td><td class="fc"><span class="ck">✓ Built in</span></td><td class="oc">Paid plan</td></tr>
-          <tr><td class="fn">Professional GPS line</td><td class="fc"><span class="ck">✓ Kalman filter</span></td><td class="oc">Premium apps only</td></tr>
-          <tr><td class="fn">Km splits analysis</td><td class="fc"><span class="ck">✓ Pace chart</span></td><td class="oc">Paid plan</td></tr>
-          <tr><td class="fn">Calisthenics skill tree</td><td class="fc"><span class="ck">✓ Full tree</span></td><td class="oc"><span class="cx">✗ None</span></td></tr>
-          <tr><td class="fn">Low data usage</td><td class="fc"><span class="ck">✓ Minimal data</span></td><td class="oc"><span class="cx">✗ Needs data</span></td></tr>
-          <tr><td class="fn">Full data backup</td><td class="fc"><span class="ck">✓ Your own Sheet</span></td><td class="oc">Their servers</td></tr>
-          <tr><td class="fn">History calendar</td><td class="fc"><span class="ck">✓ Tap any day</span></td><td class="oc">Partial</td></tr>
-          <tr><td class="fn">No ads / tracking</td><td class="fc"><span class="ck">✓ Zero ads</span></td><td class="oc"><span class="cx">✗ Ad-supported</span></td></tr>
-          <tr><td class="fn" style="border:none">Total cost</td><td class="fc" style="border:none"><span class="ck">✓ ₹299 once</span></td><td class="oc" style="border:none"><span style="color:#ef9a9a">₹4,000+/year</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- STORIES -->
-<section class="ss" id="stories">
-  <div class="wrap rev">
-    <div class="ey rev-l">Real People, Real Results</div>
-    <h2>A DAY IN<br/><em>THEIR LIFE</em></h2>
-    <div class="div"></div>
-
-    <div class="sc rev">
-      <div class="sh"><div class="av av-a">👨‍💼</div><div><div class="sn">Working Professional</div><div class="sti">Rahul, 32 — Software Engineer</div></div></div>
-      <p class="stx">6 AM: FitFlow notification arrives with a motivational push. Morning Walk tracked — GPS records smooth route, lock screen shows distance. Back home: water logged. Lunch break: gym nutrition plan checked. Evening: Chest day completed, weight logged for each exercise — up 2.5kg from last week. Sunday: A+, "6 active days, 8.4km this week."</p>
-      <div class="sus">
-        <span class="stag" style="background:rgba(30,136,229,.15);color:#64b5f6;border:1px solid rgba(30,136,229,.25)">🚶 GPS Walk</span>
-        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">🏋️ Gym + weights</span>
-        <span class="stag" style="background:rgba(30,136,229,.12);color:#90caf9;border:1px solid rgba(30,136,229,.2)">💧 Hydration</span>
-        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">📊 Weekly Report</span>
-      </div>
+<!-- FEATURES GRID -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">🚀 EVERYTHING IN ONE APP</span>
+      <h2>Built for <span class="green">Real People</span></h2>
+      <p class="subtitle">Every feature exists because we missed it ourselves.</p>
     </div>
 
-    <div class="sc rev">
-      <div class="sh"><div class="av av-b">👩‍🎓</div><div><div class="sn">College Student · No budget</div><div class="sti">Priya, 21 — Student, Chennai</div></div></div>
-      <p class="stx">No gym membership, no money for apps, bad hostel WiFi. Home Cardio in her bedroom — zero internet needed. Yoga 3x/week. Weekends: cycle GPS route. Saturday: Core & Abs 100-rep challenge + L-sit attempts. 18-day streak. Calisthenics skill tree shows handstand prep at step 4 of 8. Everything tracked, everything backed up, nothing lost.</p>
-      <div class="sus">
-        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">🏠 Home Cardio</span>
-        <span class="stag" style="background:rgba(156,39,176,.12);color:#ce93d8;border:1px solid rgba(156,39,176,.25)">🧘 Yoga</span>
-        <span class="stag" style="background:rgba(229,57,53,.12);color:#ef9a9a;border:1px solid rgba(229,57,53,.2)">🔥 Core & Abs</span>
-        <span class="stag" style="background:rgba(255,87,34,.12);color:#ffccbc;border:1px solid rgba(255,87,34,.2)">💪 Calisthenics</span>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">⭐</div>
+        <h4>Custom Workouts</h4>
+        <p>Build routines, save them, run them again. Add YouTube links per exercise.</p>
       </div>
-    </div>
-
-    <div class="sc rev">
-      <div class="sh"><div class="av av-c">👨‍🦳</div><div><div class="sn">Returning to Fitness</div><div class="sti">Venkat, 45 — Manager, Bengaluru</div></div></div>
-      <p class="stx">5 years off exercise. Registered FitFlow's 5K plan — it appears right in the bottom nav as "5K Plan". Week 1: walk 20 min (tap toggle: done). Week 3: run 2km non-stop. Week 6: first 5K done, certificate unlocked. Added Stretching module for recovery. Km splits show he ran km 1 in 7:37 and km 5 in 6:55 — finishing stronger. 3 months later: registered for an actual 10K race.</p>
-      <div class="sus">
-        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">📋 5K Plan</span>
-        <span class="stag" style="background:rgba(0,188,212,.1);color:#80deea;border:1px solid rgba(0,188,212,.2)">🤸 Stretching</span>
-        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">📏 Km Splits</span>
-        <span class="stag" style="background:rgba(67,160,90,.12);color:var(--gg);border:1px solid rgba(67,160,90,.2)">🥗 Nutrition</span>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">🟩</div>
+        <h4>Activity Heatmap</h4>
+        <p>GitHub-style 6-month grid. See consistency at a glance. Greener = more active.</p>
       </div>
-    </div>
-
-    <div class="sc rev">
-      <div class="sh"><div class="av av-d">👩‍⚕️</div><div><div class="sn">Fitness Enthusiast</div><div class="sti">Ananya, 28 — Physio, Pune</div></div></div>
-      <p class="stx">Calisthenics skill tree: handstand step 6/8, working on free balance. Custom Workouts builder for client rehab programmes. Half marathon plan in nav — Week 4, pace dropped from 8:30 to 7:15/km average. Km splits show she always slows at km 7–8 — she knows to push there now. Core & Abs every Saturday. History calendar shows 3 weeks of perfect training with one rest week. Personal bests: 18km longest run, 6:20/km fastest pace.</p>
-      <div class="sus">
-        <span class="stag" style="background:rgba(255,87,34,.12);color:#ffccbc;border:1px solid rgba(255,87,34,.25)">💪 Calisthenics</span>
-        <span class="stag" style="background:rgba(233,30,99,.1);color:#f48fb1;border:1px solid rgba(233,30,99,.2)">✏️ Custom WOs</span>
-        <span class="stag" style="background:rgba(229,57,53,.12);color:#ef9a9a;border:1px solid rgba(229,57,53,.2)">🔥 Core & Abs</span>
-        <span class="stag" style="background:rgba(240,192,64,.1);color:#f0c040;border:1px solid rgba(240,192,64,.2)">🏅 HM Plan</span>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">🏅</div>
+        <h4>Workout Achievements</h4>
+        <p>Earn badges as you hit milestones — first workout, 10 sessions, 50, century club.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">💧</div>
+        <h4>Hydration Tracker</h4>
+        <p>Daily water goal, simple tap-to-add glasses. No nagging notifications.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">⚖️</div>
+        <h4>Body Stats</h4>
+        <p>Weight, body fat%, measurements. Trend chart over time.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">🔔</div>
+        <h4>Smart Reminders</h4>
+        <p>Daily morning nudge at 6 AM. Skip if already logged. We respect your time.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">📱</div>
+        <h4>Install on Home Screen</h4>
+        <p>Adds like a native app. Opens fullscreen. No app-store gatekeepers.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-card-icon">🔄</div>
+        <h4>Multi-Device Sync</h4>
+        <p>Login on phone, tablet, laptop. Your data follows you everywhere.</p>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- FEEDBACK -->
-<section style="background:#040d08;padding:60px 18px">
-  <div class="wrap rev">
-    <div class="ey rev-l">Built With You</div>
-    <h2>YOUR VOICE<br/><em>SHAPES THIS</em></h2>
-    <div class="div"></div>
-    <p class="lead">FitFlow Pro is not a finished product shipped and forgotten. Every feature in this app — from km splits to the plan toggle — came from real user feedback. And we made it easy to keep that loop going.</p>
+<!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">⭐ REAL PEOPLE, REAL RESULTS</span>
+      <h2>A Day in Their <span class="green">Life</span></h2>
+      <p class="subtitle">Real users from across India who replaced 5+ fitness apps with one FitFlow Pro subscription.</p>
+    </div>
 
-    <div style="background:linear-gradient(135deg,rgba(46,125,70,.12),rgba(67,160,90,.06));border:1px solid rgba(67,160,90,.25);border-radius:20px;padding:24px;margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
-        <div style="width:48px;height:48px;border-radius:14px;background:rgba(67,160,90,.15);border:1px solid rgba(67,160,90,.25);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">💬</div>
-        <div>
-          <div style="font-size:15px;font-weight:700;color:#fff">Feedback built right into the app</div>
-          <div style="font-size:12px;color:var(--t3);margin-top:2px">No email. No form. No friction.</div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-quote">6AM gym sessions logged in 3 taps. Run home tracked by GPS. Yoga before bed. One app for everything — finally.</p>
+        <div class="testimonial-routine">
+          <span class="routine-tag">🏋️ Gym</span>
+          <span class="routine-tag">🏃 Running</span>
+          <span class="routine-tag">🧘 Yoga</span>
         </div>
-      </div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.75">
-        Inside FitFlow Pro there's a dedicated feedback space — tap, type, submit. Tell us what's working, what's missing, what could be better. Every submission reaches us directly. No middleman, no support ticket queue, no generic inbox.
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px" class="stag">
-      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;text-align:center">
-        <div style="font-size:26px;margin-bottom:8px">🚀</div>
-        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:5px">Features from feedback</div>
-        <div style="font-size:11px;color:var(--t3);line-height:1.5">Km splits, activity naming, plan toggles, calendar fixes — all shipped because users asked.</div>
-      </div>
-      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;text-align:center">
-        <div style="font-size:26px;margin-bottom:8px">🔄</div>
-        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:5px">Actively maintained</div>
-        <div style="font-size:11px;color:var(--t3);line-height:1.5">This isn't abandoned software. Bugs get fixed, features get added, the app improves with every update.</div>
-      </div>
-      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;text-align:center">
-        <div style="font-size:26px;margin-bottom:8px">🎯</div>
-        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:5px">You set the roadmap</div>
-        <div style="font-size:11px;color:var(--t3);line-height:1.5">The next module, the next feature — shaped by what users actually need, not what looks good in a pitch deck.</div>
-      </div>
-      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;text-align:center">
-        <div style="font-size:26px;margin-bottom:8px">👥</div>
-        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:5px">Small team, real people</div>
-        <div style="font-size:11px;color:var(--t3);line-height:1.5">When you send feedback, an actual human reads it. Not a bot, not a tier-1 support agent — the people who built it.</div>
-      </div>
-    </div>
-
-    <div style="background:linear-gradient(135deg,rgba(30,136,229,.1),rgba(46,125,70,.08));border:1px solid rgba(67,160,90,.25);border-radius:20px;padding:28px 20px;text-align:center">
-      <div style="font-family:var(--fd);font-size:clamp(22px,6vw,34px);color:#fff;line-height:1.2;margin-bottom:14px">
-        ONE PURCHASE.<br/><span style="color:var(--gg)">LIFETIME OF FITNESS.</span>
-      </div>
-      <div style="width:44px;height:2px;background:linear-gradient(90deg,var(--gb),var(--gg));border-radius:2px;margin:0 auto 16px"></div>
-      <div style="font-size:14px;color:var(--t2);line-height:1.8;max-width:380px;margin:0 auto 20px">
-        No monthly bills. No "premium features" locked behind a paywall. No cancelling when money gets tight and losing everything. Pay once at ₹299 — and every update, every new feature, every improvement we ship is yours. Forever.
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 8px;text-align:center">
-          <div style="font-family:var(--fd);font-size:22px;color:var(--gg)">Year 1</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:3px">₹299</div>
-        </div>
-        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 8px;text-align:center">
-          <div style="font-family:var(--fd);font-size:22px;color:var(--gg)">Year 3</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:3px">still ₹299</div>
-        </div>
-        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 8px;text-align:center">
-          <div style="font-family:var(--fd);font-size:22px;color:var(--gg)">Year 10</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:3px">still ₹299</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PILLARS -->
-<section class="pls">
-  <div class="wrap rev">
-    <div class="ey rev-l">Built Right</div>
-    <h2>THE TECH<br/><em>BEHIND IT</em></h2>
-    <div class="div"></div>
-    <p class="lead">Engineered to be fast, private, and always available. No ads. No tracking. No surprises.</p>
-    <div class="plg stag">
-      <div class="pi"><div class="pn">01</div><h3>PWA — No App Store</h3><p>Install from browser in 30 sec. Works on any Android from the last 5 years. No Play Store, no approvals, no waiting.</p></div>
-      <div class="pi"><div class="pn">02</div><h3>Low Data by Design</h3><p>Workout content and GPS tracking work without internet once you're logged in. Logs sync to your cloud sheet automatically when you reconnect.</p></div>
-      <div class="pi"><div class="pn">03</div><h3>Your Google Sheet</h3><p>Data goes to a Sheet you own. Every run, set, log — backed up automatically. Reinstall anytime, everything returns.</p></div>
-      <div class="pi"><div class="pn">04</div><h3>Kalman GPS Filter</h3><p>Same smoothing algorithm used by leading fitness apps. GPS noise removed, real turns preserved. Clean route lines on every run.</p></div>
-      <div class="pi"><div class="pn">05</div><h3>Live Map + Splits</h3><p>Route draws live as you move. After the run: km-by-km pace breakdown with bar chart. Know exactly where you slowed down.</p></div>
-      <div class="pi"><div class="pn">06</div><h3>Data That Survives</h3><p>Body stats, gym weights, cali skill progress, module order — all cloud-synced. Cache cleared? Logged in? It all comes back.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- WEEKLY REPORT -->
-<section class="rps">
-  <div class="wrap rev">
-    <div class="ey rev-l">Know Your Progress</div>
-    <h2>WEEKLY<br/><em>REPORT CARD</em></h2>
-    <div class="div"></div>
-    <p class="lead">Every Monday — your grade, streak, stats vs last week, and a motivational message. See exactly which days you showed up.</p>
-    <div class="rpc rev-s">
-      <div style="font-size:10px;color:var(--t3);text-align:center;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px">Week of 28 Apr — 4 May</div>
-      <div class="grade">A+</div>
-      <div class="gl2">Outstanding!</div>
-      <div class="gs">6 active days · 12 day streak 🔥</div>
-      <div class="wg">
-        <div class="wh">M</div><div class="wh">T</div><div class="wh">W</div><div class="wh">T</div><div class="wh">F</div><div class="wh">S</div><div class="wh">S</div>
-        <div class="wd ac">🏋️</div><div class="wd ac">🏃</div><div class="wd ac">🔥</div><div class="wd ac">🏋️</div><div class="wd mi">✕</div><div class="wd ac">🚶</div><div class="wd ac">🤸</div>
-      </div>
-      <div class="rsg">
-        <div class="rst"><div class="rsn">6</div><div class="rsl">Workouts</div><div class="rsd">+2 vs last week</div></div>
-        <div class="rst"><div class="rsn">8.4</div><div class="rsl">km this week</div><div class="rsd">+3.1km vs last week</div></div>
-      </div>
-      <div class="rq">"You crushed it this week! Elite consistency. Keep this energy going!"</div>
-    </div>
-  </div>
-</section>
-
-<!-- HONEST CONNECTIVITY -->
-<section class="conn-s">
-  <div class="wrap rev">
-    <div class="ey rev-l">What Works When</div>
-    <h2>REAL<br/><em>TALK</em></h2>
-    <div class="div"></div>
-    <p class="lead">We believe in being honest. Here's exactly what FitFlow needs internet for — and what runs on minimal or no data.</p>
-
-    <div class="conn-g">
-      <div class="conn-card conn-g2 rev">
-        <div class="conn-head">
-          <div class="conn-ic">✅</div>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#43a05a,#1a5c32)">RK</div>
           <div>
-            <div class="conn-title">Works on minimal internet — once logged in</div>
-            <div class="conn-sub">Workout content, GPS tracking, local logging — low data</div>
-          </div>
-        </div>
-        <div class="conn-body">
-          After your first login, workout content is cached on your device. Exercises, sets, reps, rest timers — all viewable without internet. GPS tracking uses your phone's own GPS chip — no mobile data needed for distance and pace. Logs save locally first and sync to your cloud sheet automatically when you reconnect.
-        </div>
-      </div>
-
-      <div class="conn-card conn-y rev">
-        <div class="conn-head">
-          <div class="conn-ic">📶</div>
-          <div>
-            <div class="conn-title">Needs internet — just 3 moments</div>
-            <div class="conn-sub">Login · Map tiles · Instructional videos</div>
-          </div>
-        </div>
-        <div class="conn-body" style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
-          <div style="padding:10px 12px;background:rgba(240,192,64,.06);border-radius:10px;border:1px solid rgba(240,192,64,.15)">
-            <div style="font-weight:700;font-size:12px;color:var(--ac);margin-bottom:3px">🔑 Login (one-time per device)</div>
-            <div style="font-size:11px;color:var(--t3)">After first login, your session stays active. Reinstall? Login again and all your data syncs back in seconds from Google Sheets.</div>
-          </div>
-          <div style="padding:10px 12px;background:rgba(240,192,64,.06);border-radius:10px;border:1px solid rgba(240,192,64,.15)">
-            <div style="font-weight:700;font-size:12px;color:var(--ac);margin-bottom:3px">🗺️ Map tiles during GPS runs</div>
-            <div style="font-size:11px;color:var(--t3)">The street map background needs data to load. No internet = GPS still tracks your route perfectly — you just see a blank background instead of streets. Distance, pace, time — all accurate.</div>
-          </div>
-          <div style="padding:10px 12px;background:rgba(240,192,64,.06);border-radius:10px;border:1px solid rgba(240,192,64,.15)">
-            <div style="font-weight:700;font-size:12px;color:var(--ac);margin-bottom:3px">🎥 Exercise demo videos (optional)</div>
-            <div style="font-size:11px;color:var(--t3)">Instructional videos open in YouTube. Most exercises have clear text descriptions so you're never stuck. Videos are enhancement, not requirement.</div>
+            <div class="testimonial-name">Ravi Kumar</div>
+            <div class="testimonial-meta">28 · Software Engineer · Bengaluru</div>
           </div>
         </div>
       </div>
 
-      <div class="conn-card conn-b rev">
-        <div class="conn-head">
-          <div class="conn-ic">☁️</div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-quote">I was paying thousands per year for premium apps and still using 3 others. Switched to FitFlow Pro — saved a fortune and actually use it more.</p>
+        <div class="testimonial-routine">
+          <span class="routine-tag">🏃 Running</span>
+          <span class="routine-tag">🧘 Yoga</span>
+          <span class="routine-tag">🙆 Stretching</span>
+        </div>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#ec7ed4,#b56dd6)">PS</div>
           <div>
-            <div class="conn-title">Cloud backup — automatic, silent</div>
-            <div class="conn-sub">Every run, workout, stat — saved to your own Google Sheet</div>
+            <div class="testimonial-name">Priya Sharma</div>
+            <div class="testimonial-meta">34 · Doctor · Mumbai</div>
           </div>
         </div>
-        <div class="conn-body">
-          Every activity you log syncs to a Google Sheet that <em>you own</em>. Reinstall the app, clear cache, switch phones — log in and everything restores: runs, workouts, body stats, weight history, gym weights, calisthenics progress, module order. Your data belongs to you, not us.
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-quote">The Half Marathon training plan in the bottom nav kept me on track. GPS line was perfect — not the jagged mess other apps gave me.</p>
+        <div class="testimonial-routine">
+          <span class="routine-tag">🏃 Half Marathon</span>
+          <span class="routine-tag">💪 Calisthenics</span>
+        </div>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#ff7847,#f0c040)">AV</div>
+          <div>
+            <div class="testimonial-name">Arjun Venkatesh</div>
+            <div class="testimonial-meta">42 · Teacher · Chennai</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════ COMPARISON TABLE ═══════════════════ -->
+<section class="section compare-section">
+  <div class="container">
+    <div class="text-center">
+      <span class="kicker">📊 SIDE BY SIDE</span>
+      <h2>FitFlow vs <span class="amber">Other Apps</span></h2>
+      <p class="subtitle">Why pay for 5 apps when one does it all — better, faster, cheaper.</p>
+    </div>
 
-<!-- CTA -->
-<section class="ctas" id="cta">
-  <div class="ctai">
-    <div class="ey">Start Today</div>
-    <h2>START YOUR<br/><em>JOURNEY</em></h2>
-    <p>One-time ₹299. No renewals, no app store, no ads. Open on Android, tap "Add to Home Screen." 30 seconds to install. Your fitness revolution starts now.</p>
-    <a href="#" class="btn">⚡ Get FitFlow Pro — ₹299</a>
-    <div class="ctaf">
-      <span>✓ Any Android</span>
-      <span>✓ No app store</span>
-      <span>✓ 30 sec install</span>
-      <span>✓ ₹299 once, yours forever</span>
+    <div class="compare-table reveal">
+      <div class="compare-table-head">
+        <div class="cth-feature">Feature</div>
+        <div class="cth-us">⚡ FitFlow Pro</div>
+        <div class="cth-them">Popular Apps</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="cr-name">All-in-one hub</div>
+        <div class="cr-us"><span class="check">✓</span> Yes</div>
+        <div class="cr-them"><span class="cross">✗</span> Split apps</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Core &amp; Abs module</div>
+        <div class="cr-us"><span class="check">✓</span> Built in</div>
+        <div class="cr-them"><span class="cross">✗</span> None</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Gym progressive overload</div>
+        <div class="cr-us"><span class="check">✓</span> Weight history</div>
+        <div class="cr-them"><span class="cross">✗</span> Separate app</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">GPS live map</div>
+        <div class="cr-us"><span class="check">✓</span> Built in</div>
+        <div class="cr-them"><span class="paid">$</span> Paid plan</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Professional GPS line</div>
+        <div class="cr-us"><span class="check">✓</span> Best in class</div>
+        <div class="cr-them"><span class="paid">$</span> Premium only</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Km splits analysis</div>
+        <div class="cr-us"><span class="check">✓</span> Pace chart</div>
+        <div class="cr-them"><span class="paid">$</span> Paid plan</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Calisthenics skill tree</div>
+        <div class="cr-us"><span class="check">✓</span> Full tree</div>
+        <div class="cr-them"><span class="cross">✗</span> None</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Low data usage</div>
+        <div class="cr-us"><span class="check">✓</span> Minimal</div>
+        <div class="cr-them"><span class="cross">✗</span> Heavy</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">Full data backup</div>
+        <div class="cr-us"><span class="check">✓</span> Your Sheet</div>
+        <div class="cr-them"><span class="cross">✗</span> Their servers</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">History calendar</div>
+        <div class="cr-us"><span class="check">✓</span> Tap any day</div>
+        <div class="cr-them"><span class="partial">~</span> Partial</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-name">No ads / tracking</div>
+        <div class="cr-us"><span class="check">✓</span> Zero ads</div>
+        <div class="cr-them"><span class="cross">✗</span> Ad-supported</div>
+      </div>
+
+      <div class="compare-row compare-total">
+        <div class="cr-name"><strong>Total cost</strong></div>
+        <div class="cr-us"><strong>₹299 once</strong></div>
+        <div class="cr-them"><strong>₹4,000+/year</strong></div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="flogo">FITFLOW PRO</div>
-  <p>GPS Running · Gym · Yoga · Core & Abs · Calisthenics<br/>Stretching · Custom Workouts · Nutrition · Hydration</p>
-  <p style="margin-top:8px;font-size:11px;opacity:.5">Built for consistency. Made for everyone.</p>
+<!-- PRICING -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <!-- Start Today intro (replaces former card) -->
+      <div class="start-today-intro reveal">
+        <span class="kicker" style="background:rgba(240,192,64,0.14);color:var(--accent);border-color:rgba(240,192,64,0.3)">🚀 START TODAY</span>
+        <h2 class="sj-title">Start Your <span class="amber">Journey</span></h2>
+      </div>
+      <!-- Pricing intro -->
+      <span class="kicker">💸 HONEST PRICING</span>
+      <h2>One Time. <span class="amber">Done.</span></h2>
+      <p class="subtitle">No hidden fees. No auto-renewals. Pay once for the period you want.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-amount">₹199</div>
+        <div class="price-period">6 Months</div>
+        <div class="price-monthly">That's <strong>₹33/month</strong> · less than a chai a week</div>
+        <a href="https://wa.me/917306611116?text=Hi%2C%20I%20want%20the%20%E2%82%B9199%20%2F%206%20months%20FitFlow%20Pro%20plan" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">
+          Get 6-Month Plan
+        </a>
+      </div>
+
+      <div class="price-card featured reveal">
+        <div class="price-tag">Best Value</div>
+        <div class="price-amount" style="color:var(--accent)">₹299</div>
+        <div class="price-period">Full Year</div>
+        <div class="price-monthly">That's <strong>₹25/month</strong> · save ₹99 vs 6-month plan</div>
+        <a href="https://wa.me/917306611116?text=Hi%2C%20I%20want%20the%20%E2%82%B9299%20%2F%20year%20FitFlow%20Pro%20plan" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg,var(--accent),#d4a531);color:#000;box-shadow:0 6px 20px rgba(240,192,64,0.4)">
+          Get Yearly Plan ⚡
+        </a>
+      </div>
+    </div>
+
+    <div class="comparison-card reveal">
+      <h4>Compared To Other Fitness Apps (Annual Cost)</h4>
+      <div class="compare-row">
+        <div class="compare-name">Popular Run Tracking Apps</div>
+        <div class="compare-price">₹1,800+</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-name">Diet &amp; Nutrition Apps</div>
+        <div class="compare-price">₹2,400+</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-name">Live Workout Platforms</div>
+        <div class="compare-price">₹3,500+</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-name">Premium Coaching Apps</div>
+        <div class="compare-price">₹4,000+</div>
+      </div>
+      <div class="compare-row us">
+        <div class="compare-name">FitFlow Pro<span class="savings-badge">Save 90%</span></div>
+        <div class="compare-price">₹299</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Ready to <span class="green">Start Today</span>?</h2>
+    <p>Tap below — chat with us on WhatsApp. We'll set you up in under 5 minutes.</p>
+    <a href="https://wa.me/917306611116?text=Hi%2C%20I%20want%20to%20know%20more%20about%20FitFlow%20Pro" target="_blank" class="btn btn-whatsapp" style="font-size:17px;padding:20px 36px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.2-.5-.3z"/><path d="M20.5 3.5C18.3 1.2 15.3 0 12.1 0 5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7c1.7.9 3.6 1.4 5.5 1.4 6.5 0 11.8-5.3 11.8-11.8-.1-3.2-1.3-6.2-3.5-8.4zm-8.5 18.2c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.5-1.5-3.3-1.5-5.2 0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.7-9.9 9.7z"/></svg>
+      Contact Us on WhatsApp
+    </a>
+    <div class="cta-trust">
+      <span>✓ Reply within minutes</span>
+      <span>✓ 100% transparent</span>
+      <span>✓ Made in India 🇮🇳</span>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:32px 20px;text-align:center;color:var(--text3);font-size:12px;border-top:1px solid var(--border)">
+  <p>© 2026 FitFlow Pro · Built with ❤️ in India</p>
+  <p style="margin-top:6px">Questions? <a href="https://wa.me/917306611116" style="color:var(--g5);text-decoration:none;font-weight:600">+91 73066 11116</a></p>
 </footer>
 
 <script>
-// Scroll reveal
-const obOpts = {threshold:.12, rootMargin:'0px 0px -40px 0px'};
-const ob = new IntersectionObserver(es => {
-  es.forEach(e => {
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.classList.add('on');
-      ob.unobserve(e.target);
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
     }
   });
-}, obOpts);
-document.querySelectorAll('.rev,.rev-l,.rev-r,.rev-s,.stag,.card-stack,.mgrid,.splits-preview').forEach(el => ob.observe(el));
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ── COUNTER ANIMATION UTILITY ───────────────────────────────────────
-function animateNumber(el, target, duration, prefix) {
-  if (!el) return;
-  const start = performance.now();
-  const easeOut = t => 1 - Math.pow(1 - t, 3);
-  function frame(now) {
-    const progress = Math.min((now - start) / duration, 1);
-    const val = Math.round(easeOut(progress) * target);
-    el.textContent = val.toLocaleString('en-IN');
-    if (progress < 1) requestAnimationFrame(frame);
-    else el.textContent = target.toLocaleString('en-IN');
-  }
-  requestAnimationFrame(frame);
-}
-
-// ── PRICE COUNTER ₹299 ──────────────────────────────────────────────
-const priceOb = new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) {
-    animateNumber(document.getElementById('price-counter'), 299, 1600);
-    priceOb.disconnect();
-  }
-}, {threshold:.5});
-const priceEl = document.getElementById('price-counter');
-if (priceEl) priceOb.observe(priceEl.closest('.price-hero-card') || priceEl);
-
-// ── SAVINGS COUNTER ₹3,889 ──────────────────────────────────────────
-const savingsOb = new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) {
-    animateNumber(document.getElementById('savings-counter'), 3889, 2000);
-    savingsOb.disconnect();
-  }
-}, {threshold:.5});
-const savingsEl = document.getElementById('savings-counter');
-if (savingsEl) savingsOb.observe(savingsEl.closest('.savings-card') || savingsEl);
-
-// ── ANIMATED GPS MAP ────────────────────────────────────────────────
-(function() {
-  const wrap = document.getElementById('map-anim-wrap');
-  if (!wrap) return;
-
-  // Route waypoints in SVG coords: [x, y]
-  const waypoints = [
-    [40,230],[40,190],[40,134],[70,134],[100,134],
-    [100,100],[100,67],[125,67],[150,67],
-    [150,100],[150,134],[125,134],[100,134],
-    [100,162],[100,190],[80,190],[60,190],[60,210],[60,230]
-  ];
-
-  // Precompute cumulative distances for interpolation
-  function dist(a, b) { return Math.sqrt((b[0]-a[0])**2+(b[1]-a[1])**2); }
-  const segs = [];
-  let total = 0;
-  for (let i = 1; i < waypoints.length; i++) {
-    const d = dist(waypoints[i-1], waypoints[i]);
-    total += d;
-    segs.push({from: waypoints[i-1], to: waypoints[i], cumDist: total, segDist: d});
-  }
-
-  // Get position along route (0–1)
-  function posAtFraction(f) {
-    const target = f * total;
-    for (const seg of segs) {
-      if (seg.cumDist >= target) {
-        const prev = seg.cumDist - seg.segDist;
-        const t = seg.segDist > 0 ? (target - prev) / seg.segDist : 0;
-        return [
-          seg.from[0] + t * (seg.to[0] - seg.from[0]),
-          seg.from[1] + t * (seg.to[1] - seg.from[1])
-        ];
-      }
-    }
-    return waypoints[waypoints.length - 1];
-  }
-
-  // Build path string up to fraction
-  function pathUpTo(f) {
-    const target = f * total;
-    let d = 'M' + waypoints[0][0] + ',' + waypoints[0][1];
-    let acc = 0;
-    for (const seg of segs) {
-      if (acc + seg.segDist <= target) {
-        d += ' L' + seg.to[0] + ',' + seg.to[1];
-        acc += seg.segDist;
-      } else {
-        const t = seg.segDist > 0 ? (target - acc) / seg.segDist : 0;
-        const x = seg.from[0] + t * (seg.to[0] - seg.from[0]);
-        const y = seg.from[1] + t * (seg.to[1] - seg.from[1]);
-        d += ' L' + x.toFixed(1) + ',' + y.toFixed(1);
-        break;
-      }
-    }
-    return d;
-  }
-
-  const routePath  = document.getElementById('route-path');
-  const liveDot    = document.getElementById('live-dot');
-  const pulseRing  = document.getElementById('pulse-ring');
-  const timerEl    = document.getElementById('map-timer');
-  const kmEl       = document.getElementById('map-km');
-  const paceEl     = document.getElementById('map-pace');
-  const spdEl      = document.getElementById('map-spd');
-  const kcalEl     = document.getElementById('map-kcal');
-
-  // Animation state — runs once, completes in 5s, stops at end
-  let fraction = 0;
-  let running  = false;
-  let done     = false;
-  let startT   = null;
-  let pulseR   = 5;
-  let pulseDir = 1;
-  const RUN_DURATION = 5000; // 5s to complete, no loop
-
+// Animate hero dashboard numbers
+function animateNum(el, target, duration) {
+  const isFloat = target % 1 !== 0;
+  const startTime = performance.now();
   function tick(now) {
-    if (!running || done) return;
-    if (!startT) startT = now;
-    const elapsed = now - startT;
-
-    // Stop at 1.0 — no modulo, no loop
-    fraction = Math.min(elapsed / RUN_DURATION, 1);
-
-    // Update route path
-    if (routePath) routePath.setAttribute('d', pathUpTo(fraction));
-
-    // Update live dot
-    const pos = posAtFraction(fraction);
-    if (liveDot)   { liveDot.setAttribute('cx', pos[0]); liveDot.setAttribute('cy', pos[1]); }
-    if (pulseRing) {
-      pulseR += 0.15 * pulseDir;
-      if (pulseR > 10) pulseDir = -1;
-      if (pulseR < 5)  pulseDir =  1;
-      pulseRing.setAttribute('cx', pos[0]);
-      pulseRing.setAttribute('cy', pos[1]);
-      pulseRing.setAttribute('r', pulseR.toFixed(1));
-      pulseRing.setAttribute('opacity', (1 - (pulseR - 5) / 5).toFixed(2));
-    }
-
-    // Update stats — simulate a 3.12km run
-    const totalKm   = 3.12;
-    const totalSecs = 1294; // 21:34
-    const totalKcal = 218;
-    const elapsedSim = Math.round(fraction * totalSecs);
-    const km        = (fraction * totalKm).toFixed(2);
-    const spd       = fraction > 0.02 ? (8.2 + Math.sin(fraction * 20) * 0.8).toFixed(1) : '0.0';
-    const paceSecPerKm = fraction > 0.02 ? Math.round(60 / parseFloat(spd) * 60) : 0;
-    const paceMin   = Math.floor(paceSecPerKm / 60);
-    const paceSec   = String(paceSecPerKm % 60).padStart(2,'0');
-    const mm        = String(Math.floor(elapsedSim / 60)).padStart(2,'0');
-    const ss        = String(elapsedSim % 60).padStart(2,'0');
-
-    if (timerEl) timerEl.textContent = mm + ':' + ss;
-    if (kmEl)    kmEl.textContent    = km;
-    if (paceEl)  paceEl.textContent  = fraction > 0.02 ? paceMin + ':' + paceSec : '--:--';
-    if (spdEl)   spdEl.textContent   = spd;
-    if (kcalEl)  kcalEl.textContent  = Math.round(fraction * totalKcal);
-
-    if (fraction < 1) {
-      requestAnimationFrame(tick);
-    } else {
-      // Animation complete — freeze at final state, stop the pulse ring
-      done = true;
-      if (pulseRing) pulseRing.setAttribute('opacity', '0');
-    }
+    const t = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = target * eased;
+    el.textContent = isFloat ? val.toFixed(1) : Math.round(val);
+    if (t < 1) requestAnimationFrame(tick);
   }
-
-  // Start when section scrolls into view
-  const mapOb = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting && !running) {
-      running = true;
-      requestAnimationFrame(tick);
-      mapOb.disconnect();
-    }
-  }, {threshold:.3});
-  mapOb.observe(wrap);
-})();
-
-// Smooth number counter for hero stats
-function animateCount(el, target, suffix='') {
-  const isSymbol = isNaN(parseInt(target));
-  if (isSymbol) return;
-  let start = 0;
-  const end = parseInt(target);
-  const dur = 1200;
-  const step = dur / end;
-  const timer = setInterval(() => {
-    start += 1;
-    el.textContent = start + suffix;
-    if (start >= end) { el.textContent = target + suffix; clearInterval(timer); }
-  }, step);
+  requestAnimationFrame(tick);
 }
 
-// Animate hero stats on page load
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.querySelectorAll('.hero .hsn').forEach(el => {
-      const val = el.textContent.trim();
-      if (val === '9+') animateCount(el, 9, '+');
-      else if (val === '4') animateCount(el, 4, '');
-    });
-  }, 600);
-});
-
-// Add stagger delay to feature list items inside revealed sections
-document.querySelectorAll('.fl li, .feat-list li, .blist li').forEach((el, i) => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateX(-16px)';
-  el.style.transition = 'opacity .4s ease, transform .4s ease';
-  const parent = el.closest('.rev');
-  if (parent) {
-    const parentOb = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        const siblings = parent.querySelectorAll('.fl li, .feat-list li, .blist li');
-        siblings.forEach((sib, j) => {
-          setTimeout(() => {
-            sib.style.opacity = '1';
-            sib.style.transform = 'none';
-          }, j * 80);
-        });
-        parentOb.unobserve(parent);
-      }
-    }, {threshold: .08});
-    parentOb.observe(parent);
-  }
-});
-
-// Phone mockup parallax on scroll
-const phone = document.querySelector('.pw');
-if (phone) {
-  window.addEventListener('scroll', () => {
-    const rect = phone.getBoundingClientRect();
-    const mid = window.innerHeight / 2;
-    const offset = (rect.top + rect.height/2 - mid) * 0.06;
-    phone.style.transform = `translateY(${-offset}px)`;
-  }, {passive: true});
-}
-
-// Hero logo — animated pulse ring
-(function() {
-  const ring = document.getElementById('logo-pulse-ring');
-  if (!ring) return;
-  let r = 76, growing = true, opacity = 0.4;
-  function animRing() {
-    if (growing) { r += 0.12; opacity -= 0.004; }
-    else         { r -= 0.12; opacity += 0.004; }
-    if (r >= 84) growing = false;
-    if (r <= 76) growing = true;
-    ring.setAttribute('r', r.toFixed(2));
-    ring.setAttribute('opacity', Math.max(0, Math.min(0.5, opacity)).toFixed(3));
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-
-  // Bolt subtle glow pulse
-  const bolt = document.querySelector('#hero-logo path');
-  if (bolt) {
-    let t = 0;
-    function animBolt() {
-      t += 0.02;
-      bolt.style.opacity = (0.88 + Math.sin(t) * 0.12).toFixed(3);
-      requestAnimationFrame(animBolt);
+// Animate hero numbers when card becomes visible
+const heroNumObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.animated) {
+      e.target.dataset.animated = '1';
+      e.target.querySelectorAll('.hv-stat-num').forEach((n, i) => {
+        const target = parseFloat(n.getAttribute('data-target') || '0');
+        setTimeout(() => animateNum(n, target, 1400), 200 + i * 150);
+      });
+      heroNumObs.unobserve(e.target);
     }
-    animBolt();
-  }
-})();
+  });
+}, { threshold: 0.4 });
+const heroCard = document.querySelector('.hv-card-main');
+if (heroCard) heroNumObs.observe(heroCard);
+
+// Reserved for future scroll-triggered animations
+
 </script>
 </body>
 </html>
